@@ -8,7 +8,7 @@ vi.mock('../db/client.js', () => ({
   getPool: () => ({ query: mockHealthQuery }),
 }));
 
-vi.mock('../snapshots/meridian.js', () => ({
+vi.mock('../snapshots/worldmonitor.js', () => ({
   buildBasketSeriesSnapshot: vi.fn(),
   buildCategoriesSnapshot: vi.fn(),
   buildFreshnessSnapshot: vi.fn(),

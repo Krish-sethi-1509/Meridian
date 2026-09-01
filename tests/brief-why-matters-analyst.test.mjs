@@ -775,7 +775,7 @@ describe('endpoint validation contract', () => {
 describe('buildAnalystWhyMattersPrompt — shape and budget', () => {
   let builder;
   it('loads', async () => {
-    const mod = await import('../server/meridian/intelligence/v1/brief-why-matters-prompt.ts');
+    const mod = await import('../server/worldmonitor/intelligence/v1/brief-why-matters-prompt.ts');
     builder = mod.buildAnalystWhyMattersPrompt;
     assert.ok(typeof builder === 'function');
   });
@@ -905,7 +905,7 @@ describe('sectionsForCategory — structural relevance gating', () => {
   let sectionsForCategory;
   let builder;
   it('loads', async () => {
-    const mod = await import('../server/meridian/intelligence/v1/brief-why-matters-prompt.ts');
+    const mod = await import('../server/worldmonitor/intelligence/v1/brief-why-matters-prompt.ts');
     sectionsForCategory = mod.sectionsForCategory;
     builder = mod.buildAnalystWhyMattersPrompt;
     assert.ok(typeof sectionsForCategory === 'function');

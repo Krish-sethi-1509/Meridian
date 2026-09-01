@@ -103,7 +103,7 @@ const HEALTH_VERDICT_RELEASE_LOCK_SCRIPT = [
 
 // Iran-events domain sunset (war ended 2026-07). Default OFF everywhere; set
 // IRAN_EVENTS_ENABLED=true to restore the whole domain. Mirrors the backend
-// *_ENABLED env idiom (server/meridian/resilience/v1/_shared.ts).
+// *_ENABLED env idiom (server/worldmonitor/resilience/v1/_shared.ts).
 const IRAN_EVENTS_ENABLED = (process.env.IRAN_EVENTS_ENABLED ?? 'false').toLowerCase() === 'true';
 
 const BOOTSTRAP_KEYS = {
@@ -808,7 +808,7 @@ const ON_DEMAND_KEYS = new Set([
   // absent — which is the alarm a future operator needs before flipping
   // `RESILIENCE_ENERGY_V2_ENABLED=true`. The scorer fails closed via
   // ResilienceConfigurationError if the flag flips before the seeds
-  // populate (server/meridian/resilience/v1/_dimension-scorers.ts
+  // populate (server/worldmonitor/resilience/v1/_dimension-scorers.ts
   // #scoreEnergy). Do NOT add these labels back to ON_DEMAND_KEYS
   // without revisiting that plan.
   'displacementPrev', // covered by cascade onto current-year displacement; empty most of the year

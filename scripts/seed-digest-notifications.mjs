@@ -232,7 +232,7 @@ const BRIEF_WHY_MATTERS_ENDPOINT_URL =
 
 /**
  * Lowercase + collapse whitespace to mirror extractor-side gate in
- * server/meridian/news/v1/list-feed-digest.ts
+ * server/worldmonitor/news/v1/list-feed-digest.ts
  * (normalizeForDescriptionEquality). Duplicated (not imported) because
  * that module is .ts on a different loader path; a shared .mjs helper
  * would be a cleaner home if more surfaces adopt this check.

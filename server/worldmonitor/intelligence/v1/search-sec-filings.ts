@@ -8,8 +8,8 @@ import type {
   ServerContext,
   SearchSecFilingsRequest,
   SearchSecFilingsResponse,
-} from '../../../../src/generated/server/meridian/intelligence/v1/service_server';
-import { ValidationError } from '../../../../src/generated/server/meridian/intelligence/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/intelligence/v1/service_server';
+import { ValidationError } from '../../../../src/generated/server/worldmonitor/intelligence/v1/service_server';
 import { isEdgarIsoDate, normalizeEdgarForms, searchEdgarFullText } from '../../../_shared/sec-edgar';
 
 const DEFAULT_LIMIT = 10;

@@ -2,8 +2,8 @@ import type {
   ServerContext,
   RunScenarioRequest,
   RunScenarioResponse,
-} from '../../../../src/generated/server/meridian/scenario/v1/service_server';
-import { ApiError, ValidationError } from '../../../../src/generated/server/meridian/scenario/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/scenario/v1/service_server';
+import { ApiError, ValidationError } from '../../../../src/generated/server/worldmonitor/scenario/v1/service_server';
 
 import {
   requirePremiumRpcAccess,

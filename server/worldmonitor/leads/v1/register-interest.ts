@@ -9,8 +9,8 @@ import type {
   ServerContext,
   RegisterInterestRequest,
   RegisterInterestResponse,
-} from '../../../../src/generated/server/meridian/leads/v1/service_server';
-import { ApiError, ValidationError } from '../../../../src/generated/server/meridian/leads/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/leads/v1/service_server';
+import { ApiError, ValidationError } from '../../../../src/generated/server/worldmonitor/leads/v1/service_server';
 import { getClientIp, verifyTurnstile } from '../../../_shared/turnstile';
 import { validateEmail } from '../../../_shared/email-validation';
 import { checkScopedRateLimit } from '../../../_shared/rate-limit';

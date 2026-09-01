@@ -10,7 +10,7 @@ import {
   buildMoversSnapshot,
   buildOverviewSnapshot,
   buildRetailerSpreadSnapshot,
-} from '../snapshots/meridian.js';
+} from '../snapshots/worldmonitor.js';
 import { buildCoverageSnapshot } from '../snapshots/coverage.js';
 import {
   COVERAGE_ACTIVATION_SCHEMA_VERSION,

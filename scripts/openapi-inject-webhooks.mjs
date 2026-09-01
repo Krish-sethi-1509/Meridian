@@ -4,7 +4,7 @@
  *
  * The ShippingV2Service lets partners register a `callbackUrl` (RegisterWebhook)
  * that Meridian POSTs a signed chokepoint-disruption alert to. The delivery
- * worker (server/meridian/shipping/v2/deliver-webhook.ts) signs every POST
+ * worker (server/worldmonitor/shipping/v2/deliver-webhook.ts) signs every POST
  * with an HMAC-SHA256 over the raw body, keyed by the subscription `secret`, and
  * sends it in a branded `X-WM-Signature` header (plus `X-WM-Event` /
  * `X-WM-Delivery-Id`). The sebuf `protoc-gen-openapiv3` plugin only emits the
@@ -21,7 +21,7 @@
  * headers, the payload schema, and — crucially — the verification recipe, so a
  * consuming agent can confirm a delivery genuinely came from Meridian.
  *
- * Only the bundle (docs/api/meridian.openapi.yaml) is touched: it is copied
+ * Only the bundle (docs/api/worldmonitor.openapi.yaml) is touched: it is copied
  * to public/openapi.yaml and deserialized to public/openapi.json (the artifact
  * orank fetches) at build time. The per-service ShippingV2Service spec is left
  * alone — top-level `webhooks` is a bundle-level, cross-cutting concern and the
@@ -40,7 +40,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const bundlePath = resolve(root, 'docs/api/meridian.openapi.yaml');
+const bundlePath = resolve(root, 'docs/api/worldmonitor.openapi.yaml');
 
 const CHECK = process.argv.includes('--check');
 
@@ -220,7 +220,7 @@ if (isEntryPoint) {
 
   if (CHECK) {
     if (result.changed) {
-      console.error('✗ bundle (meridian.openapi.yaml) is missing the webhooks delivery contract');
+      console.error('✗ bundle (worldmonitor.openapi.yaml) is missing the webhooks delivery contract');
       console.error('  Run: npm run gen:openapi:webhooks');
       process.exit(1);
     }
@@ -228,7 +228,7 @@ if (isEntryPoint) {
   } else {
     if (result.changed) writeFileSync(bundlePath, result.text);
     console.log(
-      `openapi-inject-webhooks: ${result.changed ? 'injected' : 'already present'} — ${WEBHOOK_EVENT} webhook (${SIGNATURE_HEADER}) in meridian.openapi.yaml`,
+      `openapi-inject-webhooks: ${result.changed ? 'injected' : 'already present'} — ${WEBHOOK_EVENT} webhook (${SIGNATURE_HEADER}) in worldmonitor.openapi.yaml`,
     );
   }
 }

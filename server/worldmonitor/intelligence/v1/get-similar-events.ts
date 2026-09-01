@@ -3,7 +3,7 @@ import type {
   ServerContext,
   GetSimilarEventsRequest,
   GetSimilarEventsResponse,
-} from '../../../../src/generated/server/meridian/intelligence/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/intelligence/v1/service_server';
 import {
   intelHistorySearch,
   resolveLimit,

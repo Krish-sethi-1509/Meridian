@@ -10,7 +10,7 @@
 import type {
   GetRouteImpactResponse,
   StrategicProduct,
-} from '@/generated/server/meridian/supply_chain/v1/service_server';
+} from '@/generated/server/worldmonitor/supply_chain/v1/service_server';
 import {
   formatScoredResilienceOverallLabel,
   formatResilienceConfidence,

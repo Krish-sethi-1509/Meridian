@@ -52,7 +52,7 @@ const targets = [
     prefix: '',
   },
   {
-    path: resolve(apiDir, 'meridian.openapi.yaml'),
+    path: resolve(apiDir, 'worldmonitor.openapi.yaml'),
     format: 'yaml',
     envelope: 'meridian_intelligence_v1_GetChinaDecisionSignalsResponse',
     prefix: 'meridian_intelligence_v1_',

@@ -21,7 +21,7 @@
  *      responses/notes). Re-serialized byte-faithfully to the generator's
  *      format (recursively sorted keys, Go-style <>&/U+2028/U+2029 escaping, no
  *      trailing newline) so the diff is additions-only.
- *   2. docs/api/<Service>.openapi.yaml and docs/api/meridian.openapi.yaml —
+ *   2. docs/api/<Service>.openapi.yaml and docs/api/worldmonitor.openapi.yaml —
  *      docs-facing YAML (the bundle is copied to public/openapi.yaml at build).
  *      The generator's YAML emitter cannot be reproduced by js-yaml (a re-dump
  *      reformats ~100% of 21k lines), so YAML gets formatting-preserving
@@ -49,7 +49,7 @@ import {
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const apiDir = resolve(root, 'docs/api');
-const bundlePath = resolve(apiDir, 'meridian.openapi.yaml');
+const bundlePath = resolve(apiDir, 'worldmonitor.openapi.yaml');
 
 const CHECK = process.argv.includes('--check');
 
@@ -1114,7 +1114,7 @@ try {
   bundleChanged = authResult.changed || entitlementResult.changed;
   if (bundleChanged) {
     wouldChange++;
-    touched.push('meridian.openapi.yaml');
+    touched.push('worldmonitor.openapi.yaml');
     if (!CHECK) writeFileSync(bundlePath, entitlementResult.text);
   }
 } catch (err) {

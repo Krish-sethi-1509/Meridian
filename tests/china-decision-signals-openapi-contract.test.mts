@@ -52,7 +52,7 @@ const specs = [
   [
     'unified YAML',
     loadYaml(readFileSync(
-      resolve(root, 'docs/api/meridian.openapi.yaml'),
+      resolve(root, 'docs/api/worldmonitor.openapi.yaml'),
       'utf8',
     )),
   ],

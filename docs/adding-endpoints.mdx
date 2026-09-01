@@ -44,11 +44,11 @@ Example: adding `GetEarthquakeDetails` to `SeismologyService`.
 
 ### 1. Define the request/response messages
 
-Create `proto/meridian/seismology/v1/get_earthquake_details.proto`:
+Create `proto/worldmonitor/seismology/v1/get_earthquake_details.proto`:
 
 ```protobuf
 syntax = "proto3";
-package meridian.seismology.v1;
+package worldmonitor.seismology.v1;
 
 import "buf/validate/validate.proto";
 import "meridian/seismology/v1/earthquake.proto";
@@ -72,7 +72,7 @@ message GetEarthquakeDetailsResponse {
 
 ### 2. Add the RPC to the service definition
 
-Edit `proto/meridian/seismology/v1/service.proto`:
+Edit `proto/worldmonitor/seismology/v1/service.proto`:
 
 ```protobuf
 import "meridian/seismology/v1/get_earthquake_details.proto";
@@ -170,16 +170,16 @@ Example: adding a hypothetical `WeatherService`. (No `weather` domain exists in 
 ### 1. Create the proto directory
 
 ```
-proto/meridian/weather/v1/
+proto/worldmonitor/weather/v1/
 ```
 
 ### 2. Define entity messages
 
-Create `proto/meridian/weather/v1/weather_station.proto`:
+Create `proto/worldmonitor/weather/v1/weather_station.proto`:
 
 ```protobuf
 syntax = "proto3";
-package meridian.weather.v1;
+package worldmonitor.weather.v1;
 
 import "buf/validate/validate.proto";
 import "sebuf/http/annotations.proto";
@@ -204,11 +204,11 @@ message WeatherStation {
 
 ### 3. Define request/response messages
 
-Create `proto/meridian/weather/v1/list_weather_stations.proto`:
+Create `proto/worldmonitor/weather/v1/list_weather_stations.proto`:
 
 ```protobuf
 syntax = "proto3";
-package meridian.weather.v1;
+package worldmonitor.weather.v1;
 
 import "buf/validate/validate.proto";
 import "meridian/core/v1/pagination.proto";
@@ -221,7 +221,7 @@ message ListWeatherStationsRequest {
   // Filter by country code.
   string country_code = 2 [(buf.validate.field).string.max_len = 2];
   // Pagination parameters.
-  meridian.core.v1.PaginationRequest pagination = 3;
+  worldmonitor.core.v1.PaginationRequest pagination = 3;
 }
 
 // ListWeatherStationsResponse contains the matching stations.
@@ -229,17 +229,17 @@ message ListWeatherStationsResponse {
   // The list of weather stations.
   repeated WeatherStation stations = 1;
   // Pagination metadata.
-  meridian.core.v1.PaginationResponse pagination = 2;
+  worldmonitor.core.v1.PaginationResponse pagination = 2;
 }
 ```
 
 ### 4. Define the service
 
-Create `proto/meridian/weather/v1/service.proto`:
+Create `proto/worldmonitor/weather/v1/service.proto`:
 
 ```protobuf
 syntax = "proto3";
-package meridian.weather.v1;
+package worldmonitor.weather.v1;
 
 import "sebuf/http/annotations.proto";
 import "meridian/weather/v1/list_weather_stations.proto";

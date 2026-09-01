@@ -3,7 +3,7 @@ import type {
   GivingProvenance,
   GivingSummary,
   PlatformGiving,
-} from '../../../../src/generated/server/meridian/giving/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/giving/v1/service_server';
 import publishedEstimateClaims from '../../../../scripts/shared/giving-published-estimate-claims.json';
 
 export const GIVING_PROVENANCE_STATUSES = [

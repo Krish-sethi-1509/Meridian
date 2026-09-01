@@ -15,7 +15,7 @@ import {
   GULF_PARTNER_CODES,
   CHOKEPOINT_EXPOSURE,
   VALID_CHOKEPOINTS,
-} from '../server/meridian/intelligence/v1/_shock-compute.js';
+} from '../server/worldmonitor/intelligence/v1/_shock-compute.js';
 
 // ---------------------------------------------------------------------------
 // Tests

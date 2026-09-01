@@ -1,4 +1,4 @@
-import type { Fundamentals } from '@/generated/client/meridian/market/v1/service_client';
+import type { Fundamentals } from '@/generated/client/worldmonitor/market/v1/service_client';
 
 export interface FundamentalDisplayCell {
   label: string;

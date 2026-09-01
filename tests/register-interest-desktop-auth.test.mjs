@@ -40,13 +40,13 @@ describe('LeadsService.registerInterest desktop auth', () => {
     process.env.VERCEL_ENV = 'production';
     delete process.env.WM_DESKTOP_AUTH_ALLOW_LEGACY;
 
-    const mod = await import('../server/meridian/leads/v1/register-interest.ts');
+    const mod = await import('../server/worldmonitor/leads/v1/register-interest.ts');
     registerInterest = mod.registerInterest;
     createDesktopAuthSignature = mod.createDesktopAuthSignature;
     timestampHeader = mod.DESKTOP_AUTH_TIMESTAMP_HEADER;
     signatureHeader = mod.DESKTOP_AUTH_SIGNATURE_HEADER;
     desktopAuthWindowMs = mod.DESKTOP_AUTH_WINDOW_MS;
-    const gen = await import('../src/generated/server/meridian/leads/v1/service_server.ts');
+    const gen = await import('../src/generated/server/worldmonitor/leads/v1/service_server.ts');
     ApiError = gen.ApiError;
   });
 

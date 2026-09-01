@@ -2,7 +2,7 @@ import type {
   ForecastServiceHandler,
   GetForecastScorecardResponse,
   ServerContext,
-} from '../../../../src/generated/server/meridian/forecast/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/forecast/v1/service_server';
 import { markNoStoreFallbackResponse } from '../../../_shared/response-headers';
 
 const REDIS_KEY = 'forecast:scorecard:v1';

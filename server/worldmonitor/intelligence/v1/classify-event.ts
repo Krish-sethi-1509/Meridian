@@ -3,7 +3,7 @@ import type {
   ClassifyEventRequest,
   ClassifyEventResponse,
   SeverityLevel,
-} from '../../../../src/generated/server/meridian/intelligence/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/intelligence/v1/service_server';
 
 import { cachedFetchJson } from '../../../_shared/redis';
 import { markNoCacheResponse } from '../../../_shared/response-headers';

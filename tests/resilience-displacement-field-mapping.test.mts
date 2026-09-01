@@ -33,7 +33,7 @@ import {
   scoreBorderSecurity,
   scoreStateContinuity,
   type ResilienceSeedReader,
-} from '../server/meridian/resilience/v1/_dimension-scorers.ts';
+} from '../server/worldmonitor/resilience/v1/_dimension-scorers.ts';
 
 const CURRENT_YEAR = new Date().getFullYear();
 const DISPLACEMENT_KEY = `displacement:summary:v1:${CURRENT_YEAR}`;

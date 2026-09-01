@@ -4,7 +4,7 @@ import {
   fetchWidestTechEvents,
   listTechEvents,
   TECH_EVENTS_UNAVAILABLE_ERROR,
-} from '../server/meridian/research/v1/list-tech-events.ts';
+} from '../server/worldmonitor/research/v1/list-tech-events.ts';
 import { __resetKeyPrefixCacheForTests } from '../server/_shared/redis.ts';
 
 // #5427: the cold-start fallback writes to the SHARED, request-independent

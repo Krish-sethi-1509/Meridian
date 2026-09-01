@@ -269,7 +269,7 @@ function isEnabledEnv(name, defaultValue) {
 }
 
 function currentResilienceCacheFormula() {
-  // Mirrors server/meridian/resilience/v1/_shared.ts currentCacheFormula().
+  // Mirrors server/worldmonitor/resilience/v1/_shared.ts currentCacheFormula().
   // Edge functions cannot import the server module, so this is intentionally
   // duplicated and guarded by tests.
   return isEnabledEnv('RESILIENCE_PILLAR_COMBINE_ENABLED', 'false') &&

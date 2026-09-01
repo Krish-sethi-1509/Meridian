@@ -5,8 +5,8 @@ import {
   buildStockNewsSearchQuery,
   resetStockNewsSearchStateForTests,
   searchRecentStockHeadlines,
-} from '../server/meridian/market/v1/stock-news-search.ts';
-import { fetchCompanyNewsMentions } from '../server/meridian/intelligence/v1/_company-shared.ts';
+} from '../server/worldmonitor/market/v1/stock-news-search.ts';
+import { fetchCompanyNewsMentions } from '../server/worldmonitor/intelligence/v1/_company-shared.ts';
 
 const originalFetch = globalThis.fetch;
 

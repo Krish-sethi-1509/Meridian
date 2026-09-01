@@ -2,7 +2,7 @@ import type {
   ServerContext,
   SummarizeArticleRequest,
   SummarizeArticleResponse,
-} from '../../../../src/generated/server/meridian/news/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/news/v1/service_server';
 
 import { cachedFetchJsonWithMeta } from '../../../_shared/redis';
 import {

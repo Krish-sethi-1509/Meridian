@@ -4,7 +4,7 @@ import type {
   GetFuelShortageDetailRequest,
   GetFuelShortageDetailResponse,
   FuelShortageEntry,
-} from '../../../../src/generated/server/meridian/supply_chain/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/supply_chain/v1/service_server';
 import { projectFuelShortage } from './list-fuel-shortages';
 
 interface RawRegistry {

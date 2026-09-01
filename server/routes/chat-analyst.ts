@@ -23,9 +23,9 @@ import { resolvePremiumCallerIdentity } from '../_shared/premium-check';
 import { checkRateLimit } from '../_shared/rate-limit';
 import { runRedisPipeline } from '../_shared/redis';
 import { DIRECT_LLM_DAILY_QUOTA_LIMIT, reserveDirectLlmQuota } from '../_shared/direct-llm-quota';
-import { assembleAnalystContext } from '../meridian/intelligence/v1/chat-analyst-context';
-import { buildAnalystSystemPrompt } from '../meridian/intelligence/v1/chat-analyst-prompt';
-import { buildActionEvents } from '../meridian/intelligence/v1/chat-analyst-actions';
+import { assembleAnalystContext } from '../worldmonitor/intelligence/v1/chat-analyst-context';
+import { buildAnalystSystemPrompt } from '../worldmonitor/intelligence/v1/chat-analyst-prompt';
+import { buildActionEvents } from '../worldmonitor/intelligence/v1/chat-analyst-actions';
 import { callLlmReasoningStream } from '../_shared/llm';
 import { sanitizeForPrompt } from '../_shared/llm-sanitize.js';
 

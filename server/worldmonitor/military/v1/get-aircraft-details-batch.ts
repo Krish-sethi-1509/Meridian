@@ -2,7 +2,7 @@ import type {
   ServerContext,
   GetAircraftDetailsBatchRequest,
   GetAircraftDetailsBatchResponse,
-} from '../../../../src/generated/server/meridian/military/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/military/v1/service_server';
 
 import { getCachedJsonBatch, cachedFetchJson } from '../../../_shared/redis';
 import { toUniqueSortedLimited } from '../../../_shared/normalize-list';

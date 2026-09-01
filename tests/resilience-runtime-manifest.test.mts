@@ -39,8 +39,8 @@ afterEach(async () => {
 async function loadRuntimeManifestModules() {
   process.env.RESILIENCE_SCHEMA_V2_ENABLED = 'true';
   const [handler, shared, responseHeaders] = await Promise.all([
-    import('../server/meridian/resilience/v1/get-resilience-runtime-manifest.ts'),
-    import('../server/meridian/resilience/v1/_shared.ts'),
+    import('../server/worldmonitor/resilience/v1/get-resilience-runtime-manifest.ts'),
+    import('../server/worldmonitor/resilience/v1/_shared.ts'),
     import('../server/_shared/response-headers.ts'),
   ]);
   return { ...handler, ...shared, ...responseHeaders };
@@ -239,8 +239,8 @@ describe('resilience runtime manifest gateway auth', () => {
   it('allows no-key manifest access while score and ranking remain premium gated', async () => {
     const [{ createDomainGateway, PUBLIC_NO_AUTH_RPC_PATHS, serverOptions }, generated, { resilienceHandler }, { PREMIUM_RPC_PATHS }] = await Promise.all([
       import('../server/gateway.ts'),
-      import('../src/generated/server/meridian/resilience/v1/service_server.ts'),
-      import('../server/meridian/resilience/v1/handler.ts'),
+      import('../src/generated/server/worldmonitor/resilience/v1/service_server.ts'),
+      import('../server/worldmonitor/resilience/v1/handler.ts'),
       import('../src/shared/premium-paths.ts'),
     ]);
     delete process.env.UPSTASH_REDIS_REST_URL;

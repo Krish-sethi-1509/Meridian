@@ -2,7 +2,7 @@
  * Convex transport for the historical intelligence memory (#5694).
  *
  * Shared by the three Pro-gated RPCs in
- * server/meridian/intelligence/v1/{search-intel-history,get-intel-timeline,
+ * server/worldmonitor/intelligence/v1/{search-intel-history,get-intel-timeline,
  * get-similar-events}.ts. Owns one concern: reading convex/intelHistory.ts
  * through its two secret-guarded internal HTTP routes, and adapting stored
  * records to the wire shape. Query embedding lives in

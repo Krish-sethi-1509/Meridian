@@ -18,12 +18,12 @@ import {
   getCurrentCacheFormula,
   scoreCacheKey,
   warmMissingResilienceScores,
-} from '../server/meridian/resilience/v1/_shared.ts';
+} from '../server/worldmonitor/resilience/v1/_shared.ts';
 import {
   scoreAllDimensions,
   type ResilienceDimensionId,
   type ResilienceSeedReader,
-} from '../server/meridian/resilience/v1/_dimension-scorers.ts';
+} from '../server/worldmonitor/resilience/v1/_dimension-scorers.ts';
 import {
   compareReferenceResults,
   recomputeReferenceCountry,

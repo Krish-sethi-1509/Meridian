@@ -1,4 +1,4 @@
-import type { InfrastructureServiceHandler } from '../../../../src/generated/server/meridian/infrastructure/v1/service_server';
+import type { InfrastructureServiceHandler } from '../../../../src/generated/server/worldmonitor/infrastructure/v1/service_server';
 
 import { getCableHealth } from './get-cable-health';
 import { listInternetDdosAttacks } from './list-ddos-attacks';

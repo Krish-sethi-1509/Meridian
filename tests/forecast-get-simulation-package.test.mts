@@ -13,12 +13,12 @@ function makeCtx() {
 }
 
 describe('getSimulationPackage response disclosure guard (#5213)', () => {
-  let getSimulationPackage: typeof import('../server/meridian/forecast/v1/get-simulation-package').getSimulationPackage;
+  let getSimulationPackage: typeof import('../server/worldmonitor/forecast/v1/get-simulation-package').getSimulationPackage;
 
   beforeEach(async () => {
     process.env.UPSTASH_REDIS_REST_URL = 'https://fake-upstash.example';
     process.env.UPSTASH_REDIS_REST_TOKEN = 'fake-token';
-    ({ getSimulationPackage } = await import('../server/meridian/forecast/v1/get-simulation-package.ts'));
+    ({ getSimulationPackage } = await import('../server/worldmonitor/forecast/v1/get-simulation-package.ts'));
   });
 
   afterEach(() => {

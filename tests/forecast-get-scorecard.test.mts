@@ -20,12 +20,12 @@ function restoreEnv() {
 }
 
 describe('getForecastScorecard backend status', () => {
-  let getForecastScorecard: typeof import('../server/meridian/forecast/v1/get-forecast-scorecard').getForecastScorecard;
+  let getForecastScorecard: typeof import('../server/worldmonitor/forecast/v1/get-forecast-scorecard').getForecastScorecard;
 
   beforeEach(async () => {
     process.env.UPSTASH_REDIS_REST_URL = 'https://fake-upstash.example';
     process.env.UPSTASH_REDIS_REST_TOKEN = 'fake-token';
-    const mod = await import('../server/meridian/forecast/v1/get-forecast-scorecard.ts');
+    const mod = await import('../server/worldmonitor/forecast/v1/get-forecast-scorecard.ts');
     getForecastScorecard = mod.getForecastScorecard;
   });
 

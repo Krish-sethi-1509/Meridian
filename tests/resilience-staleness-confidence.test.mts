@@ -5,7 +5,7 @@ import {
   computeHeadlineEligible,
   computeLowConfidence,
   computeOverallCoverage,
-} from '../server/meridian/resilience/v1/_shared.ts';
+} from '../server/worldmonitor/resilience/v1/_shared.ts';
 
 type TestDimension = {
   id: string;

@@ -155,7 +155,7 @@ Variant is set via `VITE_VARIANT` env var. Config lives in `src/config/variants/
 
 ### Adding a New API Endpoint
 
-1. Define proto message in `proto/meridian/<domain>/`
+1. Define proto message in `proto/worldmonitor/<domain>/`
 2. Add RPC with `(sebuf.http.config)` annotation
 3. Run `make generate`
 4. Create handler in `server/meridian/<domain>/`

@@ -1647,8 +1647,8 @@ describe('agent readiness: api-catalog + openapi build', () => {
     const buildOpenapi = pkg.scripts['build:openapi'];
     assert.ok(buildOpenapi, 'package.json must define scripts["build:openapi"]');
     assert.ok(
-      buildOpenapi.includes('docs/api/meridian.openapi.yaml'),
-      `build:openapi must reference docs/api/meridian.openapi.yaml, got: ${buildOpenapi}`
+      buildOpenapi.includes('docs/api/worldmonitor.openapi.yaml'),
+      `build:openapi must reference docs/api/worldmonitor.openapi.yaml, got: ${buildOpenapi}`
     );
     assert.ok(
       buildOpenapi.includes('public/openapi.yaml'),
@@ -1700,14 +1700,14 @@ describe('agent readiness: api-catalog + openapi build', () => {
     assert.ok(pkg.scripts.prebuild, 'package.json must define scripts["prebuild"] (default build path uses it)');
   });
 
-  it('openapi source exists at docs/api/meridian.openapi.yaml', () => {
+  it('openapi source exists at docs/api/worldmonitor.openapi.yaml', () => {
     // Catches the class of regression where someone cleans generated
     // artifacts and forgets to regenerate before committing — the
     // prebuild step would then fail silently at deploy time.
-    const openapiPath = resolve(__dirname, '../docs/api/meridian.openapi.yaml');
+    const openapiPath = resolve(__dirname, '../docs/api/worldmonitor.openapi.yaml');
     assert.ok(
       existsSync(openapiPath),
-      `docs/api/meridian.openapi.yaml must exist — without it, build:openapi fails at deploy time`
+      `docs/api/worldmonitor.openapi.yaml must exist — without it, build:openapi fails at deploy time`
     );
   });
 });

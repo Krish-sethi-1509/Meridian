@@ -1,4 +1,4 @@
-import type { WildfireServiceHandler } from '../../../../src/generated/server/meridian/wildfire/v1/service_server';
+import type { WildfireServiceHandler } from '../../../../src/generated/server/worldmonitor/wildfire/v1/service_server';
 
 import { listFireDetections } from './list-fire-detections';
 

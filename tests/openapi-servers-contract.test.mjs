@@ -52,8 +52,8 @@ describe('OpenAPI servers contract', () => {
     });
   }
 
-  it('bundle (meridian.openapi.yaml) still carries the servers URL', () => {
-    const bundle = loadYaml(readFileSync(resolve(apiDir, 'meridian.openapi.yaml'), 'utf8'));
-    assertServers(bundle, 'meridian.openapi.yaml');
+  it('bundle (worldmonitor.openapi.yaml) still carries the servers URL', () => {
+    const bundle = loadYaml(readFileSync(resolve(apiDir, 'worldmonitor.openapi.yaml'), 'utf8'));
+    assertServers(bundle, 'worldmonitor.openapi.yaml');
   });
 });

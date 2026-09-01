@@ -31,8 +31,8 @@ afterEach(() => {
 async function loadLeadsGateway() {
   const [{ createDomainGateway, PUBLIC_NO_AUTH_RPC_PATHS, serverOptions }, generated, { leadsHandler }, { PREMIUM_RPC_PATHS }] = await Promise.all([
     import('../server/gateway.ts'),
-    import('../src/generated/server/meridian/leads/v1/service_server.ts'),
-    import('../server/meridian/leads/v1/handler.ts'),
+    import('../src/generated/server/worldmonitor/leads/v1/service_server.ts'),
+    import('../server/worldmonitor/leads/v1/handler.ts'),
     import('../src/shared/premium-paths.ts'),
   ]);
   delete process.env.WORLDMONITOR_VALID_KEYS;

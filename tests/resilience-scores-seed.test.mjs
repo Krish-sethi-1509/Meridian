@@ -733,7 +733,7 @@ describe('handler warm pipeline is chunked', () => {
     const { dirname, join } = await import('node:path');
     const dir = dirname(fileURLToPath(import.meta.url));
     const src = readFileSync(
-      join(dir, '..', 'server', 'meridian', 'resilience', 'v1', '_shared.ts'),
+      join(dir, '..', 'server', 'worldmonitor', 'resilience', 'v1', '_shared.ts'),
       'utf8',
     );
     assert.match(

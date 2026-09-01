@@ -10,8 +10,8 @@ import type {
   ServerContext,
   SubmitContactRequest,
   SubmitContactResponse,
-} from '../../../../src/generated/server/meridian/leads/v1/service_server';
-import { ApiError, ValidationError } from '../../../../src/generated/server/meridian/leads/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/leads/v1/service_server';
+import { ApiError, ValidationError } from '../../../../src/generated/server/worldmonitor/leads/v1/service_server';
 import { getClientIp, verifyTurnstile } from '../../../_shared/turnstile';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

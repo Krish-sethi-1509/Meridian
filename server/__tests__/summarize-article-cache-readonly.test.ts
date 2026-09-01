@@ -7,7 +7,7 @@ vi.mock("../_shared/redis", () => ({
   getCachedJson: (...a: unknown[]) => getCachedJson(...a),
 }));
 
-import { getSummarizeArticleCache } from "../meridian/news/v1/get-summarize-article-cache";
+import { getSummarizeArticleCache } from "../worldmonitor/news/v1/get-summarize-article-cache";
 import { CACHE_VERSION } from "../../src/utils/summary-cache-key";
 
 const originalFetch = globalThis.fetch;

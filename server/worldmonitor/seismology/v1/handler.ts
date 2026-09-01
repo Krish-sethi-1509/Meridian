@@ -1,4 +1,4 @@
-import type { SeismologyServiceHandler } from '../../../../src/generated/server/meridian/seismology/v1/service_server';
+import type { SeismologyServiceHandler } from '../../../../src/generated/server/worldmonitor/seismology/v1/service_server';
 
 import { listEarthquakes } from './list-earthquakes';
 

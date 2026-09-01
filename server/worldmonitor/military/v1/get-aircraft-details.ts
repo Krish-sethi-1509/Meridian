@@ -2,7 +2,7 @@ import type {
   ServerContext,
   GetAircraftDetailsRequest,
   GetAircraftDetailsResponse,
-} from '../../../../src/generated/server/meridian/military/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/military/v1/service_server';
 
 import {
   AIRCRAFT_DETAILS_CACHE_KEY,

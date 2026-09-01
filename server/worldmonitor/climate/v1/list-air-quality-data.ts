@@ -3,7 +3,7 @@ import type {
   ListAirQualityDataRequest,
   ListAirQualityDataResponse,
   ServerContext,
-} from '../../../../src/generated/server/meridian/climate/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/climate/v1/service_server';
 
 import {
   normalizeAirQualityFetchedAt,

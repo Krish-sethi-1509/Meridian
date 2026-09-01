@@ -55,17 +55,17 @@ describe('ShippingV2Service handlers', () => {
     process.env.UPSTASH_REDIS_REST_TOKEN = 'fake-token';
     Reflect.set(globalThis, TEST_RESOLVER_KEY, async () => ['93.184.216.34']);
 
-    const riMod = await import('../server/meridian/shipping/v2/route-intelligence.ts');
-    const rwMod = await import('../server/meridian/shipping/v2/register-webhook.ts');
-    const lwMod = await import('../server/meridian/shipping/v2/list-webhooks.ts');
-    const dwMod = await import('../server/meridian/shipping/v2/deliver-webhook.ts');
-    webhookShared = await import('../server/meridian/shipping/v2/webhook-shared.ts');
+    const riMod = await import('../server/worldmonitor/shipping/v2/route-intelligence.ts');
+    const rwMod = await import('../server/worldmonitor/shipping/v2/register-webhook.ts');
+    const lwMod = await import('../server/worldmonitor/shipping/v2/list-webhooks.ts');
+    const dwMod = await import('../server/worldmonitor/shipping/v2/deliver-webhook.ts');
+    webhookShared = await import('../server/worldmonitor/shipping/v2/webhook-shared.ts');
     routeIntelligence = riMod.routeIntelligence;
     registerWebhook = rwMod.registerWebhook;
     listWebhooks = lwMod.listWebhooks;
     deliverShippingV2Webhook = dwMod.deliverShippingV2Webhook;
     WebhookDeliverySsrfError = dwMod.WebhookDeliverySsrfError;
-    const gen = await import('../src/generated/server/meridian/shipping/v2/service_server.ts');
+    const gen = await import('../src/generated/server/worldmonitor/shipping/v2/service_server.ts');
     ValidationError = gen.ValidationError;
     ApiError = gen.ApiError;
   });

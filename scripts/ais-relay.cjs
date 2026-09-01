@@ -3570,8 +3570,8 @@ function matchCountryNamesInText(text) {
 }
 
 // v5 (2026-04-28): bumped from v4 in lockstep with
-// server/meridian/intelligence/v1/_shared.ts and
-// server/meridian/news/v1/list-feed-digest.ts to evict cache entries
+// server/worldmonitor/intelligence/v1/_shared.ts and
+// server/worldmonitor/news/v1/list-feed-digest.ts to evict cache entries
 // that landed under the pre-publisher-prefix-fix classifier (PR #3480).
 // Brand-prefixed retrospective titles ("CBS News Radio flashback: ...")
 // had been promoted to severity=critical via the `invasion` keyword;
@@ -8040,7 +8040,7 @@ const TRANSIT_SUMMARY_INTERVAL_MS = 10 * 60 * 1000;
 
 // Threat levels for anomaly detection.
 // IMPORTANT: Must stay in sync with CHOKEPOINTS[].threatLevel in
-// server/meridian/supply-chain/v1/get-chokepoint-status.ts
+// server/worldmonitor/supply-chain/v1/get-chokepoint-status.ts
 // Only war_zone and critical trigger anomaly signals.
 const CHOKEPOINT_THREAT_LEVELS = {
   suez: 'high', malacca_strait: 'normal', hormuz_strait: 'war_zone',
@@ -8062,7 +8062,7 @@ const RELAY_NAME_TO_ID = {
   'South China Sea': null, 'Black Sea': null, // area geofences, not chokepoints
 };
 
-// Duplicated from server/meridian/supply-chain/v1/_scoring.mjs because
+// Duplicated from server/worldmonitor/supply-chain/v1/_scoring.mjs because
 // ais-relay.cjs is CJS and cannot import .mjs modules. Keep in sync.
 function detectTrafficAnomalyRelay(history, threatLevel) {
   if (!history || history.length < 37) return { dropPct: 0, signal: false };
@@ -10041,7 +10041,7 @@ const server = http.createServer(async (req, res) => {
     } else {
       // Live-tanker path: bbox-filtered + tanker-included responses skip the
       // pre-gzipped cache (bbox space would explode the cache key set).
-      // Handler-side 60s cache (server/meridian/maritime/v1/get-vessel-snapshot.ts)
+      // Handler-side 60s cache (server/worldmonitor/maritime/v1/get-vessel-snapshot.ts)
       // and the gateway 'live' tier absorb identical-bbox requests.
       const payload = {
         ...lastSnapshot,

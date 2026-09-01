@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 
 const SEED_REFRESH_AUTH_FILES = [
   '../server/gateway.ts',
-  '../server/meridian/resilience/v1/get-resilience-ranking.ts',
+  '../server/worldmonitor/resilience/v1/get-resilience-ranking.ts',
 ] as const;
 
 function stripComments(source: string): string {

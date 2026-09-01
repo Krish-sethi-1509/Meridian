@@ -47,11 +47,11 @@ const panelIndicatorsText = readFileSync(
   'utf8',
 );
 const digestSrc = readFileSync(
-  resolve(repoRoot, 'server/meridian/news/v1/list-feed-digest.ts'),
+  resolve(repoRoot, 'server/worldmonitor/news/v1/list-feed-digest.ts'),
   'utf8',
 );
 const classifierSrc = readFileSync(
-  resolve(repoRoot, 'server/meridian/news/v1/_classifier.ts'),
+  resolve(repoRoot, 'server/worldmonitor/news/v1/_classifier.ts'),
   'utf8',
 );
 const breakingAlertsSrc = readFileSync(
@@ -59,7 +59,7 @@ const breakingAlertsSrc = readFileSync(
   'utf8',
 );
 const summarizeSrc = readFileSync(
-  resolve(repoRoot, 'server/meridian/news/v1/summarize-article.ts'),
+  resolve(repoRoot, 'server/worldmonitor/news/v1/summarize-article.ts'),
   'utf8',
 );
 const summaryCacheKeySrc = readFileSync(
@@ -67,7 +67,7 @@ const summaryCacheKeySrc = readFileSync(
   'utf8',
 );
 const feedsSrc = readFileSync(
-  resolve(repoRoot, 'server/meridian/news/v1/_feeds.ts'),
+  resolve(repoRoot, 'server/worldmonitor/news/v1/_feeds.ts'),
   'utf8',
 );
 const cacheKeysSrc = readFileSync(
@@ -147,15 +147,15 @@ const weeklyBriefSrc = readFileSync(
   'utf8',
 );
 const protoText = readFileSync(
-  resolve(repoRoot, 'proto/meridian/news/v1/list_feed_digest.proto'),
+  resolve(repoRoot, 'proto/worldmonitor/news/v1/list_feed_digest.proto'),
   'utf8',
 );
 const newsItemProtoText = readFileSync(
-  resolve(repoRoot, 'proto/meridian/news/v1/news_item.proto'),
+  resolve(repoRoot, 'proto/worldmonitor/news/v1/news_item.proto'),
   'utf8',
 );
 const summarizeArticleProtoText = readFileSync(
-  resolve(repoRoot, 'proto/meridian/news/v1/summarize_article.proto'),
+  resolve(repoRoot, 'proto/worldmonitor/news/v1/summarize_article.proto'),
   'utf8',
 );
 const newsServiceOpenApiText = readFileSync(
@@ -167,7 +167,7 @@ const newsServiceOpenApiYaml = readFileSync(
   'utf8',
 );
 const meridianOpenApiYaml = readFileSync(
-  resolve(repoRoot, 'docs/api/meridian.openapi.yaml'),
+  resolve(repoRoot, 'docs/api/worldmonitor.openapi.yaml'),
   'utf8',
 );
 const newsServiceOpenApi = JSON.parse(newsServiceOpenApiText);
@@ -483,7 +483,7 @@ describe('news digest methodology parity', () => {
 
   it('documents the server news feed inventory in public data-source docs', () => {
     assert.ok(
-      dataSourcesText.includes('source-backed from `server/meridian/news/v1/_feeds.ts`'),
+      dataSourcesText.includes('source-backed from `server/worldmonitor/news/v1/_feeds.ts`'),
       'data sources page must identify _feeds.ts as the server inventory source of truth',
     );
 

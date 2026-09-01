@@ -11,14 +11,14 @@ import {
 import {
   createMarketServiceRoutes,
   type MarketServiceHandler,
-} from '../src/generated/server/meridian/market/v1/service_server.ts';
+} from '../src/generated/server/worldmonitor/market/v1/service_server.ts';
 import {
   createBatchServiceRoutes,
   type BatchServiceHandler,
-} from '../src/generated/server/meridian/batch/v1/service_server.ts';
+} from '../src/generated/server/worldmonitor/batch/v1/service_server.ts';
 
 const ROOT = join(import.meta.dirname, '..');
-const GENERATED_SERVER_ROOT = join(ROOT, 'src/generated/server/meridian');
+const GENERATED_SERVER_ROOT = join(ROOT, 'src/generated/server/worldmonitor');
 
 function walkFiles(directory: string): string[] {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {

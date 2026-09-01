@@ -2,11 +2,11 @@ import type {
   ServerContext,
   RegisterWebhookRequest,
   RegisterWebhookResponse,
-} from '../../../../src/generated/server/meridian/shipping/v2/service_server';
+} from '../../../../src/generated/server/worldmonitor/shipping/v2/service_server';
 import {
   ApiError,
   ValidationError,
-} from '../../../../src/generated/server/meridian/shipping/v2/service_server';
+} from '../../../../src/generated/server/worldmonitor/shipping/v2/service_server';
 
 // @ts-expect-error — JS module, no declaration file
 import { validateApiKey } from '../../../../api/_api-key.js';

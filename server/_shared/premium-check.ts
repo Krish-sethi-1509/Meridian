@@ -376,7 +376,7 @@ export async function resolvePremiumCallerIdentity(request: Request): Promise<Pr
  * caller, which is why the identity API carries it instead.
  *
  * Known remaining hard-deniers on this boolean, tracked in #5652: the RPC
- * surfaces under server/meridian/. They share this flattening, but NOT one
+ * surfaces under server/worldmonitor/. They share this flattening, but NOT one
  * response shape — the #5652 fix has to handle both:
  *   - an in-body `errorType: 'AuthError'` (only summarize-article.ts does this)
  *   - a thrown `ApiError(403, ...)`, which server/error-mapper.ts renders as a

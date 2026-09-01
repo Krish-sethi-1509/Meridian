@@ -8,7 +8,7 @@
 // (F3, Phase 3).
 //
 // This module is the SINGLE classifier, imported by BOTH the ingest
-// path (server/meridian/news/v1/list-feed-digest.ts — stamps
+// path (server/worldmonitor/news/v1/list-feed-digest.ts — stamps
 // `isOpinion` onto the story:track:v1 row) AND the read path
 // (scripts/seed-digest-notifications.mjs buildDigest — re-classifies
 // to catch residue rows ingested before the ingest stamp shipped).

@@ -46,7 +46,7 @@ const targets = [
     prefix: '',
   },
   {
-    path: resolve(apiDir, 'meridian.openapi.yaml'),
+    path: resolve(apiDir, 'worldmonitor.openapi.yaml'),
     format: 'yaml',
     envelope: 'meridian_supply_chain_v1_GetChinaCorridorControlTowersResponse',
     prefix: 'meridian_supply_chain_v1_',

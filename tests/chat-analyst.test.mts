@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import { readFileSync } from 'node:fs';
 
-import { buildAnalystSystemPrompt } from '../server/meridian/intelligence/v1/chat-analyst-prompt.ts';
-import { buildActionEvents, VISUAL_INTENT_RE } from '../server/meridian/intelligence/v1/chat-analyst-actions.ts';
+import { buildAnalystSystemPrompt } from '../server/worldmonitor/intelligence/v1/chat-analyst-prompt.ts';
+import { buildActionEvents, VISUAL_INTENT_RE } from '../server/worldmonitor/intelligence/v1/chat-analyst-actions.ts';
 import { postProcessAnalystHtml } from '../src/utils/analyst-markdown.ts';
 import {
   ALL_TOPIC_IDS,
@@ -19,8 +19,8 @@ import {
   buildRiskScores,
   buildWorldBrief,
   extractKeywords,
-} from '../server/meridian/intelligence/v1/chat-analyst-context.ts';
-import { assembleBriefStoryContext } from '../server/meridian/intelligence/v1/brief-story-context.ts';
+} from '../server/worldmonitor/intelligence/v1/chat-analyst-context.ts';
+import { assembleBriefStoryContext } from '../server/worldmonitor/intelligence/v1/brief-story-context.ts';
 import { readCachedJson, __resetKeyPrefixCacheForTests } from '../server/_shared/redis.ts';
 import {
   CII_RISK_SCORE_CACHE_KEYS,
@@ -33,7 +33,7 @@ import {
   SPR_KEY,
   SPR_POLICIES_KEY,
 } from '../server/_shared/cache-keys.ts';
-import type { AnalystContext } from '../server/meridian/intelligence/v1/chat-analyst-context.ts';
+import type { AnalystContext } from '../server/worldmonitor/intelligence/v1/chat-analyst-context.ts';
 
 // ---------------------------------------------------------------------------
 // Fixtures
@@ -985,7 +985,7 @@ describe('buildHeadlinesFromGdeltIntel — selection, cap and age qualification'
 
   it('no longer carries the DOC-API URL or its 2.5s hot-path timeout', () => {
     const src = readFileSync(
-      new URL('../server/meridian/intelligence/v1/chat-analyst-context.ts', import.meta.url),
+      new URL('../server/worldmonitor/intelligence/v1/chat-analyst-context.ts', import.meta.url),
       'utf-8',
     );
     assert.ok(!src.includes('api.gdeltproject.org'),

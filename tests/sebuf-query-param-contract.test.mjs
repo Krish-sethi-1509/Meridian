@@ -38,16 +38,16 @@ const OPENAPI_NOOP_PARAMS = [
 
 function fixture() {
   const root = mkdtempSync(join(tmpdir(), 'wm-sebuf-query-'));
-  mkdirSync(join(root, 'proto/meridian/demo/v1'), { recursive: true });
-  mkdirSync(join(root, 'server/meridian/demo/v1'), { recursive: true });
+  mkdirSync(join(root, 'proto/worldmonitor/demo/v1'), { recursive: true });
+  mkdirSync(join(root, 'server/worldmonitor/demo/v1'), { recursive: true });
   return root;
 }
 
 function writeProto(root, fieldSource) {
-  writeFileSync(join(root, 'proto/meridian/demo/v1/list_things.proto'), [
+  writeFileSync(join(root, 'proto/worldmonitor/demo/v1/list_things.proto'), [
     'syntax = "proto3";',
     '',
-    'package meridian.demo.v1;',
+    'package worldmonitor.demo.v1;',
     '',
     'import "sebuf/http/annotations.proto";',
     '',
@@ -58,7 +58,7 @@ function writeProto(root, fieldSource) {
 }
 
 function writeHandler(root, body) {
-  writeFileSync(join(root, 'server/meridian/demo/v1/list-things.ts'), body);
+  writeFileSync(join(root, 'server/worldmonitor/demo/v1/list-things.ts'), body);
 }
 
 describe('sebuf query-param implementation contract', () => {

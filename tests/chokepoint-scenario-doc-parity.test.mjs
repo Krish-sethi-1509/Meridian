@@ -80,14 +80,14 @@ function warRiskEnumForThreat(threatLevel) {
 }
 
 describe('chokepoint methodology docs match scoring code', () => {
-  const scoring = readRepo('server/meridian/supply-chain/v1/_scoring.mjs');
-  const statusHandler = readRepo('server/meridian/supply-chain/v1/get-chokepoint-status.ts');
+  const scoring = readRepo('server/worldmonitor/supply-chain/v1/_scoring.mjs');
+  const statusHandler = readRepo('server/worldmonitor/supply-chain/v1/get-chokepoint-status.ts');
   const flowSeeder = readRepo('scripts/seed-chokepoint-flows.mjs');
   const methodology = readRepo('docs/methodology/chokepoints.mdx');
-  const supplyChainProto = readRepo('proto/meridian/supply_chain/v1/supply_chain_data.proto');
-  const exposureProto = readRepo('proto/meridian/supply_chain/v1/get_country_chokepoint_index.proto');
+  const supplyChainProto = readRepo('proto/worldmonitor/supply_chain/v1/supply_chain_data.proto');
+  const exposureProto = readRepo('proto/worldmonitor/supply_chain/v1/get_country_chokepoint_index.proto');
   const supplyChainOpenApi = readRepo('docs/api/SupplyChainService.openapi.yaml');
-  const bundledOpenApi = readRepo('docs/api/meridian.openapi.yaml');
+  const bundledOpenApi = readRepo('docs/api/worldmonitor.openapi.yaml');
 
   it('publishes the exact threat weights and per-chokepoint assignments', () => {
     const weights = parseThreatLevels(scoring);
@@ -206,10 +206,10 @@ describe('scenario docs match worker scope and impact math', () => {
   const scenarioDoc = readRepo('docs/scenario-engine.mdx');
   const apiDoc = readRepo('docs/api-scenarios.mdx');
   const panelDoc = readRepo('docs/panels/supply-chain.mdx');
-  const runProto = readRepo('proto/meridian/scenario/v1/run_scenario.proto');
-  const statusProto = readRepo('proto/meridian/scenario/v1/get_scenario_status.proto');
+  const runProto = readRepo('proto/worldmonitor/scenario/v1/run_scenario.proto');
+  const statusProto = readRepo('proto/worldmonitor/scenario/v1/get_scenario_status.proto');
   const scenarioOpenApi = readRepo('docs/api/ScenarioService.openapi.yaml');
-  const bundledOpenApi = readRepo('docs/api/meridian.openapi.yaml');
+  const bundledOpenApi = readRepo('docs/api/worldmonitor.openapi.yaml');
 
   it('discloses the seeded reporter scope wherever scope-all is documented', () => {
     const seededReporters = parseSeededReporters(worker);

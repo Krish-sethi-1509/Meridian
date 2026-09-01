@@ -180,7 +180,7 @@ function handlerPathForProto(root, protoFile) {
   const version = parts[2];
   const filename = parts[3];
   const handlerName = snakeToKebab(basename(filename, '.proto'));
-  return join(root, 'server', 'meridian', snakeToKebab(snakeDomain), version, handlerName + '.ts');
+  return join(root, 'server', 'worldmonitor', snakeToKebab(snakeDomain), version, handlerName + '.ts');
 }
 
 function isStringLiteralLike(node) {
@@ -331,7 +331,7 @@ export function collectQueryParamContractViolations(root, options = {}) {
   const scopedProtoFiles = options.scopedProtoFiles ?? DEFAULT_SCOPED_PROTO_FILES;
   const forcedNoopQueryParams = options.forcedNoopQueryParams ?? DEFAULT_FORCED_NOOP_QUERY_PARAMS;
   const seenQueryParams = new Set();
-  const protoRoot = join(root, 'proto', 'meridian');
+  const protoRoot = join(root, 'proto', 'worldmonitor');
   const protoFiles = walk(protoRoot).filter((file) => file.endsWith('.proto'));
   const violations = [];
   const stats = {
@@ -356,7 +356,7 @@ export function collectQueryParamContractViolations(root, options = {}) {
         violations.push({
           file: slash(relative(root, field.file)) + ':' + field.line,
           message: 'query param "' + field.queryName + '" has no matching handler file to verify',
-          remedy: 'Restore the server/meridian handler or move/remove the query annotation.',
+          remedy: 'Restore the server/worldmonitor handler or move/remove the query annotation.',
         });
       }
       continue;

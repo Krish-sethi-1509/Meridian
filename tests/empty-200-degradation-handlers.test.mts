@@ -1,17 +1,17 @@
 import assert from 'node:assert/strict';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
-import { listClimateNews } from '../server/meridian/climate/v1/list-climate-news.ts';
-import { getDisplacementSummary } from '../server/meridian/displacement/v1/get-displacement-summary.ts';
-import { getGivingSummary } from '../server/meridian/giving/v1/get-giving-summary.ts';
-import { getVesselSnapshot } from '../server/meridian/maritime/v1/get-vessel-snapshot.ts';
-import { listNaturalEvents } from '../server/meridian/natural/v1/list-natural-events.ts';
-import { listPredictionMarkets } from '../server/meridian/prediction/v1/list-prediction-markets.ts';
-import { listRadiationObservations } from '../server/meridian/radiation/v1/list-radiation-observations.ts';
-import { routeIntelligence } from '../server/meridian/shipping/v2/route-intelligence.ts';
-import { getChokepointStatus } from '../server/meridian/supply-chain/v1/get-chokepoint-status.ts';
-import { listThermalEscalations } from '../server/meridian/thermal/v1/list-thermal-escalations.ts';
-import { listFireDetections } from '../server/meridian/wildfire/v1/list-fire-detections.ts';
+import { listClimateNews } from '../server/worldmonitor/climate/v1/list-climate-news.ts';
+import { getDisplacementSummary } from '../server/worldmonitor/displacement/v1/get-displacement-summary.ts';
+import { getGivingSummary } from '../server/worldmonitor/giving/v1/get-giving-summary.ts';
+import { getVesselSnapshot } from '../server/worldmonitor/maritime/v1/get-vessel-snapshot.ts';
+import { listNaturalEvents } from '../server/worldmonitor/natural/v1/list-natural-events.ts';
+import { listPredictionMarkets } from '../server/worldmonitor/prediction/v1/list-prediction-markets.ts';
+import { listRadiationObservations } from '../server/worldmonitor/radiation/v1/list-radiation-observations.ts';
+import { routeIntelligence } from '../server/worldmonitor/shipping/v2/route-intelligence.ts';
+import { getChokepointStatus } from '../server/worldmonitor/supply-chain/v1/get-chokepoint-status.ts';
+import { listThermalEscalations } from '../server/worldmonitor/thermal/v1/list-thermal-escalations.ts';
+import { listFireDetections } from '../server/worldmonitor/wildfire/v1/list-fire-detections.ts';
 
 const CLEARED_ENV_KEYS = [
   'LOCAL_API_MODE',

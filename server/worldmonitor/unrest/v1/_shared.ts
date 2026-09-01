@@ -2,7 +2,7 @@ import type {
   UnrestEvent,
   UnrestEventType,
   SeverityLevel,
-} from '../../../../src/generated/server/meridian/unrest/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/unrest/v1/service_server';
 
 // ========================================================================
 // ACLED Event Type Mapping (ported from src/services/protests.ts lines 39-46)

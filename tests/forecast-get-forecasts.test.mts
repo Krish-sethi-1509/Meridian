@@ -12,7 +12,7 @@ function makeCtx() {
   return { request: req, pathParams: {}, headers: {} };
 }
 
-function makeForecast(overrides: Partial<import('../src/generated/server/meridian/forecast/v1/service_server').Forecast>) {
+function makeForecast(overrides: Partial<import('../src/generated/server/worldmonitor/forecast/v1/service_server').Forecast>) {
   return {
     id: 'forecast-default',
     domain: 'market',
@@ -44,12 +44,12 @@ function restoreEnv() {
 }
 
 describe('getForecasts backend status', () => {
-  let getForecasts: typeof import('../server/meridian/forecast/v1/get-forecasts').getForecasts;
+  let getForecasts: typeof import('../server/worldmonitor/forecast/v1/get-forecasts').getForecasts;
 
   beforeEach(async () => {
     process.env.UPSTASH_REDIS_REST_URL = 'https://fake-upstash.example';
     process.env.UPSTASH_REDIS_REST_TOKEN = 'fake-token';
-    const mod = await import('../server/meridian/forecast/v1/get-forecasts.ts');
+    const mod = await import('../server/worldmonitor/forecast/v1/get-forecasts.ts');
     getForecasts = mod.getForecasts;
   });
 

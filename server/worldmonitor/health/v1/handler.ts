@@ -1,4 +1,4 @@
-import type { HealthServiceHandler } from '../../../../src/generated/server/meridian/health/v1/service_server';
+import type { HealthServiceHandler } from '../../../../src/generated/server/worldmonitor/health/v1/service_server';
 
 import { listAirQualityAlerts } from './list-air-quality-alerts';
 import { listDiseaseOutbreaks } from './list-disease-outbreaks';

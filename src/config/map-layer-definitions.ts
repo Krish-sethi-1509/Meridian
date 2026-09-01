@@ -195,7 +195,7 @@ export const LAYER_EXPLANATIONS: Partial<Record<keyof MapLayers, LayerExplanatio
       'EONET wildfires are freshness-filtered, so older open events may not appear as active map points.',
     ],
     related: ['Natural Events layer popups', 'Weather Alerts', 'Country brief natural signals'],
-    evidence: ['docs/data-sources.mdx', 'docs/architecture.mdx', 'server/meridian/natural/v1/list-natural-events.ts'],
+    evidence: ['docs/data-sources.mdx', 'docs/architecture.mdx', 'server/worldmonitor/natural/v1/list-natural-events.ts'],
   },
   flights: {
     key: 'flights',
@@ -240,7 +240,7 @@ export const LAYER_EXPLANATIONS: Partial<Record<keyof MapLayers, LayerExplanatio
       'Area geofences and modeled routes can simplify complex traffic patterns.',
     ],
     related: ['Supply Chain panel', 'Trade Routes layer', 'Route Explorer', 'Scenario Engine'],
-    evidence: ['docs/architecture.mdx', 'docs/data-sources.mdx', 'src/config/geo.ts', 'server/meridian/supply-chain/v1/get-chokepoint-status.ts'],
+    evidence: ['docs/architecture.mdx', 'docs/data-sources.mdx', 'src/config/geo.ts', 'server/worldmonitor/supply-chain/v1/get-chokepoint-status.ts'],
   },
   tradeRoutes: {
     key: 'tradeRoutes',
@@ -270,7 +270,7 @@ export const LAYER_EXPLANATIONS: Partial<Record<keyof MapLayers, LayerExplanatio
       'Feed availability, API keys, and per-feed abuse reports can bias coverage.',
     ],
     related: ['Cyber Threats map popups', 'CII cyber supplemental boost', 'Data freshness status'],
-    evidence: ['docs/data-sources.mdx', 'docs/architecture.mdx', 'scripts/seed-cyber-threats.mjs', 'server/meridian/cyber/v1/list-cyber-threats.ts'],
+    evidence: ['docs/data-sources.mdx', 'docs/architecture.mdx', 'scripts/seed-cyber-threats.mjs', 'server/worldmonitor/cyber/v1/list-cyber-threats.ts'],
   },
   hotspots: {
     key: 'hotspots',

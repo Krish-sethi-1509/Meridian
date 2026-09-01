@@ -215,7 +215,7 @@ test.describe('AI widget builder', () => {
       [
         {
           delayMs: 250,
-          endpoint: '/rpc/meridian.markets.v1.MarketsService/GetCommodities',
+          endpoint: '/rpc/worldmonitor.markets.v1.MarketsService/GetCommodities',
           title: 'Oil vs Gold',
           html: createHtml,
         },
@@ -315,12 +315,12 @@ test.describe('AI widget builder', () => {
     const requestBodies: unknown[] = [];
     await installWidgetAgentMocks(page, [
       {
-        endpoint: '/rpc/meridian.markets.v1.MarketsService/GetCommodities',
+        endpoint: '/rpc/worldmonitor.markets.v1.MarketsService/GetCommodities',
         title: 'Oil vs Gold',
         html: buildTallWidgetHtml('Oil vs Gold', 'oil-gold-widget'),
       },
       {
-        endpoint: '/rpc/meridian.aviation.v1.AviationService/GetAirportDelays',
+        endpoint: '/rpc/worldmonitor.aviation.v1.AviationService/GetAirportDelays',
         title: 'Flight Delay Watch',
         html: buildTallWidgetHtml('Flight Delay Watch', 'flight-delay-widget'),
       },
@@ -461,7 +461,7 @@ test.describe('AI widget builder — PRO tier', () => {
     const proHtml = buildProWidgetBody('Oil vs Gold Interactive', 'pro-oil-gold');
     await installProWidgetAgentMocks(page, [
       {
-        endpoint: '/rpc/meridian.markets.v1.MarketsService/GetCommodities',
+        endpoint: '/rpc/worldmonitor.markets.v1.MarketsService/GetCommodities',
         title: 'Oil vs Gold Interactive',
         html: proHtml,
       },
@@ -508,7 +508,7 @@ test.describe('AI widget builder — PRO tier', () => {
     const proHtml = buildProWidgetBody('Crypto Table', 'pro-crypto');
     await installProWidgetAgentMocks(page, [
       {
-        endpoint: '/rpc/meridian.markets.v1.MarketsService/GetCommodities',
+        endpoint: '/rpc/worldmonitor.markets.v1.MarketsService/GetCommodities',
         title: 'Crypto Table',
         html: proHtml,
       },
@@ -559,12 +559,12 @@ test.describe('AI widget builder — PRO tier', () => {
       page,
       [
         {
-          endpoint: '/rpc/meridian.markets.v1.MarketsService/GetCommodities',
+          endpoint: '/rpc/worldmonitor.markets.v1.MarketsService/GetCommodities',
           title: 'Oil vs Gold Interactive',
           html: buildProWidgetBody('Oil vs Gold Interactive', 'pro-oil-gold'),
         },
         {
-          endpoint: '/rpc/meridian.aviation.v1.AviationService/GetAirportDelays',
+          endpoint: '/rpc/worldmonitor.aviation.v1.AviationService/GetAirportDelays',
           title: 'Flight Interactive',
           html: buildProWidgetBody('Flight Interactive', 'pro-flight'),
         },

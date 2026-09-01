@@ -1,4 +1,4 @@
-import type { GetWebcamImageRequest, GetWebcamImageResponse, ServerContext } from '../../../../src/generated/server/meridian/webcam/v1/service_server';
+import type { GetWebcamImageRequest, GetWebcamImageResponse, ServerContext } from '../../../../src/generated/server/worldmonitor/webcam/v1/service_server';
 import { cachedFetchJson } from '../../../_shared/redis';
 
 const WINDY_BASE = 'https://api.windy.com/webcams/api/v3/webcams';

@@ -125,7 +125,7 @@ export function parseWhyMatters(text) {
 /**
  * Deterministic 16-char hex hash of the SIX story fields that flow
  * into the whyMatters prompt (5 core + description). Also consumed by
- * server/meridian/intelligence/v1/get-country-intel-brief.ts
+ * server/worldmonitor/intelligence/v1/get-country-intel-brief.ts
  * (citation verification + grounding telemetry, #4921). Cache identity
  * MUST cover every field that shapes the LLM output, or two requests
  * with the same core fields but different descriptions will share a

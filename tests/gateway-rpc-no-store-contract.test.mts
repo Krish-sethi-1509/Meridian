@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
 
 import { createDomainGateway } from '../server/gateway.ts';
-import { getEnergyPrices } from '../server/meridian/economic/v1/get-energy-prices.ts';
+import { getEnergyPrices } from '../server/worldmonitor/economic/v1/get-energy-prices.ts';
 import type { RouteDescriptor } from '../server/router.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -137,38 +137,38 @@ describe('gateway RPC no-store contract', () => {
 });
 
 const PROTECTED_HIGH_TIER_EMPTY_HANDLERS = [
-  'server/meridian/economic/v1/get-energy-prices.ts',
-  'server/meridian/economic/v1/get-energy-capacity.ts',
-  'server/meridian/economic/v1/get-crude-inventories.ts',
-  'server/meridian/economic/v1/get-nat-gas-storage.ts',
-  'server/meridian/economic/v1/list-fuel-prices.ts',
-  'server/meridian/economic/v1/list-bigmac-prices.ts',
-  'server/meridian/economic/v1/get-fao-food-price-index.ts',
-  'server/meridian/economic/v1/get-bis-policy-rates.ts',
-  'server/meridian/economic/v1/get-bis-exchange-rates.ts',
-  'server/meridian/economic/v1/get-bis-credit.ts',
-  'server/meridian/climate/v1/get-co2-monitoring.ts',
-  'server/meridian/climate/v1/get-ocean-ice-data.ts',
-  'server/meridian/climate/v1/list-climate-anomalies.ts',
-  'server/meridian/climate/v1/list-climate-disasters.ts',
-  'server/meridian/conflict/v1/list-ucdp-events.ts',
-  'server/meridian/cyber/v1/list-cyber-threats.ts',
-  'server/meridian/forecast/v1/get-forecasts.ts',
-  'server/meridian/forecast/v1/get-forecast-scorecard.ts',
-  'server/meridian/market/v1/list-defi-tokens.ts',
-  'server/meridian/market/v1/list-ai-tokens.ts',
-  'server/meridian/market/v1/list-other-tokens.ts',
-  'server/meridian/research/v1/list-arxiv-papers.ts',
-  'server/meridian/research/v1/list-hackernews-items.ts',
-  'server/meridian/research/v1/list-trending-repos.ts',
-  'server/meridian/military/v1/get-theater-posture.ts',
-  'server/meridian/military/v1/list-defense-patents.ts',
+  'server/worldmonitor/economic/v1/get-energy-prices.ts',
+  'server/worldmonitor/economic/v1/get-energy-capacity.ts',
+  'server/worldmonitor/economic/v1/get-crude-inventories.ts',
+  'server/worldmonitor/economic/v1/get-nat-gas-storage.ts',
+  'server/worldmonitor/economic/v1/list-fuel-prices.ts',
+  'server/worldmonitor/economic/v1/list-bigmac-prices.ts',
+  'server/worldmonitor/economic/v1/get-fao-food-price-index.ts',
+  'server/worldmonitor/economic/v1/get-bis-policy-rates.ts',
+  'server/worldmonitor/economic/v1/get-bis-exchange-rates.ts',
+  'server/worldmonitor/economic/v1/get-bis-credit.ts',
+  'server/worldmonitor/climate/v1/get-co2-monitoring.ts',
+  'server/worldmonitor/climate/v1/get-ocean-ice-data.ts',
+  'server/worldmonitor/climate/v1/list-climate-anomalies.ts',
+  'server/worldmonitor/climate/v1/list-climate-disasters.ts',
+  'server/worldmonitor/conflict/v1/list-ucdp-events.ts',
+  'server/worldmonitor/cyber/v1/list-cyber-threats.ts',
+  'server/worldmonitor/forecast/v1/get-forecasts.ts',
+  'server/worldmonitor/forecast/v1/get-forecast-scorecard.ts',
+  'server/worldmonitor/market/v1/list-defi-tokens.ts',
+  'server/worldmonitor/market/v1/list-ai-tokens.ts',
+  'server/worldmonitor/market/v1/list-other-tokens.ts',
+  'server/worldmonitor/research/v1/list-arxiv-papers.ts',
+  'server/worldmonitor/research/v1/list-hackernews-items.ts',
+  'server/worldmonitor/research/v1/list-trending-repos.ts',
+  'server/worldmonitor/military/v1/get-theater-posture.ts',
+  'server/worldmonitor/military/v1/list-defense-patents.ts',
 ] as const;
 
 const HEALTHY_EMPTY_ALLOWLIST = new Set([
-  "server/meridian/forecast/v1/get-forecasts.ts::{ forecasts: [], generatedAt: data.generatedAt || 0, degraded: false, stale: false, error: '' }",
-  "server/meridian/forecast/v1/get-forecast-scorecard.ts::{ schemaVersion: 1, generatedAt: 0, rollingWindowDays: 180, methodology: '', totals: { entries: 0, resolved: 0, pending: 0, pendingJudge: 0, scored: 0, void: 0, voidRate: 0, publicationCoverage: 0, }, byDomain: [], byGenerationOrigin: [], calibration: [], degraded: false, stale: false, error: '', ...overrides, }",
-  "server/meridian/climate/v1/list-climate-disasters.ts::{ disasters: [], pagination: { nextCursor: '', totalCount: allDisasters.length }, }",
+  "server/worldmonitor/forecast/v1/get-forecasts.ts::{ forecasts: [], generatedAt: data.generatedAt || 0, degraded: false, stale: false, error: '' }",
+  "server/worldmonitor/forecast/v1/get-forecast-scorecard.ts::{ schemaVersion: 1, generatedAt: 0, rollingWindowDays: 180, methodology: '', totals: { entries: 0, resolved: 0, pending: 0, pendingJudge: 0, scored: 0, void: 0, voidRate: 0, publicationCoverage: 0, }, byDomain: [], byGenerationOrigin: [], calibration: [], degraded: false, stale: false, error: '', ...overrides, }",
+  "server/worldmonitor/climate/v1/list-climate-disasters.ts::{ disasters: [], pagination: { nextCursor: '', totalCount: allDisasters.length }, }",
 ]);
 
 function propName(name: ts.PropertyName): string | null {

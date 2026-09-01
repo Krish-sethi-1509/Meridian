@@ -18,8 +18,8 @@ import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const apiDir = resolve(root, 'docs/api');
-const bundlePath = resolve(apiDir, 'meridian.openapi.yaml');
-const protoWorldmonitorDir = resolve(root, 'proto/meridian');
+const bundlePath = resolve(apiDir, 'worldmonitor.openapi.yaml');
+const protoWorldmonitorDir = resolve(root, 'proto/worldmonitor');
 const CHECK = process.argv.includes('--check');
 const HTTP_METHODS = new Set(['get', 'post', 'put', 'delete', 'patch', 'options', 'head']);
 
@@ -501,10 +501,10 @@ try {
   const { text, changed } = injectYaml(bundleRaw, bundleContracts);
   if (changed) {
     wouldChange++;
-    touched.push('meridian.openapi.yaml');
+    touched.push('worldmonitor.openapi.yaml');
     if (!CHECK) writeFileSync(bundlePath, text);
   }
-  const failures = yamlContractFailures(text, bundleContracts, 'meridian.openapi.yaml');
+  const failures = yamlContractFailures(text, bundleContracts, 'worldmonitor.openapi.yaml');
   contractFailures.push(...failures);
   if (!CHECK) failYamlContracts(failures);
 } catch (err) {

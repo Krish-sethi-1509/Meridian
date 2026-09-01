@@ -1,6 +1,6 @@
 /**
  * Unit + gateway tests for the generic REST batch endpoint
- * (POST /api/batch/v1/execute, server/meridian/batch/v1/execute-batch.ts).
+ * (POST /api/batch/v1/execute, server/worldmonitor/batch/v1/execute-batch.ts).
  *
  * The handler re-dispatches each operation as a same-origin GET through the
  * public gateway, so the security posture rests on four invariants pinned
@@ -22,8 +22,8 @@ import {
   BATCH_MARKER_HEADER,
   MAX_BATCH_OPERATIONS,
   MAX_SUB_RESPONSE_BYTES,
-} from '../server/meridian/batch/v1/execute-batch.ts';
-import type { FetchLike } from '../server/meridian/batch/v1/execute-batch.ts';
+} from '../server/worldmonitor/batch/v1/execute-batch.ts';
+import type { FetchLike } from '../server/worldmonitor/batch/v1/execute-batch.ts';
 import { installRedis } from './helpers/fake-upstash-redis.mts';
 
 const ORIGIN = 'https://www.meridian.app';
@@ -248,8 +248,8 @@ describe('batch gateway access', () => {
   it('is NOT public and not premium: anonymous POST gets 401 before any fan-out', async () => {
     const [{ createDomainGateway, PUBLIC_NO_AUTH_RPC_PATHS, serverOptions }, generated, { batchHandler }, { PREMIUM_RPC_PATHS }] = await Promise.all([
       import('../server/gateway.ts'),
-      import('../src/generated/server/meridian/batch/v1/service_server.ts'),
-      import('../server/meridian/batch/v1/handler.ts'),
+      import('../src/generated/server/worldmonitor/batch/v1/service_server.ts'),
+      import('../server/worldmonitor/batch/v1/handler.ts'),
       import('../src/shared/premium-paths.ts'),
     ]);
     delete process.env.WORLDMONITOR_VALID_KEYS;

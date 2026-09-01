@@ -11,14 +11,14 @@ import {
   failedDimensionsFromDatasets,
   readStandaloneSourceFailureDimensions,
   readFailedDatasets,
-} from '../server/meridian/resilience/v1/_source-failure.ts';
-import { RESILIENCE_DIMENSION_ORDER } from '../server/meridian/resilience/v1/_dimension-scorers.ts';
-import { resolveSeedMetaKey } from '../server/meridian/resilience/v1/_dimension-freshness.ts';
+} from '../server/worldmonitor/resilience/v1/_source-failure.ts';
+import { RESILIENCE_DIMENSION_ORDER } from '../server/worldmonitor/resilience/v1/_dimension-scorers.ts';
+import { resolveSeedMetaKey } from '../server/worldmonitor/resilience/v1/_dimension-freshness.ts';
 import {
   INDICATOR_REGISTRY,
   getIndicatorSourceKeys,
-} from '../server/meridian/resilience/v1/_indicator-registry.ts';
-import type { IndicatorSpec } from '../server/meridian/resilience/v1/_indicator-registry.ts';
+} from '../server/worldmonitor/resilience/v1/_indicator-registry.ts';
+import type { IndicatorSpec } from '../server/worldmonitor/resilience/v1/_indicator-registry.ts';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 

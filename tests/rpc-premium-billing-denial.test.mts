@@ -15,16 +15,16 @@ import {
   TRUSTED_USER_ID_HEADER,
   getInternalMcpVerifiedNonce,
 } from '../server/_shared/mcp-internal-hmac.ts';
-import { triggerSimulation } from '../server/meridian/forecast/v1/trigger-simulation.ts';
-import { summarizeArticle } from '../server/meridian/news/v1/summarize-article.ts';
-import { getScenarioStatus } from '../server/meridian/scenario/v1/get-scenario-status.ts';
-import { runScenario } from '../server/meridian/scenario/v1/run-scenario.ts';
-import { listWebhooks } from '../server/meridian/shipping/v2/list-webhooks.ts';
-import { registerWebhook } from '../server/meridian/shipping/v2/register-webhook.ts';
-import { routeIntelligence } from '../server/meridian/shipping/v2/route-intelligence.ts';
-import { ApiError as ForecastApiError } from '../src/generated/server/meridian/forecast/v1/service_server.ts';
-import { ApiError as ScenarioApiError } from '../src/generated/server/meridian/scenario/v1/service_server.ts';
-import { ApiError as ShippingApiError } from '../src/generated/server/meridian/shipping/v2/service_server.ts';
+import { triggerSimulation } from '../server/worldmonitor/forecast/v1/trigger-simulation.ts';
+import { summarizeArticle } from '../server/worldmonitor/news/v1/summarize-article.ts';
+import { getScenarioStatus } from '../server/worldmonitor/scenario/v1/get-scenario-status.ts';
+import { runScenario } from '../server/worldmonitor/scenario/v1/run-scenario.ts';
+import { listWebhooks } from '../server/worldmonitor/shipping/v2/list-webhooks.ts';
+import { registerWebhook } from '../server/worldmonitor/shipping/v2/register-webhook.ts';
+import { routeIntelligence } from '../server/worldmonitor/shipping/v2/route-intelligence.ts';
+import { ApiError as ForecastApiError } from '../src/generated/server/worldmonitor/forecast/v1/service_server.ts';
+import { ApiError as ScenarioApiError } from '../src/generated/server/worldmonitor/scenario/v1/service_server.ts';
+import { ApiError as ShippingApiError } from '../src/generated/server/worldmonitor/shipping/v2/service_server.ts';
 
 const ORIGINAL_FETCH = globalThis.fetch;
 const ORIGINAL_ENV = { ...process.env };

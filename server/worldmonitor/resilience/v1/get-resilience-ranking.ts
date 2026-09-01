@@ -5,7 +5,7 @@ import {
   type GetResilienceRankingRequest,
   type GetResilienceRankingResponse,
   type ResilienceRankingItem,
-} from '../../../../src/generated/server/meridian/resilience/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/resilience/v1/service_server';
 
 import { compareAndDeleteRedisKey, getCachedJson, runRedisPipeline } from '../../../_shared/redis';
 import { unwrapEnvelope } from '../../../_shared/seed-envelope';

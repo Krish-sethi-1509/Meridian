@@ -11,7 +11,7 @@ import type {
   GetGivingSummaryRequest,
   GetGivingSummaryResponse,
   GivingSummary,
-} from '../../../../src/generated/server/meridian/giving/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/giving/v1/service_server';
 
 import { cachedFetchJson } from '../../../_shared/redis';
 import { buildPublishedEstimateSummary } from './published-estimates';

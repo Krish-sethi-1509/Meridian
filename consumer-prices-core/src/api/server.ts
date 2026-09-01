@@ -4,7 +4,7 @@ import { realpathSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import Fastify, { type FastifyServerOptions } from 'fastify';
 import cors from '@fastify/cors';
-import { meridianRoutes } from './routes/meridian.js';
+import { meridianRoutes } from './routes/worldmonitor.js';
 import { healthRoutes } from './routes/health.js';
 
 export interface ConsumerPricesServerOptions {

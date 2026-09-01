@@ -1,7 +1,7 @@
 import { beforeEach, afterEach, describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { listTelegramFeed } from '../server/meridian/intelligence/v1/list-telegram-feed.ts';
+import { listTelegramFeed } from '../server/worldmonitor/intelligence/v1/list-telegram-feed.ts';
 
 const originalFetch = globalThis.fetch;
 const originalEnv = { ...process.env };

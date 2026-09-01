@@ -203,13 +203,13 @@ describe('getRelayHeaders — with auth', () => {
 
 describe('relay.ts — consumer import verification', () => {
   const consumers = [
-    { file: 'server/meridian/aviation/v1/_shared.ts', importPath: '../../../_shared/relay' },
-    { file: 'server/meridian/intelligence/v1/_relay.ts', importPath: '../../../_shared/relay' },
-    { file: 'server/meridian/research/v1/list-tech-events.ts', importPath: '../../../_shared/relay' },
-    { file: 'server/meridian/maritime/v1/get-vessel-snapshot.ts', importPath: '../../../_shared/relay' },
-    { file: 'server/meridian/market/v1/_shared.ts', importPath: '../../../_shared/relay' },
-    { file: 'server/meridian/news/v1/list-feed-digest.ts', importPath: '../../../_shared/relay' },
-    { file: 'server/meridian/military/v1/list-military-flights.ts', importPath: '../../../_shared/relay' },
+    { file: 'server/worldmonitor/aviation/v1/_shared.ts', importPath: '../../../_shared/relay' },
+    { file: 'server/worldmonitor/intelligence/v1/_relay.ts', importPath: '../../../_shared/relay' },
+    { file: 'server/worldmonitor/research/v1/list-tech-events.ts', importPath: '../../../_shared/relay' },
+    { file: 'server/worldmonitor/maritime/v1/get-vessel-snapshot.ts', importPath: '../../../_shared/relay' },
+    { file: 'server/worldmonitor/market/v1/_shared.ts', importPath: '../../../_shared/relay' },
+    { file: 'server/worldmonitor/news/v1/list-feed-digest.ts', importPath: '../../../_shared/relay' },
+    { file: 'server/worldmonitor/military/v1/list-military-flights.ts', importPath: '../../../_shared/relay' },
   ];
 
   for (const { file, importPath } of consumers) {
@@ -224,13 +224,13 @@ describe('relay.ts — consumer import verification', () => {
 
   it('no local getRelayBaseUrl/getRelayHeaders/getRelayRequestHeaders definitions in server/ (except _shared/relay.ts)', () => {
     const dupeFiles = [
-      'server/meridian/aviation/v1/_shared.ts',
-      'server/meridian/intelligence/v1/_relay.ts',
-      'server/meridian/research/v1/list-tech-events.ts',
-      'server/meridian/maritime/v1/get-vessel-snapshot.ts',
-      'server/meridian/market/v1/_shared.ts',
-      'server/meridian/news/v1/list-feed-digest.ts',
-      'server/meridian/military/v1/list-military-flights.ts',
+      'server/worldmonitor/aviation/v1/_shared.ts',
+      'server/worldmonitor/intelligence/v1/_relay.ts',
+      'server/worldmonitor/research/v1/list-tech-events.ts',
+      'server/worldmonitor/maritime/v1/get-vessel-snapshot.ts',
+      'server/worldmonitor/market/v1/_shared.ts',
+      'server/worldmonitor/news/v1/list-feed-digest.ts',
+      'server/worldmonitor/military/v1/list-military-flights.ts',
     ];
     for (const file of dupeFiles) {
       const src = readFileSync(resolve(file), 'utf-8');
@@ -250,7 +250,7 @@ describe('relay.ts — consumer import verification', () => {
   });
 
   it('military list-military-flights.ts uses getRelayBaseUrl() not raw WS_RELAY_URL + /opensky', () => {
-    const src = readFileSync(resolve('server/meridian/military/v1/list-military-flights.ts'), 'utf-8');
+    const src = readFileSync(resolve('server/worldmonitor/military/v1/list-military-flights.ts'), 'utf-8');
     assert.ok(
       !src.includes("process.env.WS_RELAY_URL + '/opensky'"),
       'military: must use getRelayBaseUrl() to avoid wss:// URL bug',

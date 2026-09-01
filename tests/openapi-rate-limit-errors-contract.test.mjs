@@ -125,15 +125,15 @@ describe('OpenAPI gateway rate-limit and error contracts', () => {
   }
 
   it('the unified bundle documents the same gateway contracts', () => {
-    const bundle = loadYaml(readFileSync(resolve(apiDir, 'meridian.openapi.yaml'), 'utf8'));
+    const bundle = loadYaml(readFileSync(resolve(apiDir, 'worldmonitor.openapi.yaml'), 'utf8'));
     const ops = operations(bundle);
     const serviceTotal = serviceJson.reduce(
       (sum, file) => sum + operations(JSON.parse(readFileSync(resolve(apiDir, file), 'utf8'))).length,
       0,
     );
     assert.equal(ops.length, serviceTotal, `expected bundle operation count to match service specs (${serviceTotal}), found ${ops.length}`);
-    assertSharedSchemas(bundle, 'meridian.openapi.yaml');
-    for (const op of ops) assertOperationContract(op, 'meridian.openapi.yaml');
+    assertSharedSchemas(bundle, 'worldmonitor.openapi.yaml');
+    for (const op of ops) assertOperationContract(op, 'worldmonitor.openapi.yaml');
   });
 
   it('the injector reports the specs as in-sync', () => {
@@ -272,7 +272,7 @@ components:
 `;
     writeFileSync(resolve(fixtureDir, 'FixtureService.openapi.json'), JSON.stringify(fixtureJson));
     writeFileSync(resolve(fixtureDir, 'FixtureService.openapi.yaml'), fixtureYaml);
-    writeFileSync(resolve(fixtureDir, 'meridian.openapi.yaml'), fixtureYaml);
+    writeFileSync(resolve(fixtureDir, 'worldmonitor.openapi.yaml'), fixtureYaml);
 
     execFileSync('node', ['scripts/openapi-inject-rate-limit-errors.mjs'], {
       cwd: root,

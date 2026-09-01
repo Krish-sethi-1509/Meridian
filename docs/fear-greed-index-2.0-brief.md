@@ -385,7 +385,7 @@ not treat it as a live key.
 
 ### Phase 2: Proto + RPC
 
-5. New proto: `proto/meridian/market/v1/fear_greed.proto`
+5. New proto: `proto/worldmonitor/market/v1/fear_greed.proto`
    - `GetFearGreedIndex` RPC
    - Messages for composite score, category scores, and header metrics
 6. New handler: `server/meridian/market/v1/get-fear-greed-index.ts`

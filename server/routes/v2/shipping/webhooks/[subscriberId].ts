@@ -17,7 +17,7 @@ import {
   webhookKey,
   callerFingerprint,
   type WebhookRecord,
-} from '../../../../meridian/shipping/v2/webhook-shared';
+} from '../../../../worldmonitor/shipping/v2/webhook-shared';
 
 export default async function handler(req: Request): Promise<Response> {
   const cors = getCorsHeaders(req);

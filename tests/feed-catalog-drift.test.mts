@@ -247,7 +247,7 @@ before(async () => {
   feeds = await bundleFeedsModule<FeedsModule>({ repoRoot, tempDir });
 
   const serverResult = await build({
-    entryPoints: [join(repoRoot, 'server/meridian/news/v1/_feeds.ts')],
+    entryPoints: [join(repoRoot, 'server/worldmonitor/news/v1/_feeds.ts')],
     bundle: true,
     format: 'esm',
     platform: 'neutral',

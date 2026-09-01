@@ -3,7 +3,7 @@
 import { afterEach, beforeEach, describe, expect, test } from "vitest";
 
 import { __testing__ as llmHealth, isModelUsable } from "../_shared/llm-health";
-import { summarizeArticle } from "../meridian/news/v1/summarize-article";
+import { summarizeArticle } from "../worldmonitor/news/v1/summarize-article";
 
 const originalFetch = globalThis.fetch;
 const originalEnv = { ...process.env };

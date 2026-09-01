@@ -203,7 +203,7 @@ That said, **all code is held to the same quality bar regardless of how it was w
 - Edge function gateway and legacy endpoints go in `api/`
 - UI components (panels, map, modals) go in `src/components/`
 - Service modules (data fetching, client wrappers) go in `src/services/`
-- Proto definitions go in `proto/meridian/{domain}/v1/`
+- Proto definitions go in `proto/worldmonitor/{domain}/v1/`
 
 ## Working with Sebuf (RPC Framework)
 
@@ -211,7 +211,7 @@ Sebuf is the project's custom Proto-first HTTP RPC framework — a lightweight a
 
 ### How It Works
 
-1. **Proto definitions** in `proto/meridian/{domain}/v1/` define services and messages
+1. **Proto definitions** in `proto/worldmonitor/{domain}/v1/` define services and messages
 2. **Code generation** (`make generate`) produces:
    - TypeScript clients in `src/generated/client/` (e.g., `MarketServiceClient`)
    - Server route factories in `src/generated/server/` (e.g., `createMarketServiceRoutes`)
@@ -261,7 +261,7 @@ The unified bundle is emitted by a third `protoc-gen-openapiv3` invocation in `p
 To add a new data layer to the map:
 
 1. **Define the data source** — identify the API or dataset you want to integrate
-2. **Add the proto service** (if the data needs a backend proxy) — define messages and RPC methods in `proto/meridian/{domain}/v1/`
+2. **Add the proto service** (if the data needs a backend proxy) — define messages and RPC methods in `proto/worldmonitor/{domain}/v1/`
 3. **Generate stubs** — run `make generate`
 4. **Implement the handler** in `server/meridian/{domain}/v1/`
 5. **Register the handler** in `api/[domain]/v1/[rpc].ts` and `vite.config.ts` (for local dev)

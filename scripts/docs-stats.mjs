@@ -504,13 +504,13 @@ function computeStats() {
   const protoServices = protoFiles
     .map((f) => (read(f).match(/^service\s+\w+/gm) || []).length)
     .reduce((a, b) => a + b, 0);
-  const protoDomainFolders = dirsIn('proto/meridian').length;
+  const protoDomainFolders = dirsIn('proto/worldmonitor').length;
 
   // ---- Generated OpenAPI service specs (docs/api/*Service.openapi.yaml) ----
   const openapiServiceSpecs = filesIn('docs/api').filter((f) => /Service\.openapi\.yaml$/.test(f)).length;
 
-  // ---- Server domain handlers (server/meridian/*/) ----
-  const serverDomains = dirsIn('server/meridian').length;
+  // ---- Server domain handlers (server/worldmonitor/*/) ----
+  const serverDomains = dirsIn('server/worldmonitor').length;
 
   // ---- User-facing locales (src/locales/*.json, excluding shell fragments) ----
   const localeCodes = filesIn('src/locales')
@@ -787,7 +787,7 @@ function claims(s) {
     { file: 'blog-site/src/content/blog/build-on-meridian-developer-api-open-source.md', re: /typed API: \d+\s+services, (\d+)\s+proto files/, value: s.protoFiles },
     { file: 'blog-site/src/content/blog/build-on-meridian-developer-api-open-source.md', re: /\*\*(\d+)\s+proto files\*\* defining/, value: s.protoFiles },
     { file: 'blog-site/src/content/blog/build-on-meridian-developer-api-open-source.md', re: /\*\*(\d+)\s+typed service domains\*\*/, value: s.protoServices },
-    // Heading labels the table below it, which is enumerated from server/meridian/* dirs → pin to serverDomains (not protoServices; the two equal 34 today but a domain with two `service` blocks would diverge them).
+    // Heading labels the table below it, which is enumerated from server/worldmonitor/* dirs → pin to serverDomains (not protoServices; the two equal 34 today but a domain with two `service` blocks would diverge them).
     { file: 'blog-site/src/content/blog/build-on-meridian-developer-api-open-source.md', re: /##\s+(\d+)\s+Service Domains/, value: s.serverDomains },
     { file: 'blog-site/src/content/blog/build-on-meridian-developer-api-open-source.md', re: /Protocol Buffers \((\d+)\s+files\)/, value: s.protoFiles },
     { file: 'blog-site/src/content/blog/build-on-meridian-developer-api-open-source.md', re: /meridian\)\. (\d+)\s+services, \d+\s+proto files, and a global/, value: s.protoServices },

@@ -68,12 +68,12 @@ const allFailedOutcome = {
 };
 
 describe('getSimulationOutcome runId filter (#3734 U6)', () => {
-  let getSimulationOutcome: typeof import('../server/meridian/forecast/v1/get-simulation-outcome').getSimulationOutcome;
+  let getSimulationOutcome: typeof import('../server/worldmonitor/forecast/v1/get-simulation-outcome').getSimulationOutcome;
 
   beforeEach(async () => {
     process.env.UPSTASH_REDIS_REST_URL = 'https://fake-upstash.example';
     process.env.UPSTASH_REDIS_REST_TOKEN = 'fake-token';
-    const mod = await import('../server/meridian/forecast/v1/get-simulation-outcome.ts');
+    const mod = await import('../server/worldmonitor/forecast/v1/get-simulation-outcome.ts');
     getSimulationOutcome = mod.getSimulationOutcome;
   });
 

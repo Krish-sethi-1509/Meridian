@@ -3,7 +3,7 @@ import type {
   ServerContext,
   GetYoutubeLiveStreamInfoRequest,
   GetYoutubeLiveStreamInfoResponse,
-} from '../../../../src/generated/server/meridian/aviation/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/aviation/v1/service_server';
 import { getRelayBaseUrl, getRelayHeaders } from './_shared';
 import { CHROME_UA } from '../../../_shared/constants';
 import { cachedFetchJson } from '../../../_shared/redis';

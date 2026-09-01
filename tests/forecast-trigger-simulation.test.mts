@@ -77,16 +77,16 @@ const VALID_RUN_ID = '1734567890123-abc';
 const PKG_KEY = 'seed-data/forecast-traces/2026/05/18/' + VALID_RUN_ID + '/simulation-package.json';
 
 describe('triggerSimulation handler (#3734 U4)', () => {
-  let triggerSimulation: typeof import('../server/meridian/forecast/v1/trigger-simulation').triggerSimulation;
-  let ApiError: typeof import('../src/generated/server/meridian/forecast/v1/service_server').ApiError;
+  let triggerSimulation: typeof import('../server/worldmonitor/forecast/v1/trigger-simulation').triggerSimulation;
+  let ApiError: typeof import('../src/generated/server/worldmonitor/forecast/v1/service_server').ApiError;
 
   beforeEach(async () => {
     process.env.WORLDMONITOR_VALID_KEYS = 'pro-test-key';
     process.env.UPSTASH_REDIS_REST_URL = 'https://fake-upstash.example';
     process.env.UPSTASH_REDIS_REST_TOKEN = 'fake-token';
-    const mod = await import('../server/meridian/forecast/v1/trigger-simulation.ts');
+    const mod = await import('../server/worldmonitor/forecast/v1/trigger-simulation.ts');
     triggerSimulation = mod.triggerSimulation;
-    const gen = await import('../src/generated/server/meridian/forecast/v1/service_server.ts');
+    const gen = await import('../src/generated/server/worldmonitor/forecast/v1/service_server.ts');
     ApiError = gen.ApiError;
   });
 

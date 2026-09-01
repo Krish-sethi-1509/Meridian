@@ -6,7 +6,7 @@ import type {
   StrategicRisk,
   TrendDirection,
   SeverityLevel,
-} from '../../../../src/generated/server/meridian/intelligence/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/intelligence/v1/service_server';
 
 import iso3ToIso2Json from '../../../../shared/iso3-to-iso2.json';
 import { getCachedJson, setCachedJson, cachedFetchJsonWithMeta } from '../../../_shared/redis';

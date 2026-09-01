@@ -1212,8 +1212,8 @@ describe('cachedFetchJson inflight timeout (#3539)', { concurrency: 1 }, () => {
 
 describe('country risk freshness behavior', { concurrency: 1 }, () => {
   async function importCountryRisk() {
-    return importPatchedTsModule('server/meridian/intelligence/v1/get-country-risk.ts', {
-      './_shared': resolve(root, 'server/meridian/intelligence/v1/_shared.ts'),
+    return importPatchedTsModule('server/worldmonitor/intelligence/v1/get-country-risk.ts', {
+      './_shared': resolve(root, 'server/worldmonitor/intelligence/v1/_shared.ts'),
       '../../../_shared/redis': resolve(root, 'server/_shared/redis.ts'),
       '../../../_shared/cache-keys': resolve(root, 'server/_shared/cache-keys.ts'),
       // #4921: citation verification + grounding telemetry import
@@ -1327,8 +1327,8 @@ describe('country risk freshness behavior', { concurrency: 1 }, () => {
 
 describe('theater posture caching behavior', { concurrency: 1 }, () => {
   async function importTheaterPosture() {
-    return importPatchedTsModule('server/meridian/military/v1/get-theater-posture.ts', {
-      './_shared': resolve(root, 'server/meridian/military/v1/_shared.ts'),
+    return importPatchedTsModule('server/worldmonitor/military/v1/get-theater-posture.ts', {
+      './_shared': resolve(root, 'server/worldmonitor/military/v1/_shared.ts'),
       '../../../_shared/constants': resolve(root, 'server/_shared/constants.ts'),
       '../../../_shared/redis': resolve(root, 'server/_shared/redis.ts'),
       '../../../_shared/response-headers': resolve(root, 'server/_shared/response-headers.ts'),
@@ -1497,9 +1497,9 @@ describe('theater posture caching behavior', { concurrency: 1 }, () => {
 
 describe('country intel brief caching behavior', { concurrency: 1 }, () => {
   async function importCountryIntelBrief({ premium = false } = {}) {
-    return importPatchedTsModule('server/meridian/intelligence/v1/get-country-intel-brief.ts', {
-      './_shared': resolve(root, 'server/meridian/intelligence/v1/_shared.ts'),
-      './_country-brief-context': resolve(root, 'server/meridian/intelligence/v1/_country-brief-context.ts'),
+    return importPatchedTsModule('server/worldmonitor/intelligence/v1/get-country-intel-brief.ts', {
+      './_shared': resolve(root, 'server/worldmonitor/intelligence/v1/_shared.ts'),
+      './_country-brief-context': resolve(root, 'server/worldmonitor/intelligence/v1/_country-brief-context.ts'),
       '../../../_shared/constants': resolve(root, 'server/_shared/constants.ts'),
       '../../../_shared/redis': resolve(root, 'server/_shared/redis.ts'),
       '../../../_shared/llm-health': resolve(root, 'tests/helpers/llm-health-stub.ts'),
@@ -1708,8 +1708,8 @@ describe('country intel brief caching behavior', { concurrency: 1 }, () => {
 
 describe('military flights bbox behavior', { concurrency: 1 }, () => {
   async function importListMilitaryFlights() {
-    return importPatchedTsModule('server/meridian/military/v1/list-military-flights.ts', {
-      './_shared': resolve(root, 'server/meridian/military/v1/_shared.ts'),
+    return importPatchedTsModule('server/worldmonitor/military/v1/list-military-flights.ts', {
+      './_shared': resolve(root, 'server/worldmonitor/military/v1/_shared.ts'),
       '../../../_shared/constants': resolve(root, 'server/_shared/constants.ts'),
       '../../../_shared/redis': resolve(root, 'server/_shared/redis.ts'),
       '../../../_shared/relay': resolve(root, 'server/_shared/relay.ts'),

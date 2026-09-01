@@ -32,7 +32,7 @@ import {
   scoreSovereignFiscalBuffer,
   isExcludedFromConfidenceMean,
   type ResilienceSeedReader,
-} from '../server/meridian/resilience/v1/_dimension-scorers.ts';
+} from '../server/worldmonitor/resilience/v1/_dimension-scorers.ts';
 
 const TEST_ISO2 = 'XX';
 

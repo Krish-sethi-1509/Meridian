@@ -5,7 +5,7 @@
  *
  * The sebuf `protoc-gen-openapiv3` plugin emits per-service specs
  * (docs/api/<Service>.openapi.{json,yaml}) with NO top-level `servers` field:
- * only the BUNDLE (docs/api/meridian.openapi.yaml) gets one, via the
+ * only the BUNDLE (docs/api/worldmonitor.openapi.yaml) gets one, via the
  * `bundle_server` option in proto/buf.gen.yaml. Without a per-service `servers`
  * entry the Mintlify docs site falls back to the placeholder base URL
  * `https://api.example.com`, so every rendered curl snippet points at a
@@ -27,7 +27,7 @@
  *      top-level `paths:` line, mirroring how openapi-inject-security.mjs
  *      inserts its root `security:` block.
  *
- * The bundle (meridian.openapi.yaml) already carries `servers` from
+ * The bundle (worldmonitor.openapi.yaml) already carries `servers` from
  * `bundle_server`, so it is intentionally left untouched.
  *
  * Like the sibling injectors this runs in the `make generate` codegen context

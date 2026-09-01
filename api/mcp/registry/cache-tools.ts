@@ -628,7 +628,7 @@ export const CACHE_TOOLS: ToolDef[] = [
     ],
     // NOTE: `GET /api/intelligence/v1/get-risk-scores` is NOT covered here.
     // The audit-time hint matched only this tool's conflict/risk cache keys,
-    // but the handler at server/meridian/intelligence/v1/get-risk-scores.ts
+    // but the handler at server/worldmonitor/intelligence/v1/get-risk-scores.ts
     // reads a broader cross-domain set (infra outages, climate anomalies,
     // cyber threats, wildfires, GPS jamming, OREF history, security
     // advisories, displacement, news insights, news threats, aviation,
@@ -924,7 +924,7 @@ export const CACHE_TOOLS: ToolDef[] = [
     _seedMetaKey: 'seed-meta:intelligence:risk-scores',
     _maxStaleMin: 120,
     // CASCADE-MIRROR EQUIVALENCE: the API handler at
-    // server/meridian/military/v1/get-theater-posture.ts:23 reads 3 cascade
+    // server/worldmonitor/military/v1/get-theater-posture.ts:23 reads 3 cascade
     // variants (live + stale + backup) and returns the freshest available.
     // This MCP tool reads only the stale variant; PR #3658's U7 already
     // documents `theater-posture:sebuf:v1` and `theater-posture:sebuf:backup:v1`

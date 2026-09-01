@@ -3,7 +3,7 @@ import type {
   ServerContext,
   ReverseGeocodeRequest,
   ReverseGeocodeResponse,
-} from '../../../../src/generated/server/meridian/infrastructure/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/infrastructure/v1/service_server';
 import { getCachedJson, setCachedJson } from '../../../_shared/redis';
 
 const NOMINATIM_BASE = 'https://nominatim.openstreetmap.org/reverse';

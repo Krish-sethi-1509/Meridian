@@ -3,7 +3,7 @@ import type {
   ServerContext,
   ListDiseaseOutbreaksRequest,
   ListDiseaseOutbreaksResponse,
-} from '../../../../src/generated/server/meridian/health/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/health/v1/service_server';
 
 import { getCachedJson } from '../../../_shared/redis';
 

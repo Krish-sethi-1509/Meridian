@@ -17,11 +17,11 @@ import type {
   BatchOperationBody,
   BatchOperationResult,
   FieldViolation,
-} from '../../../../src/generated/server/meridian/batch/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/batch/v1/service_server';
 import {
   ApiError,
   ValidationError,
-} from '../../../../src/generated/server/meridian/batch/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/batch/v1/service_server';
 
 export const MAX_BATCH_OPERATIONS = 20;
 export const MAX_OPERATION_ID_LENGTH = 64;

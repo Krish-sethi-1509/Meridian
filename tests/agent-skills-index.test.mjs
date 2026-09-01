@@ -255,11 +255,11 @@ describe('agent readiness: agent-skills index', () => {
     const example = parseResponseShapeExample(skill);
 
     const scorer = readFileSync(
-      join(ROOT, 'server/meridian/resilience/v1/_dimension-scorers.ts'),
+      join(ROOT, 'server/worldmonitor/resilience/v1/_dimension-scorers.ts'),
       'utf-8',
     );
     const pillars = readFileSync(
-      join(ROOT, 'server/meridian/resilience/v1/_pillar-membership.ts'),
+      join(ROOT, 'server/worldmonitor/resilience/v1/_pillar-membership.ts'),
       'utf-8',
     );
     const domainIds = readExportedStringArray(scorer, 'RESILIENCE_DOMAIN_ORDER');

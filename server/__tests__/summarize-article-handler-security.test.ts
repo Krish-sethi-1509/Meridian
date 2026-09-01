@@ -2,7 +2,7 @@
 
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
-import { summarizeArticle } from "../meridian/news/v1/summarize-article";
+import { summarizeArticle } from "../worldmonitor/news/v1/summarize-article";
 
 const originalFetch = globalThis.fetch;
 const originalEnv = { ...process.env };

@@ -22,7 +22,7 @@ import { dedupeSharedChinaProvenanceSchemas } from '../scripts/openapi-dedup-sch
 // the next injector cannot silently re-cross the cap.
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const bundlePath = resolve(root, 'docs/api/meridian.openapi.yaml');
+const bundlePath = resolve(root, 'docs/api/worldmonitor.openapi.yaml');
 const buildScriptPath = resolve(root, 'scripts/build-openapi-json.mjs');
 
 // Leave headroom under the ~1 MB cap: the spec sat at ~752 KB when the check

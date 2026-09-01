@@ -13,7 +13,7 @@ vi.mock('../config/loader.js', () => ({
 }));
 vi.mock('../db/client.js', () => ({ closePool: vi.fn() }));
 vi.mock('../snapshots/coverage.js', () => ({ buildCoverageSnapshot: mockBuildCoverageSnapshot }));
-vi.mock('../snapshots/meridian.js', () => ({
+vi.mock('../snapshots/worldmonitor.js', () => ({
   buildFreshnessSnapshot: mockBuildFreshnessSnapshot,
   buildOverviewSnapshot: mockBuildOverviewSnapshot,
   buildMoversSnapshot: mockBuildMoversSnapshot,

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { buildChinaCorridorSourceBundle } from '../server/meridian/supply-chain/v1/china-corridor-source-adapters.ts';
+import { buildChinaCorridorSourceBundle } from '../server/worldmonitor/supply-chain/v1/china-corridor-source-adapters.ts';
 
 const ASSESSED_AT = '2026-07-25T12:00:00.000Z';
 const FRESH_META = { fetchedAt: Date.parse('2026-07-25T11:30:00.000Z') };

@@ -42,8 +42,8 @@ const ACCESS_TIERS = Object.freeze([
 const REQUIRED_REGISTRATIONS = Object.freeze([
   ['shared/china-decision-signals.ts', ...CHINA_DECISION_PARITY_MANIFEST.map(({ groupId }) => `'${groupId}'`)],
   ['shared/decision-signal-provenance-families.ts', ...CHINA_DECISION_PARITY_MANIFEST.map(({ provenanceFamily }) => `${provenanceFamily}: Object.freeze({`)],
-  ['proto/meridian/intelligence/v1/get_china_decision_signals.proto', 'message GetChinaDecisionSignalsResponse'],
-  ['proto/meridian/intelligence/v1/service.proto', 'GetChinaDecisionSignals'],
+  ['proto/worldmonitor/intelligence/v1/get_china_decision_signals.proto', 'message GetChinaDecisionSignalsResponse'],
+  ['proto/worldmonitor/intelligence/v1/service.proto', 'GetChinaDecisionSignals'],
   ['api/mcp/registry/rpc-tools.ts', 'get_china_decision_signals', ROUTE, CANONICAL_KEY],
   ['server/gateway.ts', `'${ROUTE}': 'fast'`, `'${ROUTE}',`],
   ['shared/bootstrap-tier-keys.js', `chinaDecisionSignals: '${CANONICAL_KEY}'`],

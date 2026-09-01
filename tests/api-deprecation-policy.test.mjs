@@ -9,7 +9,7 @@ describe('REST API versioning and deprecation policy', () => {
   it('keeps the policy discoverable from the OpenAPI generator and source bundle', () => {
     for (const path of [
       'proto/buf.gen.yaml',
-      'docs/api/meridian.openapi.yaml',
+      'docs/api/worldmonitor.openapi.yaml',
     ]) {
       assert.match(read(path), new RegExp(policyUrl.replaceAll('.', '\\.')));
     }

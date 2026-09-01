@@ -2,8 +2,8 @@ import type {
   ServerContext,
   TriggerSimulationRequest,
   TriggerSimulationResponse,
-} from '../../../../src/generated/server/meridian/forecast/v1/service_server';
-import { ApiError } from '../../../../src/generated/server/meridian/forecast/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/forecast/v1/service_server';
+import { ApiError } from '../../../../src/generated/server/worldmonitor/forecast/v1/service_server';
 
 import {
   requirePremiumRpcAccess,

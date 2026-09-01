@@ -3,11 +3,11 @@ import { afterEach, beforeEach, describe, it, mock } from 'node:test';
 
 import { createDomainGateway, serverOptions } from '../server/gateway.ts';
 import { drainResponseHeaders } from '../server/_shared/response-headers.ts';
-import { createAviationServiceRoutes } from '../src/generated/server/meridian/aviation/v1/service_server.ts';
-import { aviationHandler } from '../server/meridian/aviation/v1/handler.ts';
-import { listAirportFlights } from '../server/meridian/aviation/v1/list-airport-flights.ts';
-import { getFlightStatus } from '../server/meridian/aviation/v1/get-flight-status.ts';
-import { getCarrierOps } from '../server/meridian/aviation/v1/get-carrier-ops.ts';
+import { createAviationServiceRoutes } from '../src/generated/server/worldmonitor/aviation/v1/service_server.ts';
+import { aviationHandler } from '../server/worldmonitor/aviation/v1/handler.ts';
+import { listAirportFlights } from '../server/worldmonitor/aviation/v1/list-airport-flights.ts';
+import { getFlightStatus } from '../server/worldmonitor/aviation/v1/get-flight-status.ts';
+import { getCarrierOps } from '../server/worldmonitor/aviation/v1/get-carrier-ops.ts';
 
 const ENV_KEYS = [
   'AVIATIONSTACK_MONTHLY_BUDGET',

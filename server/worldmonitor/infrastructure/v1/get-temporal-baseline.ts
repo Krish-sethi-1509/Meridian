@@ -2,7 +2,7 @@ import type {
   ServerContext,
   GetTemporalBaselineRequest,
   GetTemporalBaselineResponse,
-} from '../../../../src/generated/server/meridian/infrastructure/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/infrastructure/v1/service_server';
 
 import { getCachedJson } from '../../../_shared/redis';
 import {

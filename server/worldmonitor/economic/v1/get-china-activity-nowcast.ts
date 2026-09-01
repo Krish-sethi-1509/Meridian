@@ -3,7 +3,7 @@ import type {
   GetChinaActivityNowcastResponse,
   GetChinaMacroSnapshotResponse,
   ServerContext,
-} from '../../../../src/generated/server/meridian/economic/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/economic/v1/service_server';
 import {
   CHINA_ACTIVITY_NOWCAST_METHOD_VERSION,
   evaluateChinaActivityNowcast,

@@ -7,7 +7,7 @@ import {
   buildMoversSnapshot,
   buildOverviewSnapshot,
   buildRetailerSpreadSnapshot,
-} from '../../snapshots/meridian.js';
+} from '../../snapshots/worldmonitor.js';
 
 export async function meridianRoutes(fastify: FastifyInstance) {
   fastify.get('/coverage', async (request, reply) => {

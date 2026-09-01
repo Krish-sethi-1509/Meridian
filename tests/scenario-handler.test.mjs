@@ -45,13 +45,13 @@ describe('ScenarioService handlers', () => {
     process.env.UPSTASH_REDIS_REST_URL = 'https://fake-upstash.example';
     process.env.UPSTASH_REDIS_REST_TOKEN = 'fake-token';
 
-    const runMod = await import('../server/meridian/scenario/v1/run-scenario.ts');
-    const statusMod = await import('../server/meridian/scenario/v1/get-scenario-status.ts');
-    const templatesMod = await import('../server/meridian/scenario/v1/list-scenario-templates.ts');
+    const runMod = await import('../server/worldmonitor/scenario/v1/run-scenario.ts');
+    const statusMod = await import('../server/worldmonitor/scenario/v1/get-scenario-status.ts');
+    const templatesMod = await import('../server/worldmonitor/scenario/v1/list-scenario-templates.ts');
     runScenario = runMod.runScenario;
     getScenarioStatus = statusMod.getScenarioStatus;
     listScenarioTemplates = templatesMod.listScenarioTemplates;
-    const gen = await import('../src/generated/server/meridian/scenario/v1/service_server.ts');
+    const gen = await import('../src/generated/server/worldmonitor/scenario/v1/service_server.ts');
     ValidationError = gen.ValidationError;
     ApiError = gen.ApiError;
   });

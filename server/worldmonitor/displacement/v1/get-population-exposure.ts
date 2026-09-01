@@ -11,7 +11,7 @@ import type {
   ServerContext,
   GetPopulationExposureRequest,
   GetPopulationExposureResponse,
-} from '../../../../src/generated/server/meridian/displacement/v1/service_server';
+} from '../../../../src/generated/server/worldmonitor/displacement/v1/service_server';
 import {
   computeExposure,
   listCountryPopulations,

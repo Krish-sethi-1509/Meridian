@@ -4,8 +4,8 @@ import { afterEach, beforeEach, describe, it } from 'node:test';
 import { createDomainGateway } from '../server/gateway.ts';
 import { mapErrorToResponse } from '../server/error-mapper.ts';
 import { ENDPOINT_RATE_POLICIES } from '../server/_shared/rate-limit.ts';
-import { getResilienceRanking } from '../server/meridian/resilience/v1/get-resilience-ranking.ts';
-import { ApiError } from '../src/generated/server/meridian/resilience/v1/service_server.ts';
+import { getResilienceRanking } from '../server/worldmonitor/resilience/v1/get-resilience-ranking.ts';
+import { ApiError } from '../src/generated/server/worldmonitor/resilience/v1/service_server.ts';
 import {
   RESILIENCE_INTERVAL_METHODOLOGY,
   RESILIENCE_RANKING_CACHE_KEY,
@@ -16,7 +16,7 @@ import {
   ensureResilienceScoreCached,
   sortRankingItems,
   warmMissingResilienceScores,
-} from '../server/meridian/resilience/v1/_shared.ts';
+} from '../server/worldmonitor/resilience/v1/_shared.ts';
 import { __resetKeyPrefixCacheForTests, compareAndDeleteRedisKey } from '../server/_shared/redis.ts';
 import { installRedis } from './helpers/fake-upstash-redis.mts';
 import { RESILIENCE_FIXTURES } from './helpers/resilience-fixtures.mts';

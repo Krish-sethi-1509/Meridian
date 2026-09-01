@@ -63,7 +63,7 @@ import { MAX_STORIES_PER_USER } from './brief-compose.mjs';
 /**
  * Sanitize the story fields that flow into buildWhyMattersUserPrompt and
  * buildStoryDescriptionPrompt. Mirrors
- * server/meridian/intelligence/v1/brief-why-matters-prompt.ts
+ * server/worldmonitor/intelligence/v1/brief-why-matters-prompt.ts
  * sanitizeStoryFields — the legacy Railway fallback path must apply the
  * same defense as the analyst endpoint, since this is exactly what runs
  * when the endpoint misses / returns null / throws.
