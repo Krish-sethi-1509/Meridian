@@ -1,0 +1,82 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Meridian",
+    "identifier": "did:web:meridian.app",
+    "documentationUrl": "https://meridian.app/docs/documentation"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:meridian.app:mcp:meridian",
+      "displayName": "Meridian MCP server",
+      "type": "application/mcp-server-card+json",
+      "url": "https://meridian.app/.well-known/mcp/server-card.json",
+      "description": "Live global-intelligence MCP server: real-time markets, conflict events, aviation, maritime, energy, climate, health, displacement, supply chain, and AI-generated regional briefs.",
+      "tags": [
+        "news-and-intelligence",
+        "news",
+        "intelligence",
+        "geopolitics",
+        "global-risk",
+        "mcp"
+      ],
+      "capabilities": [
+        "get_world_brief",
+        "get_country_brief",
+        "get_country_risk",
+        "get_conflict_events",
+        "get_market_data",
+        "get_energy_intelligence",
+        "get_maritime_activity",
+        "get_chokepoint_status",
+        "get_supply_chain_data",
+        "analyze_situation",
+        "generate_forecasts"
+      ],
+      "representativeQueries": [
+        "what is happening in the Red Sea right now",
+        "country risk briefing for Egypt",
+        "global markets and conflict overview this morning",
+        "which shipping chokepoints are disrupted",
+        "forecast the impact of a Strait of Hormuz closure"
+      ],
+      "trustManifest": {
+        "identity": "did:web:meridian.app",
+        "identityType": "did"
+      }
+    },
+    {
+      "identifier": "urn:air:meridian.app:api:meridian",
+      "displayName": "Meridian REST API",
+      "type": "application/vnd.oai.openapi+json;version=3.1",
+      "url": "https://meridian.app/openapi.json",
+      "description": "Meridian's public REST API: 190+ documented operations across conflict, markets, energy, maritime, aviation, climate, health, and supply-chain intelligence, with API-key and OAuth access.",
+      "tags": [
+        "news-and-intelligence",
+        "api",
+        "rest",
+        "openapi"
+      ],
+      "trustManifest": {
+        "identity": "did:web:meridian.app",
+        "identityType": "did"
+      }
+    },
+    {
+      "identifier": "urn:air:meridian.app:skills:index",
+      "displayName": "Meridian agent skills",
+      "type": "application/json",
+      "url": "https://meridian.app/.well-known/agent-skills/index.json",
+      "description": "Self-published agent skills for common Meridian workflows (country briefings, market prep, conflict monitoring, route risk).",
+      "tags": [
+        "news-and-intelligence",
+        "agent-skills",
+        "skills"
+      ],
+      "trustManifest": {
+        "identity": "did:web:meridian.app",
+        "identityType": "did"
+      }
+    }
+  ]
+}

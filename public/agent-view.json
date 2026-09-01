@@ -1,0 +1,126 @@
+{
+  "$comment": "Machine-readable homepage view served at /?mode=agent (vercel.json rewrite). Structured summary for AI agents instead of marketing HTML. Parity with the MCP server card and agent card is guarded in tests/agent-mode-view.test.mjs.",
+  "kind": "agent-view",
+  "product": "Meridian",
+  "url": "https://www.meridian.app",
+  "description": "Live global-intelligence platform: real-time markets, conflict events, country risk and resilience, global procurement opportunities, shipping chokepoints, aviation/maritime activity, energy, climate, health, cyber threats, on-demand NLP utilities (classification, entity extraction, news clusters, keyword spikes), forecasts and AI-generated briefs — machine-readable JSON, correlated across layers.",
+  "endpoints": {
+    "mcp": {
+      "url": "https://meridian.app/mcp",
+      "transport": "streamable-http",
+      "serverCard": "https://meridian.app/.well-known/mcp/server-card.json",
+      "tools": 59,
+      "note": "tools/list, prompts/list, resources/list and describe_tool are anonymous; data calls need auth."
+    },
+    "rest": {
+      "base": "https://api.worldmonitor.app",
+      "openapi": "https://meridian.app/openapi.json",
+      "note": "Send a descriptive User-Agent; generic UAs are filtered at the edge. Fetch the OpenAPI spec for the full operation list."
+    },
+    "a2a": {
+      "url": "https://www.meridian.app/a2a",
+      "agentCard": "https://meridian.app/.well-known/agent-card.json",
+      "note": "Anonymous concierge: message/send routes a natural-language need to the right tool."
+    },
+    "nlweb": {
+      "url": "https://www.meridian.app/ask",
+      "note": "POST {\"query\": \"...\"} → NLWeb JSON; prefer.streaming=true → SSE (start/result/complete)."
+    },
+    "cli": {
+      "package": "meridian",
+      "install": "npm install -g meridian",
+      "url": "https://www.npmjs.com/package/worldmonitor"
+    },
+    "sdks": {
+      "javascript": {
+        "install": "npm install worldmonitor",
+        "url": "https://www.npmjs.com/package/worldmonitor"
+      },
+      "python": {
+        "install": "pip install worldmonitor-sdk",
+        "url": "https://pypi.org/project/worldmonitor-sdk/"
+      },
+      "ruby": {
+        "install": "gem install worldmonitor",
+        "url": "https://rubygems.org/gems/worldmonitor"
+      },
+      "go": {
+        "install": "go get github.com/koala73/worldmonitor/sdk/go",
+        "url": "https://pkg.go.dev/github.com/koala73/worldmonitor/sdk/go"
+      },
+      "guide": "https://www.meridian.app/docs/sdks",
+      "note": "Official zero-dependency SDK packages; every registry entry sets its homepage to meridian.app for provenance."
+    },
+    "docsMcp": {
+      "url": "https://www.meridian.app/docs/mcp",
+      "transport": "streamable-http",
+      "serverCard": "https://www.meridian.app/.well-known/mcp/docs-server-card.json",
+      "note": "Public documentation search-and-retrieval MCP server — no auth. Route 'how do I…' questions here; route live-data calls to the product MCP."
+    },
+    "sandbox": {
+      "url": "https://www.meridian.app/sandbox/index.json",
+      "docs": "https://www.meridian.app/docs/sandbox",
+      "note": "Test environment: deterministic, schema-valid sample responses for representative REST operations — no auth, no quota, safe for CI. The data API is read-only, so live calls cannot mutate production data."
+    }
+  },
+  "quickstart": {
+    "sandbox": "curl https://www.meridian.app/sandbox/get-resilience-score.json",
+    "rest": "curl -H 'X-Meridian-Key: wm_<40 hex>' 'https://api.worldmonitor.app/api/resilience/v1/get-resilience-score?countryCode=DE'",
+    "mcp": "curl -X POST https://meridian.app/mcp -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\"}'"
+  },
+  "authentication": {
+    "summary": "Authentication: OAuth2 (scope=mcp) or an API key header. Discovery surfaces (tools/list, describe_tool, prompts/list, resources/list, /a2a, /ask) are anonymous — no authentication required.",
+    "oauth2": {
+      "authorizationServer": "https://meridian.app/.well-known/oauth-authorization-server",
+      "protectedResource": "https://meridian.app/.well-known/oauth-protected-resource",
+      "scope": "mcp"
+    },
+    "apiKey": {
+      "header": "X-Meridian-Key",
+      "format": "wm_<40 hex>",
+      "issueAt": "https://meridian.app/pro"
+    },
+    "guide": "https://meridian.app/auth.md",
+    "plansAndLimits": "https://meridian.app/pricing.md"
+  },
+  "rateLimits": {
+    "anonymous": "60 requests/min per IP on public MCP methods, /a2a and /ask",
+    "authenticated": "per-plan daily quotas — see https://meridian.app/pricing.md"
+  },
+  "documentation": "https://www.meridian.app/docs/documentation",
+  "capabilities": [
+    "real-time market data (equities, commodities, crypto, FX)",
+    "global live conflict events and CII v8 scores for 31 Tier-1 countries",
+    "country resilience scores across the 196-country public rankable universe, with domain/pillar breakdown",
+    "13 shipping chokepoints with live AIS transit intelligence",
+    "maritime and aviation activity, airspace status",
+    "energy intelligence (LNG, pipelines, refineries, outages)",
+    "sanctions, supply-chain and tariff data",
+    "cyber threats, natural disasters, health and displacement signals",
+    "AI world/country briefs, scenario forecasts, prediction markets"
+  ],
+  "discovery": {
+    "llmsTxt": "https://meridian.app/llms.txt",
+    "llmsFullTxt": "https://meridian.app/llms-full.txt",
+    "sectionLlmsTxt": {
+      "api": "https://meridian.app/api/llms.txt",
+      "docs": "https://www.meridian.app/docs/llms.txt",
+      "developers": "https://meridian.app/developers/llms.txt",
+      "blog": "https://www.meridian.app/blog/llms.txt"
+    },
+    "schemamap": "https://www.meridian.app/schemamap.xml",
+    "markdownHomepage": "https://meridian.app/index.md",
+    "agentSkills": "https://meridian.app/.well-known/agent-skills/index.json",
+    "apiCatalog": "https://meridian.app/.well-known/api-catalog",
+    "aiCatalog": "https://meridian.app/.well-known/ai-catalog.json",
+    "docs": "https://www.meridian.app/docs/documentation"
+  },
+  "instances": {
+    "geopolitics": "https://www.meridian.app/dashboard",
+    "tech": "https://tech.meridian.app/dashboard",
+    "finance": "https://finance.meridian.app/dashboard",
+    "commodities": "https://commodity.meridian.app/dashboard",
+    "positiveNews": "https://happy.meridian.app/dashboard",
+    "energy": "https://energy.meridian.app/dashboard"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://meridian.app/.well-known/api-catalog",
+      "item": [
+        {
+          "href": "https://api.worldmonitor.app/",
+          "title": "Meridian REST API"
+        },
+        {
+          "href": "https://meridian.app/mcp",
+          "title": "Meridian MCP server"
+        },
+        {
+          "href": "https://www.meridian.app/docs/mcp",
+          "title": "Meridian docs MCP server (documentation search & retrieval)"
+        },
+        {
+          "href": "https://meridian.app/",
+          "title": "Meridian agent skills"
+        }
+      ]
+    },
+    {
+      "anchor": "https://api.worldmonitor.app/",
+      "service-desc": [
+        {
+          "href": "https://www.meridian.app/openapi.yaml",
+          "type": "application/vnd.oai.openapi"
+        },
+        {
+          "href": "https://www.meridian.app/openapi.json",
+          "type": "application/json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://www.meridian.app/docs/documentation",
+          "type": "text/html"
+        }
+      ],
+      "service-meta": [
+        {
+          "href": "https://meridian.app/pricing.md",
+          "type": "text/markdown",
+          "title": "Pricing, plans & limits (machine-readable)"
+        },
+        {
+          "href": "https://www.meridian.app/api/product-catalog",
+          "type": "application/json",
+          "title": "Live product catalog (tiers, prices, product IDs)"
+        },
+        {
+          "href": "https://www.meridian.app/docs/openapi/CommerceService.openapi.yaml",
+          "type": "application/vnd.oai.openapi",
+          "title": "Commerce/pricing endpoints OpenAPI (separate from the root bundle)"
+        },
+        {
+          "href": "https://meridian.app/support.md",
+          "type": "text/markdown",
+          "title": "Support channels & contact (machine-readable)"
+        },
+        {
+          "href": "https://meridian.app/agents.md",
+          "type": "text/markdown",
+          "title": "Agent operations guide (surfaces, auth, crawl policy)"
+        },
+        {
+          "href": "https://meridian.app/developers.md",
+          "type": "text/markdown",
+          "title": "Meridian Developer Portal — links every developer resource by name"
+        },
+        {
+          "href": "https://meridian.app/mcp-server.md",
+          "type": "text/markdown",
+          "title": "Meridian MCP Server — endpoint, tools, auth (machine-readable)"
+        },
+        {
+          "href": "https://meridian.app/openapi.md",
+          "type": "text/markdown",
+          "title": "Meridian OpenAPI Specification — REST API contract (machine-readable)"
+        },
+        {
+          "href": "https://meridian.app/sdks.md",
+          "type": "text/markdown",
+          "title": "Meridian SDKs — Python, Ruby, Go, JavaScript (machine-readable)"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://api.worldmonitor.app/api/health?compact=1",
+          "type": "application/json"
+        }
+      ]
+    },
+    {
+      "anchor": "https://meridian.app/mcp",
+      "service-desc": [
+        {
+          "href": "https://meridian.app/.well-known/mcp/server-card.json",
+          "type": "application/json"
+        }
+      ]
+    },
+    {
+      "anchor": "https://www.meridian.app/docs/mcp",
+      "service-desc": [
+        {
+          "href": "https://www.meridian.app/.well-known/mcp/docs-server-card.json",
+          "type": "application/json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://www.meridian.app/docs/documentation",
+          "type": "text/html"
+        }
+      ]
+    },
+    {
+      "anchor": "https://meridian.app/",
+      "agent-skills-index": [
+        {
+          "href": "https://meridian.app/.well-known/agent-skills/index.json",
+          "type": "application/json"
+        }
+      ]
+    }
+  ]
+}
