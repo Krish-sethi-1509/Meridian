@@ -65,7 +65,7 @@
     "gen:openapi:china-decision-signals": "node scripts/openapi-inject-china-decision-signals.mjs",
     "build:agent-skills": "node scripts/build-agent-skills-index.mjs",
     "prebuild": "npm run product:facts && npm run build:openapi && npm run build:agent-skills",
-    "build": "npx convex codegen && npm run security:vite-env-secrets -- --strict-local && npm run build:blog && npm run build:crawlable-corpus && npm run build:sitemap && tsc && vite build",
+    "build": "npm run security:vite-env-secrets -- --strict-local && npm run build:blog && npm run build:crawlable-corpus && npm run build:sitemap && tsc && vite build",
     "build:sidecar-sebuf": "node scripts/build-sidecar-sebuf.mjs",
     "build:desktop": "npm run security:vite-env-secrets -- --strict-local && node scripts/build-sidecar-sebuf.mjs && node scripts/build-sidecar-handlers.mjs && tsc && vite build",
     "prebuild:full": "npm run product:facts",
