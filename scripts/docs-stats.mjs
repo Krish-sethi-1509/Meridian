@@ -189,7 +189,7 @@ function cacheDirective(headerValue, name, label) {
   return found;
 }
 
-function parseBootstrapCacheContract(source = read('api/bootstrap.js')) {
+function parseBootstrapCacheContract(source = read('server/routes/bootstrap.js')) {
   const tierCache = parseCacheHeaderMap(source, 'TIER_CACHE');
   const tierCdnCache = parseCacheHeaderMap(source, 'TIER_CDN_CACHE');
 

@@ -108,7 +108,7 @@ async function tierA() {
 
 async function tierB() {
   log('--- Tier B: bundle + edge-vm load of api/mcp.ts ---');
-  const entry = resolve(ROOT, 'api/mcp.ts');
+  const entry = resolve(ROOT, 'server/routes/mcp.ts');
   let result;
   try {
     result = await build({
