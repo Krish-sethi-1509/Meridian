@@ -1,6 +1,6 @@
 export const config = { runtime: 'edge' };
 
-import gateway from '../../../../api/scenario/v1/[rpc]';
+import gateway from './[rpc]';
 import { rewriteToSebuf } from '../../../alias-rewrite';
 
 // Alias for documented v1 URL. See server/alias-rewrite.ts.
