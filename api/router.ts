@@ -13,7 +13,7 @@
  * here is a pure pass-through: no request rewriting, no framework magic.
  */
 
-export const config = { runtime: 'edge' };
+export const config = { runtime: 'nodejs' };
 
 import h0 from '../server/routes/discord/oauth/callback';
 import h1 from '../server/routes/discord/oauth/start';
@@ -275,8 +275,13 @@ function matchRoute(pathname: string): Handler | null {
 
 export default async function handler(
   req: Request,
-  ctx: { waitUntil: (p: Promise<unknown>) => void },
+  ctx?: { waitUntil: (p: Promise<unknown>) => void },
 ): Promise<Response> {
+  // Under the Node.js runtime's Web-standard signature, Vercel may not pass
+  // a second (ctx) argument the way the Edge runtime always did. Some
+  // downstream handlers call ctx.waitUntil(...) unconditionally, so fall
+  // back to a no-op here rather than letting those throw on undefined.
+  const safeCtx = ctx ?? { waitUntil: () => {} };
   const url = new URL(req.url);
   const routeHandler = matchRoute(url.pathname);
   if (!routeHandler) {
@@ -285,5 +290,5 @@ export default async function handler(
       headers: { 'Content-Type': 'application/json' },
     });
   }
-  return routeHandler(req, ctx);
+  return routeHandler(req, safeCtx);
 }
