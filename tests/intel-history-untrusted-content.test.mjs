@@ -18,7 +18,7 @@ import { strict as assert } from 'node:assert';
 import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
-import { TOOL_REGISTRY } from '../api/mcp/registry/index.ts';
+import { TOOL_REGISTRY } from '../api/mcp/_registry/index.ts';
 import { SERVER_INSTRUCTIONS } from '../api/mcp/constants.ts';
 
 const read = (relative) =>

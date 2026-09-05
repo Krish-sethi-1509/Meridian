@@ -18,8 +18,8 @@ import assert from 'node:assert/strict';
 import { __testing__ } from '../api/health.js';
 import { evaluateFreshness } from '../api/mcp/freshness.ts';
 import { executeTool } from '../api/mcp/dispatch.ts';
-import { CACHE_TOOLS } from '../api/mcp/registry/cache-tools.ts';
-import { TOOL_REGISTRY } from '../api/mcp/registry/index.ts';
+import { CACHE_TOOLS } from '../api/mcp/_registry/cache-tools.ts';
+import { TOOL_REGISTRY } from '../api/mcp/_registry/index.ts';
 
 const { classifyKey, SEED_META, ACTIVATION_MARKERS } = __testing__;
 

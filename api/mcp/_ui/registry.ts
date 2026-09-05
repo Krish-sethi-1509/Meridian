@@ -18,7 +18,7 @@
 // (the extension's content profile) — NOT `text/html+skybridge` (that is the
 // OpenAI Apps SDK's marker).
 
-import { rpcError, rpcOk } from '../rpc';
+import { rpcError, rpcOk } from '../_rpc';
 import { CHOKEPOINT_MONITOR_APP_HTML } from './chokepoint-monitor-app';
 import { COUNTRY_BRIEF_APP_HTML } from './country-brief-app';
 import { COUNTRY_RISK_APP_HTML } from './country-risk-app';

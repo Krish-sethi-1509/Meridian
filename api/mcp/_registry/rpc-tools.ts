@@ -7,13 +7,13 @@ import {
 // @ts-expect-error — generated JS module, no declaration file
 import MINING_SITES_RAW from '../../../shared/mining-sites.js';
 import { readJsonFromUpstash } from '../../_upstash-json.js';
-import { buildAuthHeaders } from '../auth';
-import { assertToolFetchOk, BillingDenialError, throwIfBillingDenial } from '../billing-denial';
-import { SUPPORTED_CONSUMER_PRICES_COUNTRIES } from '../constants';
-import { assertMcpToolFetchOk } from '../downstream';
-import { evaluateFreshness } from '../freshness';
-import type { FreshnessCheck, ToolDef } from '../types';
-import { COUNTRY_BRIEF_UI_URI, COUNTRY_RISK_UI_URI, WORLD_BRIEF_UI_URI } from '../ui/registry';
+import { buildAuthHeaders } from '../_auth';
+import { assertToolFetchOk, BillingDenialError, throwIfBillingDenial } from '../_billing-denial';
+import { SUPPORTED_CONSUMER_PRICES_COUNTRIES } from '../_constants';
+import { assertMcpToolFetchOk } from '../_downstream';
+import { evaluateFreshness } from '../_freshness';
+import type { FreshnessCheck, ToolDef } from '../_types';
+import { COUNTRY_BRIEF_UI_URI, COUNTRY_RISK_UI_URI, WORLD_BRIEF_UI_URI } from '../_ui/registry';
 import { ANALYSIS_TOOLS } from './analysis-tools';
 import { buildPublicTool, TOOL_REGISTRY } from './index';
 import { COMPANY_INTEL_TOOL } from './company-intel-tools';

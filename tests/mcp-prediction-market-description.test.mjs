@@ -5,7 +5,7 @@ import { describe, it } from 'node:test';
 import {
   TOOL_LIST_RESPONSE,
   TOOL_REGISTRY,
-} from '../api/mcp/registry/index.ts';
+} from '../api/mcp/_registry/index.ts';
 
 const EXPECTED_CATEGORIES = ['geopolitical', 'tech', 'finance'];
 const TOOL_NAME = 'get_prediction_markets';

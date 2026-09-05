@@ -64,10 +64,10 @@ function findTopLevelObjectBlocks(source) {
 }
 
 function parseMcpAppsInventory({
-  uiRegistrySource = read('api/mcp/ui/registry.ts'),
-  shellSource = read('api/mcp/ui/shell.ts'),
-  rpcToolsSource = read('api/mcp/registry/rpc-tools.ts'),
-  cacheToolsSource = read('api/mcp/registry/cache-tools.ts'),
+  uiRegistrySource = read('api/mcp/_ui/registry.ts'),
+  shellSource = read('api/mcp/_ui/shell.ts'),
+  rpcToolsSource = read('api/mcp/_registry/rpc-tools.ts'),
+  cacheToolsSource = read('api/mcp/_registry/cache-tools.ts'),
 } = {}) {
   const uiConstToUri = new Map(
     [...uiRegistrySource.matchAll(/^export\s+const\s+(\w+_UI_URI)\s*=\s*'([^']+)';/gm)]

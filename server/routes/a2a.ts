@@ -14,7 +14,7 @@
 // stay false and tasks/* methods answer TaskNotFound.
 
 import { suggestTools } from '../../api/_agent-tool-suggest';
-import { PUBLIC_RESOURCE_REGISTRY } from '../../api/mcp/resources/index';
+import { PUBLIC_RESOURCE_REGISTRY } from '../../api/mcp/_resources/index';
 import { ENDPOINT_RATE_POLICIES, checkScopedRateLimit, getClientIp } from '../_shared/rate-limit';
 
 // Re-exported so existing consumers (tests, api/ask.ts historically) keep a

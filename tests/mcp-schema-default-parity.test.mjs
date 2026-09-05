@@ -12,7 +12,7 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 // Concatenate every registry module (excluding the merge/index file) rather
 // than naming them: a hardcoded list silently stops covering a tool that moves
 // to a new sibling module.
-const REGISTRY_DIR = resolve(HERE, '../api/mcp/registry');
+const REGISTRY_DIR = resolve(HERE, '../api/mcp/_registry');
 const MCP_SRC = readdirSync(REGISTRY_DIR)
   .filter((f) => f.endsWith('.ts') && f !== 'index.ts')
   .sort()

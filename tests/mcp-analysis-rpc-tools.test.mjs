@@ -29,7 +29,7 @@ import { installRedis } from './helpers/fake-upstash-redis.mts';
 // Entered through the registry barrel, not `rpc-tools.ts` directly: rpc-tools
 // imports TOOL_REGISTRY back from the barrel, so importing it first hits the
 // cycle mid-initialisation ("Cannot access 'RPC_TOOLS' before initialization").
-import { TOOL_REGISTRY } from '../api/mcp/registry/index.ts';
+import { TOOL_REGISTRY } from '../api/mcp/_registry/index.ts';
 import { dispatchToolsCall } from '../api/mcp/dispatch.ts';
 import { McpSourceUnavailableError } from '../api/mcp/source-unavailable.ts';
 

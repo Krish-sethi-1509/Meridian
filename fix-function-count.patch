@@ -1,0 +1,921 @@
+diff --git a/api/_agent-tool-suggest.ts b/api/_agent-tool-suggest.ts
+index fcecfbc..4599937 100644
+--- a/api/_agent-tool-suggest.ts
++++ b/api/_agent-tool-suggest.ts
+@@ -9,7 +9,7 @@
+ // neither endpoint's cold-start depends on the OTHER endpoint's module-level
+ // guards (Greptile review on #4838).
+ 
+-import { TOOL_REGISTRY } from './mcp/registry/index';
++import { TOOL_REGISTRY } from './mcp/_registry/index';
+ 
+ const QUERY_STOPWORDS = new Set([
+   'the', 'and', 'for', 'with', 'what', 'which', 'who', 'how', 'where', 'when',
+diff --git a/api/data/city-coords.ts b/api/_data/city-coords.ts
+similarity index 100%
+rename from api/data/city-coords.ts
+rename to api/_data/city-coords.ts
+diff --git a/api/mcp/auth.ts b/api/mcp/_auth.ts
+similarity index 99%
+rename from api/mcp/auth.ts
+rename to api/mcp/_auth.ts
+index 58201b4..b2c45f1 100644
+--- a/api/mcp/auth.ts
++++ b/api/mcp/_auth.ts
+@@ -9,14 +9,14 @@ import { getClientIp } from '../_client-ip.js';
+ // @ts-expect-error — JS module, no declaration file
+ import { captureSilentError } from '../_sentry-edge.js';
+ import { redisPipeline as rawRedisPipeline } from '../_upstash-json.js';
+-import { resolvePlanDrivenMcpAllowance } from './quota';
++import { resolvePlanDrivenMcpAllowance } from './_quota';
+ import {
+   getBillingVerificationDenial,
+   getEntitlements,
+   isEntitlementBackendConfigured,
+ } from '../../server/_shared/entitlement-check';
+ import { checkProMcpAccess } from '../../server/_shared/pro-mcp-gate';
+-import type { BillingVerificationCode } from './billing-denial';
++import type { BillingVerificationCode } from './_billing-denial';
+ import {
+   buildInternalMcpHeaders,
+   signInternalMcpRequest,
+@@ -24,15 +24,15 @@ import {
+ import { validateProMcpTokenOrNull } from '../../server/_shared/pro-mcp-token';
+ import { validateUserApiKey } from '../../server/_shared/user-api-key';
+ import { checkFailClosedScopedIpRateLimit } from '../../server/_shared/rate-limit';
+-import { rpcError, withMcpNoStore } from './rpc';
++import { rpcError, withMcpNoStore } from './_rpc';
+ import type {
+   AuthResolution,
+   AuthResolutionRejected,
+   McpAuthContext,
+   McpHandlerDeps,
+   McpPreCheckResult,
+-} from './types';
+-import { emitMcpRateLimitHit } from './telemetry';
++} from './_types';
++import { emitMcpRateLimitHit } from './_telemetry';
+ 
+ // ---------------------------------------------------------------------------
+ // Rate limiters
+diff --git a/api/mcp/billing-denial.ts b/api/mcp/_billing-denial.ts
+similarity index 100%
+rename from api/mcp/billing-denial.ts
+rename to api/mcp/_billing-denial.ts
+diff --git a/api/mcp/constants.ts b/api/mcp/_constants.ts
+similarity index 100%
+rename from api/mcp/constants.ts
+rename to api/mcp/_constants.ts
+diff --git a/api/mcp/dispatch.ts b/api/mcp/_dispatch.ts
+similarity index 96%
+rename from api/mcp/dispatch.ts
+rename to api/mcp/_dispatch.ts
+index ee07b9e..68530bb 100644
+--- a/api/mcp/dispatch.ts
++++ b/api/mcp/_dispatch.ts
+@@ -2,32 +2,32 @@ import { readJsonFromUpstash, redisPipeline } from '../_upstash-json.js';
+ // @ts-expect-error — JS module, no declaration file
+ import { captureSilentError } from '../_sentry-edge.js';
+ import { secondsUntilUtcMidnight } from '../../server/_shared/pro-mcp-token';
+-import { getMcpBillingVerificationDenial } from './auth';
+-import { BillingDenialError } from './billing-denial';
++import { getMcpBillingVerificationDenial } from './_auth';
++import { BillingDenialError } from './_billing-denial';
+ import {
+   createMcpToolExecutionContext,
+   downstreamErrorTags,
+-} from './downstream';
+-import { mcpErrorFingerprint } from './error-fingerprint';
+-import { argBool, summarizeData } from './filters';
+-import { evaluateFreshness } from './freshness';
+-import { applyJmespath } from './jmespath';
+-import { reserveQuota } from './quota';
+-import { TOOL_REGISTRY } from './registry/index';
+-import { rpcError, rpcOk, withMcpNoStore } from './rpc';
+-import { McpSourceUnavailableError } from './source-unavailable';
++} from './_downstream';
++import { mcpErrorFingerprint } from './_error-fingerprint';
++import { argBool, summarizeData } from './_filters';
++import { evaluateFreshness } from './_freshness';
++import { applyJmespath } from './_jmespath';
++import { reserveQuota } from './_quota';
++import { TOOL_REGISTRY } from './_registry/index';
++import { rpcError, rpcOk, withMcpNoStore } from './_rpc';
++import { McpSourceUnavailableError } from './_source-unavailable';
+ import {
+   emitTelemetry,
+   principalIdForLog,
+   telemetryEnabled,
+-} from './telemetry';
++} from './_telemetry';
+ import type {
+   CacheToolDef,
+   McpAuthContext,
+   McpHandlerDeps,
+   McpToolExecutionContext,
+-} from './types';
+-import { utf8ByteLength } from './utils';
++} from './_types';
++import { utf8ByteLength } from './_utils';
+ 
+ // ---------------------------------------------------------------------------
+ // Tool execution (cache tools — no _execute)
+diff --git a/api/mcp/downstream.ts b/api/mcp/_downstream.ts
+similarity index 98%
+rename from api/mcp/downstream.ts
+rename to api/mcp/_downstream.ts
+index b0b1f7d..e030b71 100644
+--- a/api/mcp/downstream.ts
++++ b/api/mcp/_downstream.ts
+@@ -1,9 +1,9 @@
+-import { BillingDenialError, throwIfBillingDenial } from './billing-denial';
+-import { emitTelemetry } from './telemetry';
++import { BillingDenialError, throwIfBillingDenial } from './_billing-denial';
++import { emitTelemetry } from './_telemetry';
+ import type {
+   McpAuthContext,
+   McpToolExecutionContext,
+-} from './types';
++} from './_types';
+ 
+ export const MCP_CANONICAL_API_ORIGIN = 'https://api.worldmonitor.app';
+ 
+diff --git a/api/mcp/error-fingerprint.ts b/api/mcp/_error-fingerprint.ts
+similarity index 100%
+rename from api/mcp/error-fingerprint.ts
+rename to api/mcp/_error-fingerprint.ts
+diff --git a/api/mcp/filters.ts b/api/mcp/_filters.ts
+similarity index 100%
+rename from api/mcp/filters.ts
+rename to api/mcp/_filters.ts
+diff --git a/api/mcp/freshness.ts b/api/mcp/_freshness.ts
+similarity index 98%
+rename from api/mcp/freshness.ts
+rename to api/mcp/_freshness.ts
+index 4af942a..2dfe89d 100644
+--- a/api/mcp/freshness.ts
++++ b/api/mcp/_freshness.ts
+@@ -1,4 +1,4 @@
+-import type { FreshnessCheck } from './types';
++import type { FreshnessCheck } from './_types';
+ // @ts-expect-error — JS module, no declaration file
+ import { buildContentFreshnessAssessment } from '../_content-freshness.js';
+ 
+diff --git a/api/mcp/jmespath.ts b/api/mcp/_jmespath.ts
+similarity index 97%
+rename from api/mcp/jmespath.ts
+rename to api/mcp/_jmespath.ts
+index 5800198..0bd0337 100644
+--- a/api/mcp/jmespath.ts
++++ b/api/mcp/_jmespath.ts
+@@ -1,7 +1,7 @@
+ import jmespath from 'jmespath';
+-import { JMESPATH_MAX_EXPR_BYTES, JMESPATH_MAX_OUTPUT_BYTES } from './constants';
+-import type { ApplyJmespathResult } from './types';
+-import { utf8ByteLength } from './utils';
++import { JMESPATH_MAX_EXPR_BYTES, JMESPATH_MAX_OUTPUT_BYTES } from './_constants';
++import type { ApplyJmespathResult } from './_types';
++import { utf8ByteLength } from './_utils';
+ 
+ // ---------------------------------------------------------------------------
+ // JMESPath projection helpers (v1.4.0)
+diff --git a/api/mcp/prompts/index.ts b/api/mcp/_prompts/index.ts
+similarity index 99%
+rename from api/mcp/prompts/index.ts
+rename to api/mcp/_prompts/index.ts
+index 4315f7e..dedc9a1 100644
+--- a/api/mcp/prompts/index.ts
++++ b/api/mcp/_prompts/index.ts
+@@ -23,7 +23,7 @@
+ // the test suite at test time, not at module load, to keep this module free
+ // of an import cycle with the registry.
+ 
+-import type { McpPromptArgument, McpPromptDef } from '../types';
++import type { McpPromptArgument, McpPromptDef } from '../_types';
+ 
+ // ---------------------------------------------------------------------------
+ // Registry
+diff --git a/api/mcp/quota.ts b/api/mcp/_quota.ts
+similarity index 99%
+rename from api/mcp/quota.ts
+rename to api/mcp/_quota.ts
+index 6045270..9335f47 100644
+--- a/api/mcp/quota.ts
++++ b/api/mcp/_quota.ts
+@@ -3,7 +3,7 @@ import {
+   PRO_DAILY_QUOTA_LIMIT,
+   PRO_DAILY_QUOTA_TTL_SECONDS,
+ } from '../../server/_shared/pro-mcp-token';
+-import type { PipelineFn, QuotaRejected, QuotaReserved } from './types';
++import type { PipelineFn, QuotaRejected, QuotaReserved } from './_types';
+ 
+ // ---------------------------------------------------------------------------
+ // Daily quota helpers (Pro-only). INCR-first reservation runs synchronously
+diff --git a/api/mcp/registry/analysis-tools.ts b/api/mcp/_registry/analysis-tools.ts
+similarity index 99%
+rename from api/mcp/registry/analysis-tools.ts
+rename to api/mcp/_registry/analysis-tools.ts
+index 6824a69..470219c 100644
+--- a/api/mcp/registry/analysis-tools.ts
++++ b/api/mcp/_registry/analysis-tools.ts
+@@ -52,9 +52,9 @@ import {
+ } from '../../../shared/analysis-population-exposure';
+ import { INTEL_HOTSPOTS } from '../../../shared/geo-data';
+ import { readJsonBatchFromUpstashWithStatus } from '../../_upstash-json.js';
+-import { evaluateFreshness } from '../freshness';
+-import { McpSourceUnavailableError } from '../source-unavailable';
+-import type { FreshnessCheck, ToolDef } from '../types';
++import { evaluateFreshness } from '../_freshness';
++import { McpSourceUnavailableError } from '../_source-unavailable';
++import type { FreshnessCheck, ToolDef } from '../_types';
+ 
+ type PayloadValidator = (value: unknown) => boolean;
+ 
+diff --git a/api/mcp/registry/cache-tools.ts b/api/mcp/_registry/cache-tools.ts
+similarity index 99%
+rename from api/mcp/registry/cache-tools.ts
+rename to api/mcp/_registry/cache-tools.ts
+index 12f8a36..8a1b746 100644
+--- a/api/mcp/registry/cache-tools.ts
++++ b/api/mcp/_registry/cache-tools.ts
+@@ -9,7 +9,7 @@ import { getSourceProvenanceState } from '../../../shared/source-provenance';
+ import { CII_RISK_SCORE_CACHE_KEYS } from '../../_cii-risk-cache-keys.js';
+ // @ts-expect-error — generated Edge-safe JS mirror; authored types live in shared/bootstrap-tier-keys.d.ts
+ import { BOOTSTRAP_CACHE_KEYS } from '../../_bootstrap-tier-keys.js';
+-import { DEFAULT_LIST_LIMIT, MARKET_FRESHNESS_CHECKS } from '../constants';
++import { DEFAULT_LIST_LIMIT, MARKET_FRESHNESS_CHECKS } from '../_constants';
+ import {
+   argBool,
+   argNum,
+@@ -31,9 +31,9 @@ import {
+   pickNestedMap,
+   selectDatasets,
+   summarizeData,
+-} from '../filters';
+-import type { ToolDef } from '../types';
+-import { utf8ByteLength } from '../utils';
++} from '../_filters';
++import type { ToolDef } from '../_types';
++import { utf8ByteLength } from '../_utils';
+ import {
+   CHOKEPOINT_MONITOR_UI_URI,
+   CONFLICT_EVENTS_UI_URI,
+@@ -42,7 +42,7 @@ import {
+   NATURAL_DISASTERS_UI_URI,
+   NEWS_INTELLIGENCE_UI_URI,
+   PREDICTION_MARKETS_UI_URI,
+-} from '../ui/registry';
++} from '../_ui/registry';
+ 
+ // Iran-events domain sunset (war ended 2026-07). Default OFF: drop the dormant
+ // conflict:iran-events:v1 key from the get_conflict_events cache set so the MCP
+diff --git a/api/mcp/registry/company-intel-tools.ts b/api/mcp/_registry/company-intel-tools.ts
+similarity index 98%
+rename from api/mcp/registry/company-intel-tools.ts
+rename to api/mcp/_registry/company-intel-tools.ts
+index c3927ea..13e3dc2 100644
+--- a/api/mcp/registry/company-intel-tools.ts
++++ b/api/mcp/_registry/company-intel-tools.ts
+@@ -1,6 +1,6 @@
+-import { buildAuthHeaders } from '../auth';
+-import { assertToolFetchOk } from '../billing-denial';
+-import type { ToolDef } from '../types';
++import { buildAuthHeaders } from '../_auth';
++import { assertToolFetchOk } from '../_billing-denial';
++import type { ToolDef } from '../_types';
+ 
+ export const COMPANY_INTEL_VIEWS = [
+   'enrichment',
+diff --git a/api/mcp/registry/index.ts b/api/mcp/_registry/index.ts
+similarity index 96%
+rename from api/mcp/registry/index.ts
+rename to api/mcp/_registry/index.ts
+index 8590883..456db96 100644
+--- a/api/mcp/registry/index.ts
++++ b/api/mcp/_registry/index.ts
+@@ -1,7 +1,7 @@
+-import { TOOL_DESCRIPTION_MAX_BYTES } from '../constants';
+-import { JMESPATH_SCHEMA } from '../jmespath';
+-import type { PublicToolShape, ToolDef } from '../types';
+-import { compressDescription, utf8ByteLength } from '../utils';
++import { TOOL_DESCRIPTION_MAX_BYTES } from '../_constants';
++import { JMESPATH_SCHEMA } from '../_jmespath';
++import type { PublicToolShape, ToolDef } from '../_types';
++import { compressDescription, utf8ByteLength } from '../_utils';
+ import { CACHE_TOOLS } from './cache-tools';
+ import { NLP_TOOLS } from './nlp-tools';
+ import { RPC_TOOLS } from './rpc-tools';
+diff --git a/api/mcp/registry/nlp-tools.ts b/api/mcp/_registry/nlp-tools.ts
+similarity index 99%
+rename from api/mcp/registry/nlp-tools.ts
+rename to api/mcp/_registry/nlp-tools.ts
+index 75d5f34..d9649fc 100644
+--- a/api/mcp/registry/nlp-tools.ts
++++ b/api/mcp/_registry/nlp-tools.ts
+@@ -24,10 +24,10 @@ import {
+ import { clusterNewsCore, protoThreatLevelToLabel, topClusterKeywords } from '../../../shared/news-clustering-core.js';
+ import type { NewsItemCore } from '../../../shared/news-clustering-core.js';
+ import { getSourceProvenanceState } from '../../../shared/source-provenance.js';
+-import { buildAuthHeaders } from '../auth';
+-import { assertToolFetchOk } from '../billing-denial';
+-import { argStr } from '../filters';
+-import type { ToolDef } from '../types';
++import { buildAuthHeaders } from '../_auth';
++import { assertToolFetchOk } from '../_billing-denial';
++import { argStr } from '../_filters';
++import type { ToolDef } from '../_types';
+ 
+ // ── #5697 on-demand NLP intelligence utilities ──────────────────────────────
+ // Four deterministic (classify_event excepted — enum-validated LLM) utilities
+diff --git a/api/mcp/registry/rpc-tools.ts b/api/mcp/_registry/rpc-tools.ts
+similarity index 99%
+rename from api/mcp/registry/rpc-tools.ts
+rename to api/mcp/_registry/rpc-tools.ts
+index c53e1a5..a156474 100644
+--- a/api/mcp/registry/rpc-tools.ts
++++ b/api/mcp/_registry/rpc-tools.ts
+@@ -7,13 +7,13 @@ import {
+ // @ts-expect-error — generated JS module, no declaration file
+ import MINING_SITES_RAW from '../../../shared/mining-sites.js';
+ import { readJsonFromUpstash } from '../../_upstash-json.js';
+-import { buildAuthHeaders } from '../auth';
+-import { assertToolFetchOk, BillingDenialError, throwIfBillingDenial } from '../billing-denial';
+-import { SUPPORTED_CONSUMER_PRICES_COUNTRIES } from '../constants';
+-import { assertMcpToolFetchOk } from '../downstream';
+-import { evaluateFreshness } from '../freshness';
+-import type { FreshnessCheck, ToolDef } from '../types';
+-import { COUNTRY_BRIEF_UI_URI, COUNTRY_RISK_UI_URI, WORLD_BRIEF_UI_URI } from '../ui/registry';
++import { buildAuthHeaders } from '../_auth';
++import { assertToolFetchOk, BillingDenialError, throwIfBillingDenial } from '../_billing-denial';
++import { SUPPORTED_CONSUMER_PRICES_COUNTRIES } from '../_constants';
++import { assertMcpToolFetchOk } from '../_downstream';
++import { evaluateFreshness } from '../_freshness';
++import type { FreshnessCheck, ToolDef } from '../_types';
++import { COUNTRY_BRIEF_UI_URI, COUNTRY_RISK_UI_URI, WORLD_BRIEF_UI_URI } from '../_ui/registry';
+ import { ANALYSIS_TOOLS } from './analysis-tools';
+ import { buildPublicTool, TOOL_REGISTRY } from './index';
+ import { COMPANY_INTEL_TOOL } from './company-intel-tools';
+diff --git a/api/mcp/resources/index.ts b/api/mcp/_resources/index.ts
+similarity index 99%
+rename from api/mcp/resources/index.ts
+rename to api/mcp/_resources/index.ts
+index 21f4ec2..b9a8f5c 100644
+--- a/api/mcp/resources/index.ts
++++ b/api/mcp/_resources/index.ts
+@@ -44,10 +44,10 @@ import type {
+   McpHandlerDeps,
+   PublicResourceDef,
+   TemplateResourceDef,
+-} from '../types';
+-import { dispatchToolsCall } from '../dispatch';
+-import { evaluateFreshness } from '../freshness';
+-import { rpcError, rpcOk, withMcpNoStore } from '../rpc';
++} from '../_types';
++import { dispatchToolsCall } from '../_dispatch';
++import { evaluateFreshness } from '../_freshness';
++import { rpcError, rpcOk, withMcpNoStore } from '../_rpc';
+ import { readJsonFromUpstash } from '../../_upstash-json.js';
+ import { CHOKEPOINT_SLUGS } from './slugs';
+ 
+diff --git a/api/mcp/resources/slugs.ts b/api/mcp/_resources/slugs.ts
+similarity index 100%
+rename from api/mcp/resources/slugs.ts
+rename to api/mcp/_resources/slugs.ts
+diff --git a/api/mcp/rpc.ts b/api/mcp/_rpc.ts
+similarity index 100%
+rename from api/mcp/rpc.ts
+rename to api/mcp/_rpc.ts
+diff --git a/api/mcp/source-unavailable.ts b/api/mcp/_source-unavailable.ts
+similarity index 100%
+rename from api/mcp/source-unavailable.ts
+rename to api/mcp/_source-unavailable.ts
+diff --git a/api/mcp/telemetry.ts b/api/mcp/_telemetry.ts
+similarity index 98%
+rename from api/mcp/telemetry.ts
+rename to api/mcp/_telemetry.ts
+index ea7d9f4..2c97cc7 100644
+--- a/api/mcp/telemetry.ts
++++ b/api/mcp/_telemetry.ts
+@@ -1,5 +1,5 @@
+ import { hashKeySync } from '../../server/_shared/usage-identity';
+-import type { McpAuthContext } from './types';
++import type { McpAuthContext } from './_types';
+ 
+ // ---------------------------------------------------------------------------
+ // Telemetry
+diff --git a/api/mcp/types.ts b/api/mcp/_types.ts
+similarity index 100%
+rename from api/mcp/types.ts
+rename to api/mcp/_types.ts
+diff --git a/api/mcp/ui/chokepoint-monitor-app.ts b/api/mcp/_ui/chokepoint-monitor-app.ts
+similarity index 100%
+rename from api/mcp/ui/chokepoint-monitor-app.ts
+rename to api/mcp/_ui/chokepoint-monitor-app.ts
+diff --git a/api/mcp/ui/conflict-events-app.ts b/api/mcp/_ui/conflict-events-app.ts
+similarity index 100%
+rename from api/mcp/ui/conflict-events-app.ts
+rename to api/mcp/_ui/conflict-events-app.ts
+diff --git a/api/mcp/ui/country-brief-app.ts b/api/mcp/_ui/country-brief-app.ts
+similarity index 100%
+rename from api/mcp/ui/country-brief-app.ts
+rename to api/mcp/_ui/country-brief-app.ts
+diff --git a/api/mcp/ui/country-risk-app.ts b/api/mcp/_ui/country-risk-app.ts
+similarity index 100%
+rename from api/mcp/ui/country-risk-app.ts
+rename to api/mcp/_ui/country-risk-app.ts
+diff --git a/api/mcp/ui/forecasts-app.ts b/api/mcp/_ui/forecasts-app.ts
+similarity index 100%
+rename from api/mcp/ui/forecasts-app.ts
+rename to api/mcp/_ui/forecasts-app.ts
+diff --git a/api/mcp/ui/market-radar-app.ts b/api/mcp/_ui/market-radar-app.ts
+similarity index 100%
+rename from api/mcp/ui/market-radar-app.ts
+rename to api/mcp/_ui/market-radar-app.ts
+diff --git a/api/mcp/ui/natural-disasters-app.ts b/api/mcp/_ui/natural-disasters-app.ts
+similarity index 100%
+rename from api/mcp/ui/natural-disasters-app.ts
+rename to api/mcp/_ui/natural-disasters-app.ts
+diff --git a/api/mcp/ui/news-intelligence-app.ts b/api/mcp/_ui/news-intelligence-app.ts
+similarity index 100%
+rename from api/mcp/ui/news-intelligence-app.ts
+rename to api/mcp/_ui/news-intelligence-app.ts
+diff --git a/api/mcp/ui/prediction-markets-app.ts b/api/mcp/_ui/prediction-markets-app.ts
+similarity index 100%
+rename from api/mcp/ui/prediction-markets-app.ts
+rename to api/mcp/_ui/prediction-markets-app.ts
+diff --git a/api/mcp/ui/registry.ts b/api/mcp/_ui/registry.ts
+similarity index 99%
+rename from api/mcp/ui/registry.ts
+rename to api/mcp/_ui/registry.ts
+index df3c2ff..47d9781 100644
+--- a/api/mcp/ui/registry.ts
++++ b/api/mcp/_ui/registry.ts
+@@ -18,7 +18,7 @@
+ // (the extension's content profile) — NOT `text/html+skybridge` (that is the
+ // OpenAI Apps SDK's marker).
+ 
+-import { rpcError, rpcOk } from '../rpc';
++import { rpcError, rpcOk } from '../_rpc';
+ import { CHOKEPOINT_MONITOR_APP_HTML } from './chokepoint-monitor-app';
+ import { COUNTRY_BRIEF_APP_HTML } from './country-brief-app';
+ import { COUNTRY_RISK_APP_HTML } from './country-risk-app';
+diff --git a/api/mcp/ui/shell.ts b/api/mcp/_ui/shell.ts
+similarity index 100%
+rename from api/mcp/ui/shell.ts
+rename to api/mcp/_ui/shell.ts
+diff --git a/api/mcp/ui/world-brief-app.ts b/api/mcp/_ui/world-brief-app.ts
+similarity index 100%
+rename from api/mcp/ui/world-brief-app.ts
+rename to api/mcp/_ui/world-brief-app.ts
+diff --git a/api/mcp/usage.ts b/api/mcp/_usage.ts
+similarity index 99%
+rename from api/mcp/usage.ts
+rename to api/mcp/_usage.ts
+index 9a761b1..fbdcc67 100644
+--- a/api/mcp/usage.ts
++++ b/api/mcp/_usage.ts
+@@ -26,7 +26,7 @@ import {
+   type WaitUntilCtx,
+ } from '../../server/_shared/usage';
+ import type { AuthKind } from '../../server/_shared/usage-identity';
+-import type { McpAuthContext } from './types';
++import type { McpAuthContext } from './_types';
+ 
+ // Which stage of the /mcp funnel produced the terminal Response. Set by the
+ // handler at each return site; combined with the HTTP status it maps onto the
+diff --git a/api/mcp/utils.ts b/api/mcp/_utils.ts
+similarity index 100%
+rename from api/mcp/utils.ts
+rename to api/mcp/_utils.ts
+diff --git a/scripts/audit-china-decision-parity.mjs b/scripts/audit-china-decision-parity.mjs
+index 931881a..d45659f 100644
+--- a/scripts/audit-china-decision-parity.mjs
++++ b/scripts/audit-china-decision-parity.mjs
+@@ -44,7 +44,7 @@ const REQUIRED_REGISTRATIONS = Object.freeze([
+   ['shared/decision-signal-provenance-families.ts', ...CHINA_DECISION_PARITY_MANIFEST.map(({ provenanceFamily }) => `${provenanceFamily}: Object.freeze({`)],
+   ['proto/worldmonitor/intelligence/v1/get_china_decision_signals.proto', 'message GetChinaDecisionSignalsResponse'],
+   ['proto/worldmonitor/intelligence/v1/service.proto', 'GetChinaDecisionSignals'],
+-  ['api/mcp/registry/rpc-tools.ts', 'get_china_decision_signals', ROUTE, CANONICAL_KEY],
++  ['api/mcp/_registry/rpc-tools.ts', 'get_china_decision_signals', ROUTE, CANONICAL_KEY],
+   ['server/gateway.ts', `'${ROUTE}': 'fast'`, `'${ROUTE}',`],
+   ['shared/bootstrap-tier-keys.js', `chinaDecisionSignals: '${CANONICAL_KEY}'`],
+   ['api/_bootstrap-tier-keys.js', `chinaDecisionSignals: '${CANONICAL_KEY}'`],
+diff --git a/scripts/docs-stats.mjs b/scripts/docs-stats.mjs
+index 1ca91e5..c25f69e 100644
+--- a/scripts/docs-stats.mjs
++++ b/scripts/docs-stats.mjs
+@@ -64,10 +64,10 @@ function findTopLevelObjectBlocks(source) {
+ }
+ 
+ function parseMcpAppsInventory({
+-  uiRegistrySource = read('api/mcp/ui/registry.ts'),
+-  shellSource = read('api/mcp/ui/shell.ts'),
+-  rpcToolsSource = read('api/mcp/registry/rpc-tools.ts'),
+-  cacheToolsSource = read('api/mcp/registry/cache-tools.ts'),
++  uiRegistrySource = read('api/mcp/_ui/registry.ts'),
++  shellSource = read('api/mcp/_ui/shell.ts'),
++  rpcToolsSource = read('api/mcp/_registry/rpc-tools.ts'),
++  cacheToolsSource = read('api/mcp/_registry/cache-tools.ts'),
+ } = {}) {
+   const uiConstToUri = new Map(
+     [...uiRegistrySource.matchAll(/^export\s+const\s+(\w+_UI_URI)\s*=\s*'([^']+)';/gm)]
+diff --git a/scripts/generate-public-product-facts.mjs b/scripts/generate-public-product-facts.mjs
+index 66a61c3..e0af6d9 100644
+--- a/scripts/generate-public-product-facts.mjs
++++ b/scripts/generate-public-product-facts.mjs
+@@ -19,7 +19,7 @@ import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+ import { dirname, join } from 'node:path';
+ import { fileURLToPath } from 'node:url';
+ import { PRODUCT_CATALOG, PUBLIC_PRODUCT_METADATA } from '../convex/config/productCatalog.ts';
+-import { TOOL_REGISTRY } from '../api/mcp/registry/index.ts';
++import { TOOL_REGISTRY } from '../api/mcp/_registry/index.ts';
+ import { computeStats } from './docs-stats.mjs';
+ 
+ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+diff --git a/server/routes/a2a.ts b/server/routes/a2a.ts
+index 0d7a4c1..71e5e32 100644
+--- a/server/routes/a2a.ts
++++ b/server/routes/a2a.ts
+@@ -14,7 +14,7 @@
+ // stay false and tasks/* methods answer TaskNotFound.
+ 
+ import { suggestTools } from '../../api/_agent-tool-suggest';
+-import { PUBLIC_RESOURCE_REGISTRY } from '../../api/mcp/resources/index';
++import { PUBLIC_RESOURCE_REGISTRY } from '../../api/mcp/_resources/index';
+ import { ENDPOINT_RATE_POLICIES, checkScopedRateLimit, getClientIp } from '../_shared/rate-limit';
+ 
+ // Re-exported so existing consumers (tests, api/ask.ts historically) keep a
+diff --git a/server/routes/mcp.ts b/server/routes/mcp.ts
+index c2d00d3..4b3b635 100644
+--- a/server/routes/mcp.ts
++++ b/server/routes/mcp.ts
+@@ -12,14 +12,14 @@ export {
+   resolveAuthContext,
+   runProPreChecks,
+   wwwAuthHeader,
+-} from '../../api/mcp/auth';
++} from '../../api/mcp/_auth';
+ export {
+   JMESPATH_MAX_EXPR_BYTES,
+   JMESPATH_MAX_OUTPUT_BYTES,
+   MCP_SUPPORTED_CLIENT_MATRIX,
+   negotiateProtocolVersion,
+   TOOL_DESCRIPTION_MAX_BYTES,
+-} from '../../api/mcp/constants';
++} from '../../api/mcp/_constants';
+ 
+ // MCP_SUPPORTED_PROTOCOL_VERSIONS / MCP_PROTOCOL_VERSION snapshot the env at
+ // THIS module's load. They live here (not in ./mcp/constants) so dynamic
+@@ -39,17 +39,17 @@ export const MCP_SUPPORTED_PROTOCOL_VERSIONS: readonly string[] =
+ export const MCP_PROTOCOL_VERSION: string = MCP_PROTOCOL_FLOOR_2025_06_18_DISABLED
+   ? '2025-03-26'
+   : '2025-06-18';
+-export { dispatchToolsCall, executeTool } from '../../api/mcp/dispatch';
+-export { evaluateFreshness } from '../../api/mcp/freshness';
+-export { applyJmespath, JMESPATH_SCHEMA } from '../../api/mcp/jmespath';
+-export { reserveQuota } from '../../api/mcp/quota';
++export { dispatchToolsCall, executeTool } from '../../api/mcp/_dispatch';
++export { evaluateFreshness } from '../../api/mcp/_freshness';
++export { applyJmespath, JMESPATH_SCHEMA } from '../../api/mcp/_jmespath';
++export { reserveQuota } from '../../api/mcp/_quota';
+ export {
+   buildPublicTool,
+   SUMMARY_SCHEMA,
+   TOOL_LIST_BYTES,
+   TOOL_LIST_RESPONSE,
+   TOOL_REGISTRY,
+-} from '../../api/mcp/registry/index';
++} from '../../api/mcp/_registry/index';
+ export {
+   emitMcpRateLimitHit,
+   emitTelemetry,
+@@ -59,17 +59,17 @@ export {
+   MCP_TOOLS_LIST_TELEMETRY_KEYS,
+   principalIdForLog,
+   telemetryEnabled,
+-} from '../../api/mcp/telemetry';
++} from '../../api/mcp/_telemetry';
+ export type {
+   ApplyJmespathResult,
+   JmespathFailKind,
+   McpAuthContext,
+   McpHandlerDeps,
+   PublicToolShape,
+-} from '../../api/mcp/types';
+-export { compressDescription, utf8ByteLength } from '../../api/mcp/utils';
++} from '../../api/mcp/_types';
++export { compressDescription, utf8ByteLength } from '../../api/mcp/_utils';
+ 
+-export { buildPromptResponse, PROMPT_LIST_RESPONSE, PROMPT_REGISTRY } from '../../api/mcp/prompts/index';
++export { buildPromptResponse, PROMPT_LIST_RESPONSE, PROMPT_REGISTRY } from '../../api/mcp/_prompts/index';
+ export {
+   buildPublicResourceResponse,
+   buildResourceResponse,
+@@ -78,8 +78,8 @@ export {
+   RESOURCE_LIST_RESPONSE,
+   RESOURCE_TEMPLATE_LIST_RESPONSE,
+   TEMPLATE_RESOURCE_REGISTRY,
+-} from '../../api/mcp/resources/index';
+-export { CHOKEPOINT_SLUGS } from '../../api/mcp/resources/slugs';
++} from '../../api/mcp/_resources/index';
++export { CHOKEPOINT_SLUGS } from '../../api/mcp/_resources/slugs';
+ 
+ // Test-only escape hatch. Exposes the TOOL_REGISTRY by REFERENCE so mutations
+ // inside `tests/mcp-tool-output-contracts.test.mjs` (which monkey-patches
+@@ -91,12 +91,12 @@ export { CHOKEPOINT_SLUGS } from '../../api/mcp/resources/slugs';
+ // capability-parity test's "advertised → non-empty registry" check stays
+ // aligned with the wire; the data-bearing URI templates are exposed
+ // separately as TEMPLATE_RESOURCE_REGISTRY.
+-import { PROMPT_REGISTRY as __PROMPT_REGISTRY } from '../../api/mcp/prompts/index';
++import { PROMPT_REGISTRY as __PROMPT_REGISTRY } from '../../api/mcp/_prompts/index';
+ import {
+   PUBLIC_RESOURCE_REGISTRY as __PUBLIC_RESOURCE_REGISTRY,
+   TEMPLATE_RESOURCE_REGISTRY as __TEMPLATE_RESOURCE_REGISTRY,
+-} from '../../api/mcp/resources/index';
+-import { TOOL_REGISTRY as __TOOL_REGISTRY } from '../../api/mcp/registry/index';
++} from '../../api/mcp/_resources/index';
++import { TOOL_REGISTRY as __TOOL_REGISTRY } from '../../api/mcp/_registry/index';
+ export const __testing__ = {
+   TOOL_REGISTRY: __TOOL_REGISTRY,
+   PROMPT_REGISTRY: __PROMPT_REGISTRY,
+diff --git a/server/routes/mcp/handler.ts b/server/routes/mcp/handler.ts
+index 7d2804e..fe36e6a 100644
+--- a/server/routes/mcp/handler.ts
++++ b/server/routes/mcp/handler.ts
+@@ -7,29 +7,29 @@ import {
+   resolveAuthContext,
+   runContextPreChecks,
+   wwwAuthHeader,
+-} from '../../../api/mcp/auth';
++} from '../../../api/mcp/_auth';
+ import {
+   MCP_LOG_LEVELS,
+   negotiateProtocolVersion,
+   SERVER_INSTRUCTIONS,
+   SERVER_NAME,
+   SERVER_VERSION,
+-} from '../../../api/mcp/constants';
+-import { dispatchToolsCall } from '../../../api/mcp/dispatch';
+-import { buildPromptResponse, PROMPT_LIST_RESPONSE } from '../../../api/mcp/prompts/index';
+-import { TOOL_LIST_BYTES, TOOL_LIST_RESPONSE } from '../../../api/mcp/registry/index';
++} from '../../../api/mcp/_constants';
++import { dispatchToolsCall } from '../../../api/mcp/_dispatch';
++import { buildPromptResponse, PROMPT_LIST_RESPONSE } from '../../../api/mcp/_prompts/index';
++import { TOOL_LIST_BYTES, TOOL_LIST_RESPONSE } from '../../../api/mcp/_registry/index';
+ import {
+   buildPublicResourceResponse,
+   buildResourceResponse,
+   isPublicResourceUri,
+   RESOURCE_LIST_RESPONSE,
+   RESOURCE_TEMPLATE_LIST_RESPONSE,
+-} from '../../../api/mcp/resources/index';
+-import { rpcError, rpcOk, withMcpNoStore } from '../../../api/mcp/rpc';
+-import { buildUiResourceRead, isUiResourceUri, UI_RESOURCE_LIST_RESPONSE } from '../../../api/mcp/ui/registry';
+-import { emitTelemetry, principalIdForLog } from '../../../api/mcp/telemetry';
+-import { createMcpUsage, emitMcpRequestEvent, setUsageContext, type McpUsage } from '../../../api/mcp/usage';
+-import type { McpAuthContext, McpHandlerDeps } from '../../../api/mcp/types';
++} from '../../../api/mcp/_resources/index';
++import { rpcError, rpcOk, withMcpNoStore } from '../../../api/mcp/_rpc';
++import { buildUiResourceRead, isUiResourceUri, UI_RESOURCE_LIST_RESPONSE } from '../../../api/mcp/_ui/registry';
++import { emitTelemetry, principalIdForLog } from '../../../api/mcp/_telemetry';
++import { createMcpUsage, emitMcpRequestEvent, setUsageContext, type McpUsage } from '../../../api/mcp/_usage';
++import type { McpAuthContext, McpHandlerDeps } from '../../../api/mcp/_types';
+ 
+ // MCP methods servable WITHOUT authentication. These are the zero-data
+ // discovery surface an agent (or an agent-readiness scanner) needs to learn
+diff --git a/server/routes/user/mcp-quota.ts b/server/routes/user/mcp-quota.ts
+index 83cd545..2a86215 100644
+--- a/server/routes/user/mcp-quota.ts
++++ b/server/routes/user/mcp-quota.ts
+@@ -43,7 +43,7 @@ import { getCorsHeaders } from '../../../api/_cors.js';
+ import { captureSilentError } from '../../../api/_sentry-edge.js';
+ import { resolveClerkSession } from '../../_shared/auth-session';
+ import { getEntitlements } from '../../_shared/entitlement-check';
+-import { resolveDailyLimit, resolvePlanDrivenMcpAllowance } from '../../../api/mcp/quota';
++import { resolveDailyLimit, resolvePlanDrivenMcpAllowance } from '../../../api/mcp/_quota';
+ import {
+   dailyCounterKey,
+   secondsUntilUtcMidnight,
+diff --git a/server/worldmonitor/research/v1/list-tech-events.ts b/server/worldmonitor/research/v1/list-tech-events.ts
+index d4e48cd..d53e64e 100644
+--- a/server/worldmonitor/research/v1/list-tech-events.ts
++++ b/server/worldmonitor/research/v1/list-tech-events.ts
+@@ -18,7 +18,7 @@ import type {
+   TechEvent,
+   TechEventCoords,
+ } from '../../../../src/generated/server/worldmonitor/research/v1/service_server';
+-import { CITY_COORDS } from '../../../../api/data/city-coords';
++import { CITY_COORDS } from '../../../../api/_data/city-coords';
+ import filterParamContracts from '../../../../shared/openapi-filter-param-contracts.json';
+ import { CHROME_UA } from '../../../_shared/constants';
+ import { resolveTechEventsPaging, type TechEventsPagingPresence } from './_tech-events-paging';
+diff --git a/tests/china-strategic-trade-contract.test.mjs b/tests/china-strategic-trade-contract.test.mjs
+index 370a246..caab860 100644
+--- a/tests/china-strategic-trade-contract.test.mjs
++++ b/tests/china-strategic-trade-contract.test.mjs
+@@ -12,7 +12,7 @@ import {
+   TRADE_FLOW_MATRIX_SIZE,
+   TRADE_FLOW_RATE_LIMIT_RETRY_BUDGET,
+ } from '../scripts/seed-trade-flows.mjs';
+-import { CACHE_TOOLS } from '../api/mcp/registry/cache-tools.ts';
++import { CACHE_TOOLS } from '../api/mcp/_registry/cache-tools.ts';
+ 
+ const requiredStrategicProducts = [
+   'semiconductors',
+diff --git a/tests/eurostat-seeders.test.mjs b/tests/eurostat-seeders.test.mjs
+index 2c9d40a..dede810 100644
+--- a/tests/eurostat-seeders.test.mjs
++++ b/tests/eurostat-seeders.test.mjs
+@@ -193,7 +193,7 @@ describe('Registry wiring (issue #3028)', () => {
+   });
+ 
+   it('MCP tool registry exposes the three new EU overlay tools', async () => {
+-    const src = await readFile(resolve(ROOT, 'api/mcp/registry/cache-tools.ts'), 'utf8');
++    const src = await readFile(resolve(ROOT, 'api/mcp/_registry/cache-tools.ts'), 'utf8');
+     assert.match(src, /name: 'get_eu_housing_cycle'/);
+     assert.match(src, /name: 'get_eu_quarterly_gov_debt'/);
+     assert.match(src, /name: 'get_eu_industrial_production'/);
+diff --git a/tests/intel-history-untrusted-content.test.mjs b/tests/intel-history-untrusted-content.test.mjs
+index 24a35b8..7c96730 100644
+--- a/tests/intel-history-untrusted-content.test.mjs
++++ b/tests/intel-history-untrusted-content.test.mjs
+@@ -18,7 +18,7 @@ import { strict as assert } from 'node:assert';
+ import { readFileSync, existsSync } from 'node:fs';
+ import { fileURLToPath } from 'node:url';
+ 
+-import { TOOL_REGISTRY } from '../api/mcp/registry/index.ts';
++import { TOOL_REGISTRY } from '../api/mcp/_registry/index.ts';
+ import { SERVER_INSTRUCTIONS } from '../api/mcp/constants.ts';
+ 
+ const read = (relative) =>
+diff --git a/tests/llms-txt-mcp-tools.test.mjs b/tests/llms-txt-mcp-tools.test.mjs
+index 3026140..9f79032 100644
+--- a/tests/llms-txt-mcp-tools.test.mjs
++++ b/tests/llms-txt-mcp-tools.test.mjs
+@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
+ 
+ const __filename = fileURLToPath(import.meta.url);
+ const ROOT = resolve(dirname(__filename), '..');
+-const REGISTRY_DIR = join(ROOT, 'api/mcp/registry');
++const REGISTRY_DIR = join(ROOT, 'api/mcp/_registry');
+ const LLMS_FILES = ['public/llms.txt', 'public/llms-full.txt', 'public/api/llms.txt'];
+ 
+ // Every MCP tool name uses a verb prefix (get_/generate_/analyze_/search_/
+diff --git a/tests/mcp-analysis-cache-tools.test.mjs b/tests/mcp-analysis-cache-tools.test.mjs
+index 354af33..112b531 100644
+--- a/tests/mcp-analysis-cache-tools.test.mjs
++++ b/tests/mcp-analysis-cache-tools.test.mjs
+@@ -1,7 +1,7 @@
+ import assert from 'node:assert/strict';
+ import { describe, it } from 'node:test';
+ 
+-import { CACHE_TOOLS } from '../api/mcp/registry/cache-tools.ts';
++import { CACHE_TOOLS } from '../api/mcp/_registry/cache-tools.ts';
+ 
+ const findTool = (name) => CACHE_TOOLS.find((t) => t.name === name);
+ 
+diff --git a/tests/mcp-analysis-rpc-tools-contract.test.mjs b/tests/mcp-analysis-rpc-tools-contract.test.mjs
+index ed5b72e..50f9dc0 100644
+--- a/tests/mcp-analysis-rpc-tools-contract.test.mjs
++++ b/tests/mcp-analysis-rpc-tools-contract.test.mjs
+@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
+ import { readFileSync } from 'node:fs';
+ import { describe, it } from 'node:test';
+ 
+-import { TOOL_REGISTRY } from '../api/mcp/registry/index.ts';
++import { TOOL_REGISTRY } from '../api/mcp/_registry/index.ts';
+ 
+ const findTool = (name) => TOOL_REGISTRY.find((tool) => tool.name === name);
+ // ---------------------------------------------------------------------------
+diff --git a/tests/mcp-analysis-rpc-tools.test.mjs b/tests/mcp-analysis-rpc-tools.test.mjs
+index 593cc79..3c6f6b7 100644
+--- a/tests/mcp-analysis-rpc-tools.test.mjs
++++ b/tests/mcp-analysis-rpc-tools.test.mjs
+@@ -29,7 +29,7 @@ import { installRedis } from './helpers/fake-upstash-redis.mts';
+ // Entered through the registry barrel, not `rpc-tools.ts` directly: rpc-tools
+ // imports TOOL_REGISTRY back from the barrel, so importing it first hits the
+ // cycle mid-initialisation ("Cannot access 'RPC_TOOLS' before initialization").
+-import { TOOL_REGISTRY } from '../api/mcp/registry/index.ts';
++import { TOOL_REGISTRY } from '../api/mcp/_registry/index.ts';
+ import { dispatchToolsCall } from '../api/mcp/dispatch.ts';
+ import { McpSourceUnavailableError } from '../api/mcp/source-unavailable.ts';
+ 
+diff --git a/tests/mcp-nlp-tools.test.mjs b/tests/mcp-nlp-tools.test.mjs
+index b6588a0..3e93db1 100644
+--- a/tests/mcp-nlp-tools.test.mjs
++++ b/tests/mcp-nlp-tools.test.mjs
+@@ -965,7 +965,7 @@ describe('#5697 spike-tool Redis key drift', () => {
+ 
+     // Read the whole registry dir: pinning one filename is how a static guard
+     // silently loses reach when the code it guards moves to a sibling module.
+-    const registryDir = new URL('../api/mcp/registry/', import.meta.url);
++    const registryDir = new URL('../api/mcp/_registry/', import.meta.url);
+     const src = readdirSync(registryDir)
+       .filter((f) => f.endsWith('.ts') && f !== 'index.ts')
+       .map((f) => readFileSync(new URL(f, registryDir), 'utf8'))
+diff --git a/tests/mcp-portwatch-content-freshness-parity.test.mjs b/tests/mcp-portwatch-content-freshness-parity.test.mjs
+index 71354a1..6fb4c5a 100644
+--- a/tests/mcp-portwatch-content-freshness-parity.test.mjs
++++ b/tests/mcp-portwatch-content-freshness-parity.test.mjs
+@@ -18,8 +18,8 @@ import assert from 'node:assert/strict';
+ import { __testing__ } from '../api/health.js';
+ import { evaluateFreshness } from '../api/mcp/freshness.ts';
+ import { executeTool } from '../api/mcp/dispatch.ts';
+-import { CACHE_TOOLS } from '../api/mcp/registry/cache-tools.ts';
+-import { TOOL_REGISTRY } from '../api/mcp/registry/index.ts';
++import { CACHE_TOOLS } from '../api/mcp/_registry/cache-tools.ts';
++import { TOOL_REGISTRY } from '../api/mcp/_registry/index.ts';
+ 
+ const { classifyKey, SEED_META, ACTIVATION_MARKERS } = __testing__;
+ 
+diff --git a/tests/mcp-prediction-market-description.test.mjs b/tests/mcp-prediction-market-description.test.mjs
+index e93e0eb..4c51b9b 100644
+--- a/tests/mcp-prediction-market-description.test.mjs
++++ b/tests/mcp-prediction-market-description.test.mjs
+@@ -5,7 +5,7 @@ import { describe, it } from 'node:test';
+ import {
+   TOOL_LIST_RESPONSE,
+   TOOL_REGISTRY,
+-} from '../api/mcp/registry/index.ts';
++} from '../api/mcp/_registry/index.ts';
+ 
+ const EXPECTED_CATEGORIES = ['geopolitical', 'tech', 'finance'];
+ const TOOL_NAME = 'get_prediction_markets';
+diff --git a/tests/mcp-resources.test.mjs b/tests/mcp-resources.test.mjs
+index 7194935..6d7efc8 100644
+--- a/tests/mcp-resources.test.mjs
++++ b/tests/mcp-resources.test.mjs
+@@ -1078,7 +1078,7 @@ describe('api/mcp.ts — resources capability + stability + auth-symmetry', () =
+     assert.deepEqual(actualSorted, expected, 'CHOKEPOINT_SLUGS contents must match the snapshot byte-for-byte');
+   });
+ 
+-  it('api/mcp/resources/slugs.ts file-on-disk parses to the same CHOKEPOINT_SLUGS export', () => {
++  it('api/mcp/_resources/slugs.ts file-on-disk parses to the same CHOKEPOINT_SLUGS export', () => {
+     // Defense-in-depth: the snapshot test above runs against the
+     // already-loaded module; this one re-reads the source file from disk
+     // so a sabotage that edits ONLY the in-memory const (test bypass)
+diff --git a/tests/mcp-schema-default-parity.test.mjs b/tests/mcp-schema-default-parity.test.mjs
+index 1362cca..7b3361e 100644
+--- a/tests/mcp-schema-default-parity.test.mjs
++++ b/tests/mcp-schema-default-parity.test.mjs
+@@ -12,7 +12,7 @@ const HERE = dirname(fileURLToPath(import.meta.url));
+ // Concatenate every registry module (excluding the merge/index file) rather
+ // than naming them: a hardcoded list silently stops covering a tool that moves
+ // to a new sibling module.
+-const REGISTRY_DIR = resolve(HERE, '../api/mcp/registry');
++const REGISTRY_DIR = resolve(HERE, '../api/mcp/_registry');
+ const MCP_SRC = readdirSync(REGISTRY_DIR)
+   .filter((f) => f.endsWith('.ts') && f !== 'index.ts')
+   .sort()
+diff --git a/tests/mcp-tool-output-contracts.test.mjs b/tests/mcp-tool-output-contracts.test.mjs
+index ac4c6ff..c03ad46 100644
+--- a/tests/mcp-tool-output-contracts.test.mjs
++++ b/tests/mcp-tool-output-contracts.test.mjs
+@@ -24,7 +24,7 @@
+ import { describe, it, beforeEach, afterEach } from 'node:test';
+ import { strict as assert } from 'node:assert';
+ 
+-import { TOOL_REGISTRY } from '../api/mcp/registry/index.ts';
++import { TOOL_REGISTRY } from '../api/mcp/_registry/index.ts';
+ import { validate } from './helpers/json-schema-mini.mjs';
+ import {
+   HMAC_SECRET,
+diff --git a/tests/mcp-tools-list-compression.test.mjs b/tests/mcp-tools-list-compression.test.mjs
+index af54a98..6a15244 100644
+--- a/tests/mcp-tools-list-compression.test.mjs
++++ b/tests/mcp-tools-list-compression.test.mjs
+@@ -2,7 +2,7 @@ import { describe, it, beforeEach, afterEach } from 'node:test';
+ import { strict as assert } from 'node:assert';
+ import { readFileSync } from 'node:fs';
+ 
+-import { TOOL_REGISTRY } from '../api/mcp/registry/index.ts';
++import { TOOL_REGISTRY } from '../api/mcp/_registry/index.ts';
+ 
+ const originalEnv = { ...process.env };
+ 
+diff --git a/tests/mcp.test.mjs b/tests/mcp.test.mjs
+index 613b74e..0ee0c5c 100644
+--- a/tests/mcp.test.mjs
++++ b/tests/mcp.test.mjs
+@@ -12,7 +12,7 @@ import {
+   callBody,
+ } from './helpers/mcp-pro-deps.mjs';
+ import { buildOfficialChinaMacroFixture } from './helpers/china-macro-fixture.mjs';
+-import { TOOL_REGISTRY } from '../api/mcp/registry/index.ts';
++import { TOOL_REGISTRY } from '../api/mcp/_registry/index.ts';
+ 
+ const originalFetch = globalThis.fetch;
+ const originalEnv = { ...process.env };
+diff --git a/tests/public-product-facts.test.mjs b/tests/public-product-facts.test.mjs
+index 7bc7602..ba04ce5 100644
+--- a/tests/public-product-facts.test.mjs
++++ b/tests/public-product-facts.test.mjs
+@@ -4,7 +4,7 @@ import { execFileSync } from 'node:child_process';
+ import { readFileSync, readdirSync, statSync } from 'node:fs';
+ import { dirname, join, resolve } from 'node:path';
+ import { fileURLToPath } from 'node:url';
+-import { TOOL_REGISTRY } from '../api/mcp/registry/index.ts';
++import { TOOL_REGISTRY } from '../api/mcp/_registry/index.ts';
+ import { PRODUCT_CATALOG } from '../convex/config/productCatalog.ts';
+ 
+ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');

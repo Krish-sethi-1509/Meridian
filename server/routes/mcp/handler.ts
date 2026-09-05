@@ -7,29 +7,29 @@ import {
   resolveAuthContext,
   runContextPreChecks,
   wwwAuthHeader,
-} from '../../../api/mcp/auth';
+} from '../../../api/mcp/_auth';
 import {
   MCP_LOG_LEVELS,
   negotiateProtocolVersion,
   SERVER_INSTRUCTIONS,
   SERVER_NAME,
   SERVER_VERSION,
-} from '../../../api/mcp/constants';
-import { dispatchToolsCall } from '../../../api/mcp/dispatch';
-import { buildPromptResponse, PROMPT_LIST_RESPONSE } from '../../../api/mcp/prompts/index';
-import { TOOL_LIST_BYTES, TOOL_LIST_RESPONSE } from '../../../api/mcp/registry/index';
+} from '../../../api/mcp/_constants';
+import { dispatchToolsCall } from '../../../api/mcp/_dispatch';
+import { buildPromptResponse, PROMPT_LIST_RESPONSE } from '../../../api/mcp/_prompts/index';
+import { TOOL_LIST_BYTES, TOOL_LIST_RESPONSE } from '../../../api/mcp/_registry/index';
 import {
   buildPublicResourceResponse,
   buildResourceResponse,
   isPublicResourceUri,
   RESOURCE_LIST_RESPONSE,
   RESOURCE_TEMPLATE_LIST_RESPONSE,
-} from '../../../api/mcp/resources/index';
-import { rpcError, rpcOk, withMcpNoStore } from '../../../api/mcp/rpc';
-import { buildUiResourceRead, isUiResourceUri, UI_RESOURCE_LIST_RESPONSE } from '../../../api/mcp/ui/registry';
-import { emitTelemetry, principalIdForLog } from '../../../api/mcp/telemetry';
-import { createMcpUsage, emitMcpRequestEvent, setUsageContext, type McpUsage } from '../../../api/mcp/usage';
-import type { McpAuthContext, McpHandlerDeps } from '../../../api/mcp/types';
+} from '../../../api/mcp/_resources/index';
+import { rpcError, rpcOk, withMcpNoStore } from '../../../api/mcp/_rpc';
+import { buildUiResourceRead, isUiResourceUri, UI_RESOURCE_LIST_RESPONSE } from '../../../api/mcp/_ui/registry';
+import { emitTelemetry, principalIdForLog } from '../../../api/mcp/_telemetry';
+import { createMcpUsage, emitMcpRequestEvent, setUsageContext, type McpUsage } from '../../../api/mcp/_usage';
+import type { McpAuthContext, McpHandlerDeps } from '../../../api/mcp/_types';
 
 // MCP methods servable WITHOUT authentication. These are the zero-data
 // discovery surface an agent (or an agent-readiness scanner) needs to learn
