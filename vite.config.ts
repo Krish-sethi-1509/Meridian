@@ -1157,6 +1157,9 @@ export default defineConfig(({ mode }) => {
               if (id.includes('/i18next')) {
                 return 'i18n';
               }
+              if (id.includes('/zod/')) {
+                return 'zod';
+              }
               if (id.includes('/@sentry/') || id.includes('/@sentry-internal/')) {
                 return 'sentry';
               }
@@ -1281,6 +1284,8 @@ export default defineConfig(({ mode }) => {
               id.endsWith('/shared/agent-bus-actions.ts') ||
               id.endsWith('/shared/analysis-military-surge.ts') ||
               id.endsWith('/src/utils/follow-button.ts') ||
+              id.endsWith('/src/services/military-surge.ts') ||
+              id.endsWith('/src/services/parallel-analysis.ts') ||
               id.endsWith('/src/utils/signal-quality.ts') ||
               id.endsWith('/src/utils/export.ts') ||
               id.endsWith('/src/utils/export-report.ts') ||
