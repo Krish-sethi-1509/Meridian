@@ -15,6 +15,7 @@
 [![skills.sh](https://skills.sh/b/koala73/worldmonitor)](https://skills.sh/koala73/worldmonitor)
 
 <p align="center">
+  <a href="https://meridian-5zeg-8hnjz7ebb-krish-sethi-1509s-projects.vercel.app/"><img src="https://img.shields.io/badge/Live_Demo-Vercel-blue?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo"></a>&nbsp;
   <a href="https://www.meridian.app"><img src="https://img.shields.io/badge/Web_App-meridian.app-blue?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Web App"></a>&nbsp;
   <a href="https://tech.meridian.app"><img src="https://img.shields.io/badge/Tech_Variant-tech.meridian.app-0891b2?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Tech Variant"></a>&nbsp;
   <a href="https://finance.meridian.app"><img src="https://img.shields.io/badge/Finance_Variant-finance.meridian.app-059669?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Finance Variant"></a>&nbsp;
@@ -27,7 +28,7 @@
   <a href="https://www.npmjs.com/package/worldmonitor"><img src="https://img.shields.io/npm/v/worldmonitor?style=for-the-badge&logo=npm&logoColor=white&label=npm%20i%20worldmonitor&color=CB3837" alt="npm i worldmonitor"></a>&nbsp;
   <a href="https://www.npmjs.com/package/worldmonitor"><img src="https://img.shields.io/badge/CLI-npx%20worldmonitor-CB3837?style=for-the-badge&logo=npm&logoColor=white" alt="npx worldmonitor"></a>&nbsp;
   <a href="https://pypi.org/project/worldmonitor-sdk/"><img src="https://img.shields.io/pypi/v/worldmonitor-sdk?style=for-the-badge&logo=pypi&logoColor=white&label=pip%20install%20worldmonitor-sdk&color=3775A9" alt="pip install worldmonitor-sdk"></a>&nbsp;
-  <a href="https://rubygems.org/gems/worldmonitor"><img src="https://img.shields.io/gem/v/worldmonitor?style=for-the-badge&logo=rubygems&logoColor=white&label=gem%20install%20worldmonitor&color=E9573F" alt="gem install worldmonitor"></a>&nbsp;
+  <a href="https://rubygems.org/gems/worldmonitor"><img src="https://img.shields.io/badge/gem%20install-worldmonitor-E9573F?style=for-the-badge&logo=rubygems&logoColor=white" alt="gem install worldmonitor"></a>&nbsp;
   <a href="https://pkg.go.dev/github.com/koala73/worldmonitor/sdk/go"><img src="https://img.shields.io/badge/go%20get-sdk%2Fgo-00ADD8?style=for-the-badge&logo=go&logoColor=white" alt="go get github.com/koala73/worldmonitor/sdk/go"></a>
 </p>
 
