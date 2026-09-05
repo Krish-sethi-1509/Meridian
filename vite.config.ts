@@ -1268,6 +1268,29 @@ export default defineConfig(({ mode }) => {
             if (id.endsWith('/src/components/ResilienceWidget.ts')) {
               return 'panels-intel';
             }
+            // Co-locate the remaining modules shared between the entry bundle
+            // and panels-intel that Rollup was auto-splitting into their own
+            // facade chunks (agent-bus-actions, follow-button, export,
+            // FrameworkSelector, signal-quality, military-surge). Each formed
+            // a circular chunk (index -> panels-intel -> X -> index) under
+            // onlyExplicitManualChunks, the same runtime-TDZ crash class as
+            // DeckGLMap/deck-stack above ("Cannot access 'X' before
+            // initialization"), observed live as agent-bus-actions crashing
+            // ZodObject construction on load (#dashboard-stuck-loading).
+            if (
+              id.endsWith('/shared/agent-bus-actions.ts') ||
+              id.endsWith('/shared/analysis-military-surge.ts') ||
+              id.endsWith('/src/utils/follow-button.ts') ||
+              id.endsWith('/src/utils/signal-quality.ts') ||
+              id.endsWith('/src/utils/export.ts') ||
+              id.endsWith('/src/utils/export-report.ts') ||
+              id.endsWith('/src/services/gates/export.ts') ||
+              id.endsWith('/src/services/gates/export-resolver.ts') ||
+              id.endsWith('/src/components/ExportGateControl.ts') ||
+              id.endsWith('/src/components/FrameworkSelector.ts')
+            ) {
+              return 'panels-intel';
+            }
             if (id.includes('/src/components/') && id.endsWith('.ts')) {
               const panelChunk = panelChunkForComponentId(id);
               if (panelChunk) return panelChunk;
