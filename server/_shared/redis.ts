@@ -1,6 +1,6 @@
-import { unwrapEnvelope } from './seed-envelope';
-import { getRpcNoStoreReasonFromPayload } from './cache-contract';
-import { buildUpstreamEvent, getUsageScope, sendToAxiom } from './usage';
+import { unwrapEnvelope } from './seed-envelope.js';
+import { getRpcNoStoreReasonFromPayload } from './cache-contract.js';
+import { buildUpstreamEvent, getUsageScope, sendToAxiom } from './usage.js';
 
 // Default Upstash REST timeouts are tuned for production (Vercel ↔ Upstash
 // same-datacenter latency is sub-50ms, 1.5s leaves >20× headroom). They
@@ -75,7 +75,7 @@ export type CacheReadResult = { status: 'hit'; value: unknown } | { status: 'mis
 export async function readCachedJson(key: string, raw = false): Promise<CacheReadResult> {
   if (process.env.LOCAL_API_MODE === 'tauri-sidecar') {
     try {
-      const { sidecarCacheGet } = await import('./sidecar-cache');
+      const { sidecarCacheGet } = await import('./sidecar-cache.js');
       const value = sidecarCacheGet(key);
       return value == null ? { status: 'miss' } : { status: 'hit', value };
     } catch (error) {
@@ -132,7 +132,7 @@ function logCacheReadError(key: string, err: unknown): void {
  */
 export async function getRawJson(key: string): Promise<unknown | null> {
   if (process.env.LOCAL_API_MODE === 'tauri-sidecar') {
-    const { sidecarCacheGet } = await import('./sidecar-cache');
+    const { sidecarCacheGet } = await import('./sidecar-cache.js');
     return sidecarCacheGet(key);
   }
   const url = process.env.UPSTASH_REDIS_REST_URL;
@@ -162,7 +162,7 @@ export async function getRawJson(key: string): Promise<unknown | null> {
  */
 export async function getCachedRawString(key: string): Promise<string | null> {
   if (process.env.LOCAL_API_MODE === 'tauri-sidecar') {
-    const { sidecarCacheGet } = await import('./sidecar-cache');
+    const { sidecarCacheGet } = await import('./sidecar-cache.js');
     const v = sidecarCacheGet(key);
     return typeof v === 'string' ? v : null;
   }
@@ -197,7 +197,7 @@ export async function getCachedJson(key: string, raw = false): Promise<unknown |
 
 export async function setCachedJson(key: string, value: unknown, ttlSeconds: number, raw = false): Promise<boolean> {
   if (process.env.LOCAL_API_MODE === 'tauri-sidecar') {
-    const { sidecarCacheSet } = await import('./sidecar-cache');
+    const { sidecarCacheSet } = await import('./sidecar-cache.js');
     sidecarCacheSet(key, value, ttlSeconds);
     return true;
   }
@@ -251,7 +251,7 @@ export async function readCachedJsonList(
     : 1;
   if (process.env.LOCAL_API_MODE === 'tauri-sidecar') {
     try {
-      const { sidecarCacheGet } = await import('./sidecar-cache');
+      const { sidecarCacheGet } = await import('./sidecar-cache.js');
       const value = sidecarCacheGet(key);
       if (!Array.isArray(value) || value.length === 0) return { status: 'miss' };
       return { status: 'hit', value: value.slice(0, boundedLimit) };
@@ -338,7 +338,7 @@ export async function prependCachedJsonList(
 
   if (process.env.LOCAL_API_MODE === 'tauri-sidecar') {
     try {
-      const { sidecarCacheGet, sidecarCacheSet } = await import('./sidecar-cache');
+      const { sidecarCacheGet, sidecarCacheSet } = await import('./sidecar-cache.js');
       const existing = sidecarCacheGet(key);
       const retained = Array.isArray(existing)
         ? existing.filter((item) => JSON.stringify(item) !== encoded)
@@ -491,7 +491,7 @@ export async function getCachedJsonBatch(keys: string[], raw = false): Promise<M
 
   if (process.env.LOCAL_API_MODE === 'tauri-sidecar') {
     try {
-      const { sidecarCacheGet } = await import('./sidecar-cache');
+      const { sidecarCacheGet } = await import('./sidecar-cache.js');
       for (const key of keys) {
         const value = sidecarCacheGet(key);
         if (value != null) result.set(key, value);

@@ -13,8 +13,8 @@ export const config = { runtime: 'edge' };
 
 // @ts-expect-error — JS module, no declaration file
 import { getCorsHeaders } from '../../../../api/_cors.js';
-import { validateBearerToken } from '../../../auth-session';
-import { checkTierProEntitlement } from '../../../_shared/pro-entitlement';
+import { validateBearerToken } from '../../../auth-session.js';
+import { checkTierProEntitlement } from '../../../_shared/pro-entitlement.js';
 
 const SLACK_CLIENT_ID = process.env.SLACK_CLIENT_ID ?? '';
 const SLACK_REDIRECT_URI = process.env.SLACK_REDIRECT_URI ?? '';
