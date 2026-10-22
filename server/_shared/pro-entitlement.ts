@@ -15,7 +15,7 @@ import {
   renderBillingVerificationDenial,
   unverifiableEntitlementDenial,
   type EntitlementCheckOptions,
-} from './entitlement-check';
+} from './entitlement-check.js';
 
 type ProEntitlementDecision =
   | { allowed: true }
